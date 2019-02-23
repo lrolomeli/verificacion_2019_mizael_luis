@@ -64,6 +64,7 @@ begin
 			begin
 				led_state <= '0;
 				count_off <= '0;
+				count_on <= count_on + 1'b1;
 			end
 			else
 			begin
@@ -75,6 +76,7 @@ begin
 			begin
 				led_state <= 1'b1;
 				count_on <= '0;
+				count_off <= count_off + 1'b1;
 			end
 			else
 			begin
