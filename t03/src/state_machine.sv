@@ -60,7 +60,7 @@ begin
 			end
 			
 			2'b01:
-			if(count_on < 2'd6)
+			if(count_on < 3'd6)
 			begin
 				led_state <= '0;
 				count_off <= '0;
@@ -71,7 +71,7 @@ begin
 			end
 			
 			2'b10:
-			if(count_off < 2'd4)
+			if(count_off < 3'd4)
 			begin
 				led_state <= 1'b1;
 				count_on <= '0;
