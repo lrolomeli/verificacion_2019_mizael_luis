@@ -49,7 +49,7 @@ logic [BITS:0] time_count;
 
 always_ff@(posedge fpga_clk, negedge rst)
 begin: Counter
-
+	//Start to job 
 	if (~rst)
 	begin
 		time_count <= '0;
@@ -61,18 +61,23 @@ begin: Counter
 	
 		if(enable)
 		begin
-		
+			
+			/** The toggle was applicate to signal “Clock divider” **/
 			if(time_count == 0)
 			begin
 				clk_div = ~clk_div;
 				time_count <= time_count + 1'b1;
 			end
 			
+			/** The count was restarted because "time count" have the same 
+			value that counter**/  
 			else if (time_count == COUNT)
 			begin
 				time_count <= '0;				
 			end
 			
+			/** The signal “clock divider” conserve her value and the count 
+			of time added one unit **/	
 			else
 			begin
 				time_count <= time_count + 1'b1;
