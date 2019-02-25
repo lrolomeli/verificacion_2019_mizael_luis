@@ -33,7 +33,7 @@ module state_machine
 logic [1:0] state;
 logic [1:0] flag;
 logic [2:0] count_on;
-logic [2:0] count_off;
+logic [1:0] count_off;
 
 always_ff@(posedge clk or negedge rst)
 begin
@@ -51,16 +51,18 @@ begin
 	begin
 	
 		led_1hz <= ~led_1hz;
-		
+				
 		case(state)
 			2'b00:
 			if(start)
 			begin
 				state <= 2'b01;
+				led_state <= '0;
+				count_on <= count_on + 1'b1;
 			end
 			
 			2'b01:
-			if(count_on < 3'd6)
+			if(count_on < 3'd5)
 			begin
 				led_state <= '0;
 				count_off <= '0;
@@ -69,10 +71,11 @@ begin
 			else
 			begin
 				state <= 2'b10;
+				count_off <= count_off + 1'b1;
 			end
 			
 			2'b10:
-			if(count_off < 3'd4)
+			if(count_off < 2'd3)
 			begin
 				led_state <= 1'b1;
 				count_on <= '0;

@@ -14,6 +14,7 @@ counter c(
 
 	.fpga_clk(clk),
 	.rst(rst),
+	.enable(start),
 	
 	.clk_div(clkdiv_w)
 

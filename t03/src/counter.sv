@@ -30,7 +30,7 @@ module counter
 (
 	// Parameter Declarations
 	parameter FPGA_RATE = 26'd50000000,
-	parameter RATE = 7'd100, //HERTZ
+	parameter RATE = 1'd1, //HERTZ
 	parameter COUNT = FPGA_RATE / (2 * RATE),
 	parameter BITS = $clog2(COUNT)
 
@@ -38,6 +38,7 @@ module counter
 	// Input Ports
 	input fpga_clk,
 	input rst,
+	input enable,
 	
 	//Output Ports
 	output logic clk_div
@@ -55,17 +56,33 @@ begin: Counter
 		clk_div <= '0;
 	end
 	
-   else if (time_count == COUNT)
-	begin
-		time_count <= '0;
-		clk_div = ~clk_div;
-	end
-	
 	else
 	begin
-		time_count <= time_count + 1'b1;
-		clk_div = clk_div;
+	
+		if(enable)
+		begin
+		
+			if(time_count == 0)
+			begin
+				clk_div = ~clk_div;
+				time_count <= time_count + 1'b1;
+			end
+			
+			else if (time_count == COUNT)
+			begin
+				time_count <= '0;				
+			end
+			
+			else
+			begin
+				time_count <= time_count + 1'b1;
+				clk_div = clk_div;
+			end
+			
+		end
+		
 	end
+
 	
 end: Counter
 
