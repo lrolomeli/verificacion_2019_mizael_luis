@@ -5,4 +5,4 @@ onbreak {resume}
 set NoQuitOnFinish 1
 vsim -voptargs=+acc work.tb_universal
 do wave.do
-run 1000ns
+run 19000ns
