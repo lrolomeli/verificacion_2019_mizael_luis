@@ -1,0 +1,56 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/tareas_veri/t05/tb
+vtb_universal
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1551550910
+!i10b 1
+!s100 UfkC`NQ=dQj;ok@H29fWI0
+IOzS[FHH=e5UT:6M9W_W`I0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 tb_universal_sv_unit
+S1
+R0
+Z4 w1551550684
+8tb_universal.sv
+Ftb_universal.sv
+L0 2
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1551550910.000000
+Z7 !s107 tb_universal.sv|../src/universal.sv|
+Z8 !s90 -reportprogress|300|-f|files.f|
+!i113 1
+Z9 tCvgOpt 0
+vuniversal
+R1
+R2
+!i10b 1
+!s100 [L5M^:`2bUU9VkTPGAS743
+I[L?>KXlm4PFMO=Cn0@D8S0
+R3
+!s105 universal_sv_unit
+S1
+R0
+R4
+8../src/universal.sv
+F../src/universal.sv
+L0 22
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+R9
