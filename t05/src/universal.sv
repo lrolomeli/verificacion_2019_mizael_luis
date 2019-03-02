@@ -32,14 +32,30 @@ begin
 			case(selector)
 				SIPO_LSB:
 				begin
-					rgstr <= {rgstr[DW-2:0], inp[0]};
-					out <= rgstr;
+					if (l_s)
+					begin
+						rgstr <= inp;
+					end
+					else
+					begin
+						rgstr <= {rgstr[DW-2:0], inp[0]};
+						out <= rgstr;
+					end
 				end
+				
 				SIPO_MSB:
 				begin
-					rgstr <= {inp[0], rgstr[DW-1:1]};
-					out <= rgstr;
+					if (l_s)
+					begin
+						rgstr <= inp;
+					end
+					else
+					begin
+						rgstr <= {inp[0], rgstr[DW-1:1]};
+						out <= rgstr;
+					end
 				end
+				
 				PISO_LSB:
 				begin
 					if (l_s)
@@ -53,6 +69,7 @@ begin
 						out  = rgstr[0];
 					end
 				end
+				
 				PISO_MSB:
 				begin
 					if (l_s)
@@ -66,20 +83,44 @@ begin
 						out  = rgstr[DW-1];
 					end
 				end
+				
 				SISO_LSB:
 				begin
-					rgstr  <= {rgstr[DW-2:0], inp[0]};
-					out  = rgstr[DW-1];
+					if (l_s)
+					begin
+						rgstr <= inp;
+					end
+					else
+					begin
+						rgstr  <= {rgstr[DW-2:0], inp[0]};
+						out  = rgstr[DW-1];
+					end
 				end
+				
 				SISO_MSB:
 				begin
-					rgstr  <= {inp[0], rgstr[DW-1:1]};
-					out  = rgstr[0];
+					if (l_s)
+					begin
+						rgstr <= inp;
+					end
+					else
+					begin
+						rgstr  <= {inp[0], rgstr[DW-1:1]};
+						out  = rgstr[0];
+					end
 				end
+				
 				PIPO:
 				begin
-					rgstr  <= inp;
-					out  = rgstr;
+					if (l_s)
+					begin
+						rgstr <= inp;
+					end
+					else
+					begin
+						rgstr  <= inp;
+						out  = rgstr;
+					end
 				end
 				
 				default:
