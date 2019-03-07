@@ -7,7 +7,7 @@ module MS
 
 	input clk,
 	input rst,
-	//input start,
+	input start,
 	input l_s,
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
@@ -20,6 +20,7 @@ module MS
 logic [DW-1:0] rgstr1;
 logic [DW_2-1:0] rgstr2;
 logic [DWlogb2:0] count;
+
 
 always_ff@(posedge clk, negedge rst)
 begin: always_MS
@@ -38,8 +39,9 @@ begin: always_MS
 		
       if (l_s)
 		begin
-		   rgstr1 <= multiplier;
-			rgstr2 <= multiplicand;
+		   rgstr1 <= multiplier[DW-2:0];
+			rgstr2 <= multiplicand[DW-2:0];
+			count <= '0;
 		end
 		
 		else
@@ -54,15 +56,26 @@ begin: always_MS
 				
 			//size of rgstr2 is DW2 in other words [DW_2-1:0]
 			//if we want to shift left 1 bit we must eliminate the msb
-			rgstr2 <= {rgstr2[DW_2-2:0], 1'b0}; 
+			//rgstr2 <= {rgstr2[DW_2-2:0], 1'b0}; 
 			//Si queremos que no tome en cuenta el bit mas significativo 
 			// es decir el signo	tenemos que tomar DW_2-3
-			//rgstr2 <= {rgstr2[DW_2-3:0], 1'b0};
+			rgstr2 <= {rgstr2[DW_2-2:0], 1'b0};
 			
-			if(count == DW)
+			if(count == DW-1)
 			begin
-				count <= '0;
 				done <= 1'b1;
+				
+				if(multiplier[DW-1] ^ multiplicand[DW-1])
+				begin
+					product <= (~product) + 1'b1;
+				end
+				else
+				begin
+					product <= product;
+				end
+				
+				count <= '0;
+				
 			end
 			
 			else
