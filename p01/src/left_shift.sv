@@ -1,12 +1,12 @@
-module left_shift 
+module left_shift
 #(
-parameter DW_2 = 16;
+parameter DW_2 = 16
 )
 (
 input clk,
 input l_s,
 input rst,
-input [DW_2-1:0] rgstr,
+input [DW_2-1:0] rgstr2,
 
 output logic [DW_2-1:0] shift_out
 );
@@ -17,13 +17,12 @@ begin
 
 	if(~rst)
 	begin
-		rgstr <= '0;
 		shift_out <= '0;
 	end
 	
 	else
 	begin 
-	shift_out <= {rgstr[DW_2-2:0], 1'b0};
+		shift_out <= {rgstr2[DW_2-2:0], 1'b0};
 	end 
 	
 end 
