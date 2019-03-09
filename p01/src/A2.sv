@@ -8,7 +8,7 @@ module a2
 	input multiplicand_msb,
 	input [DW_2-1 : 0]product,
 	
-	output sign,
+	output logic sign,
 	output logic [DW_2-1:0] result
 
 );

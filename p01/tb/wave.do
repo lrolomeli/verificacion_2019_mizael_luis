@@ -1,23 +1,21 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /MS/clk
-add wave -noupdate /MS/rst
-add wave -noupdate /MS/start
-add wave -noupdate /MS/l_s
-add wave -noupdate /MS/multiplier
-add wave -noupdate /MS/multiplicand
-add wave -noupdate /MS/done
-add wave -noupdate -radix hexadecimal /MS/product
-add wave -noupdate /MS/rgstr1
-add wave -noupdate /MS/rgstr2
-add wave -noupdate -radix unsigned /MS/count
+add wave -noupdate /top_module/clk
+add wave -noupdate /top_module/rst
+add wave -noupdate /top_module/l_s
+add wave -noupdate /top_module/multiplier
+add wave -noupdate /top_module/multiplicand
+add wave -noupdate -radix hexadecimal /top_module/product
+add wave -noupdate /top_module/rgstr1_w
+add wave -noupdate /top_module/rgstr2_w
+add wave -noupdate /top_module/shift_reg_w
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {381395 ps} 0}
+WaveRestoreCursors {{Cursor 1} {122810 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
-configure wave -signalnamewidth 1
+configure wave -signalnamewidth 0
 configure wave -snapdistance 10
 configure wave -datasetprefix 0
 configure wave -rowmargin 4

@@ -22,7 +22,15 @@ begin
 	
 	else
 	begin 
-		shift_out <= {rgstr2[DW_2-2:0], 1'b0};
+		if(l_s)
+		begin
+			shift_out <= rgstr2;
+		end
+		else
+		begin
+			shift_out <= {shift_out[DW_2-2:0], 1'b0};
+		end
+		
 	end 
 	
 end 

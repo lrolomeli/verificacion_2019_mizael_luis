@@ -16,10 +16,10 @@ module top_module
 	output logic [DW_2-1:0] product
 );
 
-logic start_W;
+logic start_w;
 logic done_w;
-logic [DW-1:0] rgstr1_W;
-logic [DW_2-1:0] rgstr2_W;
+logic [DW-1:0] rgstr1_w;
+logic [DW_2-1:0] rgstr2_w;
 logic [DW_2-1:0] shift_reg_w;
 logic [DW_2-1:0] product_w;
 
@@ -54,7 +54,7 @@ sweep_sequential_adder sa(
 	.rgstr1(rgstr1_w),
 	.rgstr2(shift_reg_w),
 	
-	.done(0),
+	.done(done_w),
 	.product(product_w)
 
 );

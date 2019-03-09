@@ -12,7 +12,7 @@ module load
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
 	
-	output logic [DW-1:0] rgstr1,		//Entrada del multiplier registrada
+	output logic [DW-1:0] rgstr1,	//Entrada del multiplier registrada
 	output logic [DW_2-1:0] rgstr2	//Entrada del multiplicand registrada
 //Esta entrada es la que utilizamos para realizar la suma secuencial con el producto
 //Por lo tanto debe tener el mismo ancho de bus que el resultado.
