@@ -2,17 +2,14 @@ module control_unit
 (
 input clk,
 input rst,
+input start,
 input l_s,
 input done,
-input start,
 
 output logic init_FSM,
 output logic enable
 
 );
-
-/** enum used to select type of register **/
-enum logic [1:0] {IDLE, LOAD, MULTIPLYING} STATES;
 
 always_ff@(posedge clk, negedge rst)
 begin 
@@ -28,27 +25,18 @@ begin
 	begin 
 		if (start)
 		begin 
-			init_FSM <= 1'b1;
+			init_FSM <= 1'b1;	//La senal de start inicia la maquina de estados	
 		end
 		
-		else
-		begin
-			init_FSM <= '0;
-		end
-		
-		if (l_s)
+		else if (l_s)
 		begin 
-			enable <= 1'b1;
-		end
-		
-		else
-		begin
-			enable <= '0;
+			enable <= 1'b1;	//Esta senal habilita el modulo de multiplicacion en la FSM
 		end
 		
 		if (done)
 		begin
-			init_FSM <= '0;
+			//No estoy seguro de que poner aqui cuando ya termino de multiplicar.
+			init_FSM <= '0;	//Indica que ya se ha completado el estado de multiplicacion
 		end
 		
 	end 
