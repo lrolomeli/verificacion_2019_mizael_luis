@@ -1,38 +1,66 @@
+/*********************************************************************************
+* Module Name: left_shift.sv
+
+* Description: left shift register 
+
+* Inputs: clk, l_s, rst, rgstr2
+
+* Outputs: shift_out
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  09/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module left_shift
-#(
-parameter DW_2 = 16
-)
 (
+/** Input ports **/
 input clk,
 input l_s,
 input rst,
-input [DW_2-1:0] rgstr2,
+input [DW_2-ONE:ZERO] rgstr2,
 
-output logic [DW_2-1:0] shift_out
+/** Output ports **/
+output logic [DW_2-ONE:ZERO] shift_out
 );
 
 
-always_ff@(posedge clk, negedge rst)
-begin 
-
-	if(~rst)
-	begin
-		shift_out <= '0;
-	end
-	
-	else
+	always_ff@(posedge clk, negedge rst)
 	begin 
-		if(l_s)
+
+		if(~rst)
 		begin
-			shift_out <= rgstr2;
-		end
+			shift_out <= ZERO;	/** Clean out register **/
+		end	
+		
 		else
-		begin
-			shift_out <= {shift_out[DW_2-2:0], 1'b0};
-		end
+		begin 
+			if(l_s)
+			begin
+				shift_out <= rgstr2; /** Load value to register **/
+			end
+			else
+			begin
+				shift_out <= {shift_out[DW_2-TWO:ZERO], ZERO};	/** Shift apply **/
+			end
+			
+		end 
 		
 	end 
-	
-end 
 
 endmodule 

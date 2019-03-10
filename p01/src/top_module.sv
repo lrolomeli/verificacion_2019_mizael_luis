@@ -1,19 +1,44 @@
+/*********************************************************************************
+* Module Name: Top Module.sv
+
+* Description: Put on A2 complement number received 
+
+* Inputs: multiplier_msb, multiplicand_msb, [DW_2-1 : 0]product
+
+* Outputs: sign, [DW_2-1:0] result
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  09/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module top_module
-#(
-	parameter DW_2 = 16,
-	parameter DW = 8
-)
 (
 	input clk,
 	input rst,
 	input start,
 	input l_s,
-	input [DW-1:0] multiplier,
-	input [DW-1:0] multiplicand,
+	input [DW-ONE:ZERO] multiplier,
+	input [DW-ONE:ZERO] multiplicand,
 	
 	output logic done,
 	output sign,
-	output logic [DW_2-1:0] product
+	output logic [DW_2-ONE:ZERO] product
 );
 
 logic start_w;
@@ -21,10 +46,10 @@ logic done_w;
 
 logic l_s_w;
 
-logic [DW-1:0] rgstr1_w;
-logic [DW_2-1:0] rgstr2_w;
-logic [DW_2-1:0] shift_reg_w;
-logic [DW_2-1:0] product_w;
+logic [DW-ONE:ZERO] rgstr1_w;
+logic [DW_2-ONE:ZERO] rgstr2_w;
+logic [DW_2-ONE:ZERO] shift_reg_w;
+logic [DW_2-ONE:ZERO] product_w;
 
 debouncer db(
 
@@ -52,13 +77,13 @@ control_unit cu(
 
 FSM sm(
 	
-	.clk(clk)
-	.rst(rst)
-	.start(),
-	.enable(),
+	.clk(clk),
+	.rst(rst),
+	.start(start),
+	.enable(ebable),
 
-	.l_s(),
-	.done()
+	.l_s(l_s),
+	.done(done)
 	
 );
 

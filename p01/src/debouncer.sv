@@ -1,61 +1,78 @@
-module debouncer
-#(
-	parameter MILLIS = 20,		// (2^(20))/ 50 MHz = 20 ms debouncer time
-	parameter COUNT = 1048575  // Max Counting with 20 bits
+/*********************************************************************************
+* Module Name: debouncer.sv
 
-)(
-	// inputs
+* Description: Remove error when push a button  
+
+* Inputs: clk, rst, start 
+
+* Outputs: db_out
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  09/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+import Pkg_Debouncer::*;
+
+module debouncer
+(
+	/** Input ports **/
 	input clk,
 	input	rst, 
 	input start,
 
-	// output
+	/** Output ports **/
 	output logic db_out													
 );
-	
-
-	// logic counter
-	logic [MILLIS-1 : 0]	counter;							
-	// input flip-flops
-	logic DFF1;
-	logic DFF2;
-	
 	
 	always_ff@(posedge clk, negedge rst)
 	begin: debouncer
 	
 		if(~rst)
 		begin
-			DFF1 <= '0;
-			DFF2 <= '0;
-			counter <= '0;
-			db_out <= '0;
+			DFF1 <= ZERO;
+			DFF2 <= ZERO;
+			counter <= ZERO;
+			db_out <= ZERO;
 		end
 		
 		else
 		begin
 		
-			DFF1 <= start;		//la entrada al ff1
-			DFF2 <= DFF1;		//el ff1 al ff2
+			DFF1 <= start;	/** Input to ff1 **/		
+			DFF2 <= DFF1;	/** Of ff1 to ff2 **/		
 		
-			if(DFF1 ^ DFF2)	//Si son diferentes el resultado es 1
+			if(DFF1 ^ DFF2)	/** If ff1 and ff2 are differents, result is 1 **/
 			begin
-				counter <= '0;	//limpia el contador
+				counter <= ZERO;	/** clean counter **/
 			end
 			
-			else	//Si son iguales checa si el contador termino
+			else	/** ff1 and ff2 are equals, ckeck to couenter finished **/
 			begin
 			
-				if(counter == COUNT)
+				if(counter == COUNT) /** check the couter have same value count and clean count **/
 				begin
-					db_out <= DFF2;	//si termina de contar asigna la salida como la entrada
-					counter <= '0;		//limpia el contador y si no
+					db_out <= DFF2;	
+					counter <= ZERO;		
 				end
 				
-				else
+				else						/** counter count to max value **/
 				begin
 					db_out <= db_out;
-					counter <= counter + 1'b1;	//simplemente cuenta hasta llegar a la cuenta maxima.
+					counter <= counter + ONE;	
 				end
 				
 			end
