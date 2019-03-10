@@ -67,8 +67,7 @@ begin
 				//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
 				if(count == DW-1)
 				begin
-					done <= 1'b1;
-					count <= '0;				
+					done <= 1'b1;			
 				end
 				
 				else
