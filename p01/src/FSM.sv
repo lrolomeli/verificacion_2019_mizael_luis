@@ -2,71 +2,76 @@ module FSM
 (
 input clk,
 input rst,
-input start,
-input enable,
+input init_FSM,
+input done,
 
 output logic l_s,
-output logic done
+output logic complete
 );
 
 /** enum used to select type of register **/
 enum logic [1:0] {IDLE, LOAD, MULTIPLYING} STATES;
+logic [1:0] state;
 
 always_ff@(posedge clk, negedge rst)
-begin: always_MS
+begin
 
 	if(~rst)
 	begin
 		l_s <= '0;
-		enable_out <= '0;
-		state <= '0;
+		state <= IDLE;
+		complete <= '0;
 	end
 	
 	else
 	begin
 		case(state)
-		IDLE :
-		begin
-			//Vamos a estar en este estado mientras la
-			//senal de start sea igual a cero
-			if(start)
+			IDLE :
 			begin
-				l_s < = 1'b1;
-				state <= LOAD;
+				//Vamos a estar en este estado mientras la
+				//senal de start sea igual a cero
+				if(init_FSM)
+				begin
+					state <= LOAD;
+					l_s <= 1'b1;
+				end
+				
 			end
-			l_s < = '0;
-			state <= state;
 			
-		end
-		
-		LOAD :
-		begin 
-			if(enable)
+			LOAD :
 			begin
+			
+				l_s <= '0;
 				state <= MULTIPLYING;
-			end
-			state <= state;
 
-		end
-		
-		MULTIPLYING :
-		begin 
-			//Si ya termino de multiplicar debe
-			//enviar una senal de done
+			end
 			
-			/**Multiplicando*/
-			/**Ya acabe = done*/
-			done <= 1'b1;
-		end
+			MULTIPLYING :
+			begin 
+				//Si ya termino de multiplicar debe
+				//enviar una senal de done
+				if(done)
+				begin
+					state <= IDLE;
+					//Tienes que indicarle al control unit que mantenga el resultado
+					complete <= 1'b1;
+					//y en caso de volver a recibir un start hay que limpiar antes el resultado
+				end
+
+			end
+			
+			
+			default: 
+			begin 
+				l_s <= '0;
+				state <= IDLE;
+				complete <= '0;
+			end
 		
+		endcase
+	
+	end
 		
-		default: 
-		begin 
-			l_s <= '0;
-			state <= '0;
-			done <= '0;
-		end
-		
-end: always_MS
+end
 
 endmodule

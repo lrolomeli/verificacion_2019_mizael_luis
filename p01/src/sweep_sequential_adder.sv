@@ -9,6 +9,8 @@ module sweep_sequential_adder
 	input clk,
 	input rst,
 	input l_s,
+	input init_FSM,
+	input permit,
 	input [DW-1:0] rgstr1,
 	input [DW_2-1:0] rgstr2,
 	
@@ -29,47 +31,56 @@ begin
 	begin
 		count <= '0;
 		product <= '0;
+		done <= '0;
 	end
 	
 	else
 	begin
 		
-		//La misma senal de start no puede indicar el inicio del contador		
-		if(l_s)
-		begin
-			count <= '0;
-		end
-		
-		else
+		if(init_FSM)
 		begin
 		
-			//Barrido de cada bit en "multiplier"
-			//En caso de ser 1 el bit entonces sumamos el valor de rgstr2
-			//Y rgstr2 tiene el valor de "multiplicand" y puede estar recorrido
-			//o puede ser si counter es 0 el valor original de "multiplicand".
-			if(rgstr1[count]) 
+			//La misma senal de start no puede indicar el inicio del contador		
+			if(l_s)
 			begin
-				product <= product + rgstr2;
+				count <= '0;
 			end
-		
-			//La operacion de multiplicacion tiene una latencia de DW ciclos de reloj
-			//Sin embargo en el ciclo DW-1 debimos haber terminado con la multiplicacion
-			//debido a que utilizamos el msb de cada entrada para representar el complemento A2
-			//en este punto ya tenemos un resultado al que faltaria simplemente comprobar si hacer
-			//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
-			if(count == DW-1)
+			//Esta senal de permit directa de control unit es para mantener el resultado
+			//cuando esta en estado de listo (done) y se limpia cuando hay una senal de
+			//start.
+			else if(~permit)
 			begin
-				done <= 1'b1;
-				count <= '0;				
-			end
 			
-			else
-			begin
-				count <= count + 1'b1;
+				//Barrido de cada bit en "multiplier"
+				//En caso de ser 1 el bit entonces sumamos el valor de rgstr2
+				//Y rgstr2 tiene el valor de "multiplicand" y puede estar recorrido
+				//o puede ser si counter es 0 el valor original de "multiplicand".
+				if(rgstr1[count]) 
+				begin
+					product <= product + rgstr2;
+				end
+			
+				//La operacion de multiplicacion tiene una latencia de DW ciclos de reloj
+				//Sin embargo en el ciclo DW-1 debimos haber terminado con la multiplicacion
+				//debido a que utilizamos el msb de cada entrada para representar el complemento A2
+				//en este punto ya tenemos un resultado al que faltaria simplemente comprobar si hacer
+				//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
+				if(count == DW-1)
+				begin
+					done <= 1'b1;
+					count <= '0;				
+				end
+				
+				else
+				begin
+					done <= '0;
+					count <= count + 1'b1;
+				end
+			
 			end
 		
 		end
-
+		
 	end
 
 end

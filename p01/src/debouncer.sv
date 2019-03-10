@@ -48,13 +48,13 @@ module debouncer
 			
 				if(counter == COUNT)
 				begin
-					db_out <= DFF2;	//si termina de contar asigna la salida como la entrada
+					db_out <= 1'b1;	//si termina de contar asigna la salida como la entrada
 					counter <= '0;		//limpia el contador y si no
 				end
 				
 				else
 				begin
-					db_out <= db_out;
+					db_out <= '0;
 					counter <= counter + 1'b1;	//simplemente cuenta hasta llegar a la cuenta maxima.
 				end
 				

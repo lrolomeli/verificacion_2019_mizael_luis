@@ -7,19 +7,20 @@ module top_module
 	input clk,
 	input rst,
 	input start,
-	input l_s,
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
 	
-	output logic done,
+	//output logic done,
 	output sign,
 	output logic [DW_2-1:0] product
 );
 
 logic start_w;
+logic init_FSM_w;
 logic done_w;
-
 logic l_s_w;
+logic complete_w;
+logic permit_w;
 
 logic [DW-1:0] rgstr1_w;
 logic [DW_2-1:0] rgstr2_w;
@@ -41,24 +42,22 @@ control_unit cu(
 	.clk(clk),
 	.rst(rst),
 	.start(start_w),
-	.l_s(),
-	.done(),
+	.complete(complete_w),
 
-	.init_FSM(),
-	.enable()
-	
+	.permit(permit_w),
+	.init_FSM(init_FSM_w)
 
 );
 
 FSM sm(
 	
-	.clk(clk)
-	.rst(rst)
-	.start(),
-	.enable(),
+	.clk(clk),
+	.rst(rst),
+	.init_FSM(init_FSM_w),
+	.done(done_w),
 
-	.l_s(),
-	.done()
+	.l_s(l_s_w),
+	.complete(complete_w)
 	
 );
 
@@ -66,7 +65,7 @@ load ld(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(l_s/*start_w*/),
+	.l_s(l_s_w),
 	.multiplier(multiplier),
 	.multiplicand(multiplicand),
 	
@@ -79,9 +78,11 @@ sweep_sequential_adder sa(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(l_s),
+	.l_s(l_s_w),
+	.init_FSM(init_FSM_w),
 	.rgstr1(rgstr1_w),
 	.rgstr2(shift_reg_w),
+	.permit(permit_w),
 	
 	.done(done_w),
 	.product(product_w)
@@ -92,7 +93,8 @@ left_shift ls(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(l_s),
+	.l_s(l_s_w),
+	.permit(permit_w),
 	.rgstr2(rgstr2_w),
 	
 	.shift_out(shift_reg_w)

@@ -3,11 +3,12 @@ module control_unit
 input clk,
 input rst,
 input start,
-input l_s,
-input done,
+input complete,
 
-output logic init_FSM,
-output logic enable
+output logic permit,
+output logic init_FSM
+
+//output logic enable
 
 );
 
@@ -16,27 +17,24 @@ begin
 
 	if(~rst)
 	begin
-		l_s  <= '0;
-		done  <= '0;
-		start <= '0;
+		init_FSM <= '0;
+		permit <= '0;
 	end
 	
 	else
 	begin 
-		if (start)
-		begin 
+		if(start)
+		begin
+			permit <= '0;
 			init_FSM <= 1'b1;	//La senal de start inicia la maquina de estados	
 		end
 		
-		else if (l_s)
-		begin 
-			enable <= 1'b1;	//Esta senal habilita el modulo de multiplicacion en la FSM
-		end
-		
-		if (done)
+		if(complete)
 		begin
-			//No estoy seguro de que poner aqui cuando ya termino de multiplicar.
-			init_FSM <= '0;	//Indica que ya se ha completado el estado de multiplicacion
+			//Mandar senal al multiplicador de que se mantenga el resultado
+			//Hasta que alguien modifique las entradas o el start.
+			permit <= 1'b1;
+			init_FSM <= '0;
 		end
 		
 	end 
