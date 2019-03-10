@@ -78,6 +78,11 @@ begin
 				end
 			
 			end
+			
+		   	else
+			begin
+				count <= '0;
+			end
 		
 		end
 		

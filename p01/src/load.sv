@@ -12,6 +12,7 @@ module load
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
 	
+	output logic charged,
 	output logic [DW-1:0] rgstr1,	//Entrada del multiplier registrada
 	output logic [DW_2-1:0] rgstr2	//Entrada del multiplicand registrada
 //Esta entrada es la que utilizamos para realizar la suma secuencial con el producto
@@ -29,6 +30,7 @@ begin: always_MS
 	begin
 		rgstr1 <= '0;
 		rgstr2 <= '0;
+		charged <= '0;
 	end
 	
 	else
@@ -38,12 +40,15 @@ begin: always_MS
 		begin
 		   rgstr1 <= multiplier[DW-2:0];
 			rgstr2 <= multiplicand[DW-2:0];
+			charged <= 1'b1;
 		end
 
 		else
 		begin
+			charged <= '0;
 			rgstr1 <= rgstr1;
 			rgstr2 <= rgstr2;
+			
 		end
 
 	end

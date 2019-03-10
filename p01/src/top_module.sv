@@ -10,7 +10,6 @@ module top_module
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
 	
-	//output logic done,
 	output sign,
 	output logic [DW_2-1:0] product
 );
@@ -21,6 +20,7 @@ logic done_w;
 logic l_s_w;
 logic complete_w;
 logic permit_w;
+logic charged_w;
 
 logic [DW-1:0] rgstr1_w;
 logic [DW_2-1:0] rgstr2_w;
@@ -69,6 +69,7 @@ load ld(
 	.multiplier(multiplier),
 	.multiplicand(multiplicand),
 	
+	.charged(charged_w),
 	.rgstr1(rgstr1_w),
 	.rgstr2(rgstr2_w)
 	
@@ -78,7 +79,7 @@ sweep_sequential_adder sa(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(l_s_w),
+	.l_s(charged_w),
 	.init_FSM(init_FSM_w),
 	.rgstr1(rgstr1_w),
 	.rgstr2(shift_reg_w),
@@ -93,7 +94,7 @@ left_shift ls(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(l_s_w),
+	.l_s(charged_w),
 	.permit(permit_w),
 	.rgstr2(rgstr2_w),
 	
