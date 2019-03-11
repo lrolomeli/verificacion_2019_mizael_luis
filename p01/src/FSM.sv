@@ -1,77 +1,108 @@
+/*********************************************************************************
+* Module Name: FSM.sv
+
+* Description: FSM to description hardwere   
+
+* Inputs: clk, rst, start, enable,
+
+* Outputs: l_s, done
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  09/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module FSM
 (
-input clk,
-input rst,
-input init_FSM,
-input done,
-
-output logic l_s,
-output logic complete
+	/** Input ports **/
+	input clk,
+	input rst,
+	input init_FSM,
+	input done,
+	
+	/** Input ports **/
+	output logic l_s,
+	output logic complete
+	
 );
 
-/** enum used to select type of register **/
-enum logic [1:0] {IDLE, LOAD, MULTIPLYING} STATES;
-logic [1:0] state;
-
-always_ff@(posedge clk, negedge rst)
-begin
-
-	if(~rst)
+	always_ff@(posedge clk, negedge rst)
 	begin
-		l_s <= '0;
-		state <= IDLE;
-		complete <= '0;
-	end
-	
-	else
-	begin
-		case(state)
-			IDLE :
-			begin
-				//Vamos a estar en este estado mientras la
-				//senal de start sea igual a cero
-				if(init_FSM)
+
+		if(~rst)
+		begin
+			/** Init FSM **/
+			l_s <= BIT_ZERO;
+			state <= IDLE;
+			complete <= BIT_ZERO;
+		end
+		
+		else
+		begin
+			case(state)
+				IDLE :
 				begin
-					state <= LOAD;
-					l_s <= 1'b1;
+					if(init_FSM)
+					/** Init idle state **/
+					begin
+						//Vamos a estar en este estado mientras la
+						//senal de start sea igual a cero
+						state <= LOAD;
+						l_s <= BIT_ONE;
+					end
 				end
 				
-			end
-			
-			LOAD :
-			begin
-			
-				l_s <= '0;
-				state <= MULTIPLYING;
-
-			end
-			
-			MULTIPLYING :
-			begin 
-				//Si ya termino de multiplicar debe
-				//enviar una senal de done
-				if(done)
+				LOAD :
+				/** Init load state **/
 				begin
-					state <= IDLE;
-					//Tienes que indicarle al control unit que mantenga el resultado
-					complete <= 1'b1;
-					//y en caso de volver a recibir un start hay que limpiar antes el resultado
+					//Cargamos los datos a los registros con datos
+					//cmabiamos a estado multiplicar
+					l_s <= BIT_ZERO;
+					state <= MULTIPLYING;
 				end
+				
+				MULTIPLYING :
+				/** Init load state **/
+				begin 
+					//Si ya termino de multiplicar debe
+					//enviar una senal de done
+					if(done)
+					begin
+						state <= IDLE;
+						//Tienes que indicarle al control unit que mantenga el resultado
+						complete <= BIT_ONE;
+						//y en caso de volver a recibir un start hay que limpiar antes el resultado
+					end
 
-			end
+				end
+				
+				
+				default: 
+				begin 
+					l_s <= BIT_ZERO;
+					state <= IDLE;
+					complete <= BIT_ZERO;
+				end
 			
-			
-			default: 
-			begin 
-				l_s <= '0;
-				state <= IDLE;
-				complete <= '0;
-			end
+			endcase
 		
-		endcase
-	
+		end
+			
 	end
-		
-end
 
 endmodule

@@ -1,32 +1,48 @@
+/*********************************************************************************
+* Module Name: top_module.sv
+
+* Description: top module
+
+* Inputs: clk, rst, start, multiplier, multiplicand
+
+* Outputs: sign, product
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  09/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+import Pkg_Top_Module::*;
+
 module top_module
-#(
-	parameter DW_2 = 16,
-	parameter DW = 8
-)
 (
+	/** Input ports **/
 	input clk,
 	input rst,
 	input start,
 	input [DW-1:0] multiplier,
 	input [DW-1:0] multiplicand,
 	
+	/** Output ports **/
 	output sign,
 	output logic [DW_2-1:0] product
 );
 
-logic start_w;
-logic init_FSM_w;
-logic done_w;
-logic l_s_w;
-logic complete_w;
-logic permit_w;
-logic charged_w;
-
-logic [DW-1:0] rgstr1_w;
-logic [DW_2-1:0] rgstr2_w;
-logic [DW_2-1:0] shift_reg_w;
-logic [DW_2-1:0] product_w;
-
+/** Create module debounce **/
 debouncer db(
 
 	.clk(clk),
@@ -37,6 +53,7 @@ debouncer db(
 
 );
 
+/** Create module Control Unit **/
 control_unit cu(
 
 	.clk(clk),
@@ -49,8 +66,9 @@ control_unit cu(
 
 );
 
+/** Create module FSM **/
 FSM sm(
-	
+
 	.clk(clk),
 	.rst(rst),
 	.init_FSM(init_FSM_w),
@@ -61,8 +79,9 @@ FSM sm(
 	
 );
 
+/** Create module load **/
 load ld(
-
+	
 	.clk(clk),
 	.rst(rst),
 	.l_s(l_s_w),
@@ -75,6 +94,7 @@ load ld(
 	
 );
 
+/** Create module secuencial adder **/
 sweep_sequential_adder sa(
 
 	.clk(clk),
@@ -90,6 +110,7 @@ sweep_sequential_adder sa(
 
 );
 
+/** Create module left shift **/
 left_shift ls(
 
 	.clk(clk),
@@ -102,6 +123,7 @@ left_shift ls(
 
 );
 
+/** Create module A2 **/
 a2 a(
 
 	.multiplier_msb(multiplier[DW-1]),
