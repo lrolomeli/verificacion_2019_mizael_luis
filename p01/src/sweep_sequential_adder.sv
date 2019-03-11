@@ -66,6 +66,7 @@ module sweep_sequential_adder
 				if(l_s)
 				begin
 					count <= BIT_ZERO;
+					product <= BIT_ZERO;
 				end
 				//Esta senal de permit directa de control unit es para mantener el resultado
 				//cuando esta en estado de listo (done) y se limpia cuando hay una senal de

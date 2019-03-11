@@ -51,7 +51,6 @@ module debouncer
 		
 		else
 		begin
-		
 			DFF1 <= start;		/** Input to ff1 **/
 			DFF2 <= DFF1;		/** Of ff1 to ff2 **/
 		
@@ -66,7 +65,7 @@ module debouncer
 				if(counter == COUNT)
 				begin
 					/** check the couter have same value count and clean count **/
-					db_out <= BIT_ONE;	//si termina de contar asigna la salida como la entrada
+					db_out <= ~(DFF2);	//si termina de contar asigna la salida como la entrada
 					counter <= BIT_ZERO;		//limpia el contador y si no
 				end
 				
