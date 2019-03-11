@@ -34,12 +34,12 @@ module top_module
 	input clk,
 	input rst,
 	input start,
-	input [DW-1:0] multiplier,
-	input [DW-1:0] multiplicand,
+	input [DW-ONE:ZERO] multiplier,
+	input [DW-ONE:ZERO] multiplicand,
 	
 	/** Output ports **/
 	output sign,
-	output logic [DW_2-1:0] product
+	output logic [DW_2-ONE:ZERO] product
 );
 
 /** Create module debounce **/

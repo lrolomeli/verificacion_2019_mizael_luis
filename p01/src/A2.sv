@@ -26,6 +26,8 @@
 // Import the Packages
 //================================================================================
 import Pkg_Global::*;
+import Pkg_Top_Module::*;
+import Pkg_Debouncer::*;
 
 module a2
 (
@@ -48,7 +50,7 @@ module a2
 		if (multiplier_msb ^ multiplicand_msb)
 		begin
 			/** Put on A2 complement **/
-			result = ~(product [DW_2-TWO:ZERO]) - BIT_ONE;
+			result = ~(product [DW_2-TWO:ZERO]) + BIT_ONE;
 			sign = multiplier_msb ^ multiplicand_msb;
 		end
 		
