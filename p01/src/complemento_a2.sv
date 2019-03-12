@@ -1,5 +1,5 @@
 /*********************************************************************************
-* Module Name: a2.sv
+* Module Name: complemento_a2.sv
 
 * Description: Put on A2 complement number received 
 
@@ -26,10 +26,9 @@
 // Import the Packages
 //================================================================================
 import Pkg_Global::*;
-import Pkg_Top_Module::*;
 import Pkg_Debouncer::*;
 
-module a2
+module complemento_a2
 (
 
 	/** Input ports **/

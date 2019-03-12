@@ -26,7 +26,6 @@
 // Import the Packages
 //================================================================================
 import Pkg_Global::*;
-import Pkg_Top_Module::*;
 
 module top_module
 (
@@ -41,6 +40,19 @@ module top_module
 	output sign,
 	output logic [DW_2-ONE:ZERO] product
 );
+
+logic start_w;
+logic init_FSM_w;
+logic done_w;
+logic l_s_w;
+logic complete_w;
+logic permit_w;
+logic charged_w;
+
+logic [DW-ONE:ZERO] rgstr1_w;
+logic [DW_2-ONE:ZERO] rgstr2_w;
+logic [DW_2-ONE:ZERO] shift_reg_w;
+logic [DW_2-ONE:ZERO] product_w;
 
 /** Create module debounce **/
 debouncer db(
@@ -124,7 +136,7 @@ left_shift ls(
 );
 
 /** Create module A2 **/
-a2 a(
+complemento_a2 a(
 
 	.multiplier_msb(multiplier[DW-1]),
 	.multiplicand_msb(multiplicand[DW-1]),

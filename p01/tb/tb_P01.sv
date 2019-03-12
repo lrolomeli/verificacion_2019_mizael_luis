@@ -6,7 +6,6 @@ module tb_P01;
 //================================================================================
 import Pkg_Global::*;
 import Pkg_Debouncer::*;
-import Pkg_Top_Module::*;
 
 /** Input ports **/
 logic clk;
@@ -33,10 +32,18 @@ top_module P01(
 initial begin
         clk = 0;
         rst = 0;
-	start = 0;
+	start = 1;
 	multiplier = 8'b01111111;
 	multiplicand = 8'b11111111;
     #2  rst = 1;
+	start = 0;
+    #MAX_COUNT
+	start = 1;
+	multiplier = 8'b01111111;
+	multiplicand = 8'b11111100;
+    #MAX_COUNT
+	start = 0;	
+    #MAX_COUNT
 	start = 1;
     #MAX_COUNT
     $stop;

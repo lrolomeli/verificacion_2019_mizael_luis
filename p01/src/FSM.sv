@@ -41,6 +41,7 @@ module FSM
 	
 );
 
+
 	always_ff@(posedge clk, negedge rst)
 	begin
 
