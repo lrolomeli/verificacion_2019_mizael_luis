@@ -48,9 +48,8 @@ logic l_s_w;
 logic complete_w;
 logic permit_w;
 logic charged_w;
-
-logic [DW-ONE:ZERO] multiplier_w;
-logic [DW-ONE:ZERO] multiplicand_w;
+logic multiplier_w;
+logic multiplicand_w;
 
 logic [DW-ONE:ZERO] rgstr1_w;
 logic [DW_2-ONE:ZERO] rgstr2_w;
@@ -97,13 +96,13 @@ FSM sm(
 complemento_a2_in multiplier_a2
 (
 	.in(multiplier),
-	.out(multiplier_w)
+	.out(multiplier_w),
 );
 
 complemento_a2_in multiplicand_a2
 (
 	.in(multiplicand),
-	.out(multiplicand_w)
+	.out(multiplicand_w),
 
 );
 

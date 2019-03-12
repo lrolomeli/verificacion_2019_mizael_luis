@@ -44,7 +44,8 @@ package Pkg_Global;
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/** enum used to select type of register **/
-	enum logic [1:0] {IDLE, LOAD, MULTIPLYING} state;
+	typedef enum bit [1:0] {IDLE, LOAD, MULTIPLYING} STATES;
+	logic [1:0] state;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // wires

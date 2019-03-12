@@ -8,4 +8,5 @@
 ../src/left_shift.sv
 ../src/load.sv
 ../src/sweep_sequential_adder.sv
+../src/complemento_a2_in.sv
 tb_P01.sv

@@ -65,8 +65,8 @@ module load
 			if (l_s)
 			begin
 				/** Load data to register **/
-				rgstr1 <= multiplier[DW-ONE:ZERO];
-				rgstr2 <= multiplicand[DW-ONE:ZERO];
+				rgstr1 <= multiplier[DW-TWO:ZERO];
+				rgstr2 <= multiplicand[DW-TWO:ZERO];
 				charged <= BIT_ONE;
 			end
 
