@@ -44,6 +44,10 @@ module sweep_sequential_adder
 
 );
 
+	//A este modulo le debe entrar una senal de control que indique si hay que empezar a contar
+	//Por ejemplo ls 
+	logic [DWlogb2:0] count;
+
 	always_ff@(posedge clk, negedge rst)
 	begin
 
