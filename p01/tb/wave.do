@@ -23,7 +23,7 @@ add wave -noupdate -color Blue /Pkg_Global::state
 add wave -noupdate /tb_P01/P01/sa/count
 add wave -noupdate /tb_P01/P01/result_w
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {39956897600 ps} 0}
+WaveRestoreCursors {{Cursor 1} {62914649800 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -39,4 +39,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {6659482800 ps} {94741105800 ps}
+WaveRestoreZoom {62914470600 ps} {62914829 ns}

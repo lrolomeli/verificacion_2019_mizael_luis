@@ -32,19 +32,23 @@ top_module P01(
 initial begin
         clk = 0;
         rst = 0;
-	start = 1;
+	start = 0;
 	multiplier = 4'b0111;
 	multiplicand = 4'b1111;
     #2  rst = 1;
 	start = 0;
     #MAX_COUNT
-	start = 1;
+	start = 0;
 	multiplier = 4'b0111;
 	multiplicand = 4'b1100;
     #MAX_COUNT
+	multiplier = 4'b1010;
+	multiplicand = 4'b0101;
 	start = 0;	
     #MAX_COUNT
-	start = 1;
+	multiplier = 4'b1111;
+	multiplicand = 4'b1100;
+	start = 0;
     #MAX_COUNT
     $stop;
 end
