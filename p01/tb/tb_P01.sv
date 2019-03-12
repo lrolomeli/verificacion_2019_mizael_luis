@@ -33,14 +33,14 @@ initial begin
         clk = 0;
         rst = 0;
 	start = 1;
-	multiplier = 8'b01111111;
-	multiplicand = 8'b11111111;
+	multiplier = 4'b0111;
+	multiplicand = 4'b1111;
     #2  rst = 1;
 	start = 0;
     #MAX_COUNT
 	start = 1;
-	multiplier = 8'b01111111;
-	multiplicand = 8'b11111100;
+	multiplier = 4'b0111;
+	multiplicand = 4'b1100;
     #MAX_COUNT
 	start = 0;	
     #MAX_COUNT

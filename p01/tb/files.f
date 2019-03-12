@@ -9,4 +9,6 @@
 ../src/load.sv
 ../src/sweep_sequential_adder.sv
 ../src/complemento_a2_in.sv
+../src/bin2dec.sv
+../src/segments.sv
 tb_P01.sv

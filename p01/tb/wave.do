@@ -19,10 +19,11 @@ add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/rgstr1_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/rgstr2_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/shift_reg_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/product_w
-add wave -noupdate -radix hexadecimal /Pkg_Global::count
 add wave -noupdate -color Blue /Pkg_Global::state
+add wave -noupdate /tb_P01/P01/sa/count
+add wave -noupdate /tb_P01/P01/result_w
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {14300812800 ps} 0}
+WaveRestoreCursors {{Cursor 1} {39956897600 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -38,4 +39,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {88081623 ns}
+WaveRestoreZoom {6659482800 ps} {94741105800 ps}
