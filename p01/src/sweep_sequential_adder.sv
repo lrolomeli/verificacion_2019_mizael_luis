@@ -34,7 +34,6 @@ module sweep_sequential_adder
 	input clk,
 	input rst,
 	input l_s,
-	input init_FSM,
 	input permit,
 	input [DW-ONE:ZERO] rgstr1,
 	input [DW_2-ONE:ZERO] rgstr2,
@@ -58,54 +57,46 @@ module sweep_sequential_adder
 		
 		else
 		begin
-			
-			if(init_FSM)
+		
+			//La misma senal de start no puede indicar el inicio del contador		
+			if(l_s)
+			begin
+				count <= BIT_ZERO;
+				product <= BIT_ZERO;
+			end
+			//Esta senal de permit directa de control unit es para mantener el resultado
+			//cuando esta en estado de listo (done) y se limpia cuando hay una senal de
+			//start.
+			else if(permit)
 			begin
 			
-				//La misma senal de start no puede indicar el inicio del contador		
-				if(l_s)
+				//Barrido de cada bit en "multiplier"
+				//En caso de ser 1 el bit entonces sumamos el valor de rgstr2
+				//Y rgstr2 tiene el valor de "multiplicand" y puede estar recorrido
+				//o puede ser si counter es 0 el valor original de "multiplicand".
+
+				if(rgstr1[count] && ~(count == DW-ONE)) 
 				begin
-					count <= BIT_ZERO;
-					product <= BIT_ZERO;
-				end
-				//Esta senal de permit directa de control unit es para mantener el resultado
-				//cuando esta en estado de listo (done) y se limpia cuando hay una senal de
-				//start.
-				else if(~permit)
-				begin
-				
-					//Barrido de cada bit en "multiplier"
-					//En caso de ser 1 el bit entonces sumamos el valor de rgstr2
-					//Y rgstr2 tiene el valor de "multiplicand" y puede estar recorrido
-					//o puede ser si counter es 0 el valor original de "multiplicand".
-					if(rgstr1[count]) 
-					begin
-						product <= product + rgstr2;
-					end
-				
-					//La operacion de multiplicacion tiene una latencia de DW ciclos de reloj
-					//Sin embargo en el ciclo DW-1 debimos haber terminado con la multiplicacion
-					//debido a que utilizamos el msb de cada entrada para representar el complemento A2
-					//en este punto ya tenemos un resultado al que faltaria simplemente comprobar si hacer
-					//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
-					if(count == DW-ONE)
-					begin
-						done <= BIT_ONE;			
-					end
-					
-					else
-					begin
-						done <= BIT_ZERO;
-						count <= count + BIT_ONE;
-					end
-				
+					product <= product + rgstr2;
+					count <= count + BIT_ONE;
 				end
 				
-					else
+				//La operacion de multiplicacion tiene una latencia de DW ciclos de reloj
+				//Sin embargo en el ciclo DW-1 debimos haber terminado con la multiplicacion
+				//debido a que utilizamos el msb de cada entrada para representar el complemento A2
+				//en este punto ya tenemos un resultado al que faltaria simplemente comprobar si hacer
+				//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
+				
+				else if(count == DW-ONE)
 				begin
-					count <= BIT_ZERO;
+					done <= BIT_ONE;
 				end
+						
+			end
 			
+			else
+			begin
+				done <= BIT_ZERO;
 			end
 			
 		end

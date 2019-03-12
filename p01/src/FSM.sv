@@ -32,13 +32,11 @@ module FSM
 	/** Input ports **/
 	input clk,
 	input rst,
-	input init_FSM,
+	input start,
+	input l_s,
 	input done,
 	
-	/** Input ports **/
-	output logic l_s,
-	output logic complete
-	
+	output [ONE:ZERO] current_state
 );
 
 
@@ -48,9 +46,7 @@ module FSM
 		if(~rst)
 		begin
 			/** Init FSM **/
-			l_s <= BIT_ZERO;
 			state <= IDLE;
-			complete <= BIT_ZERO;
 		end
 		
 		else
@@ -58,23 +54,25 @@ module FSM
 			case(state)
 				IDLE :
 				begin
-					if(init_FSM)
+					
+					if(start)
 					/** Init idle state **/
 					begin
 						//Vamos a estar en este estado mientras la
 						//senal de start sea igual a cero
 						state <= LOAD;
-						l_s <= BIT_ONE;
 					end
+
 				end
 				
 				LOAD :
 				/** Init load state **/
 				begin
-					//Cargamos los datos a los registros con datos
-					//cmabiamos a estado multiplicar
-					l_s <= BIT_ZERO;
-					state <= MULTIPLYING;
+					//datos cargados
+					if(l_s)
+					begin
+						state <= MULTIPLYING;
+					end
 				end
 				
 				MULTIPLYING :
@@ -85,19 +83,13 @@ module FSM
 					if(done)
 					begin
 						state <= IDLE;
-						//Tienes que indicarle al control unit que mantenga el resultado
-						complete <= BIT_ONE;
-						//y en caso de volver a recibir un start hay que limpiar antes el resultado
 					end
 
-				end
-				
+				end		
 				
 				default: 
 				begin 
-					l_s <= BIT_ZERO;
 					state <= IDLE;
-					complete <= BIT_ZERO;
 				end
 			
 			endcase
@@ -105,5 +97,7 @@ module FSM
 		end
 			
 	end
+	
+	assign current_state = state;
 
 endmodule

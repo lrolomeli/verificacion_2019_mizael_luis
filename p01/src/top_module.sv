@@ -42,12 +42,11 @@ module top_module
 );
 
 logic start_w;
-logic init_FSM_w;
 logic done_w;
 logic l_s_w;
-logic complete_w;
 logic permit_w;
 logic charged_w;
+logic [ONE:ZERO] current_state_w;
 
 logic [DW-ONE:ZERO] multiplier_w;
 logic [DW-ONE:ZERO] multiplicand_w;
@@ -73,12 +72,11 @@ control_unit cu(
 
 	.clk(clk),
 	.rst(rst),
-	.start(start_w),
-	.complete(complete_w),
-
-	.permit(permit_w),
-	.init_FSM(init_FSM_w)
-
+	.current_state(current_state_w),
+	
+	.l_s(l_s_w),
+	.permit(permit_w)
+	
 );
 
 /** Create module FSM **/
@@ -86,11 +84,12 @@ FSM sm(
 
 	.clk(clk),
 	.rst(rst),
-	.init_FSM(init_FSM_w),
+	.start(start_w),
+	.l_s(l_s_w),
 	.done(done_w),
 
-	.l_s(l_s_w),
-	.complete(complete_w)
+	.current_state(current_state_w)
+	
 	
 );
 
@@ -129,7 +128,6 @@ sweep_sequential_adder sa(
 	.clk(clk),
 	.rst(rst),
 	.l_s(charged_w),
-	.init_FSM(init_FSM_w),
 	.rgstr1(rgstr1_w),
 	.rgstr2(shift_reg_w),
 	.permit(permit_w),

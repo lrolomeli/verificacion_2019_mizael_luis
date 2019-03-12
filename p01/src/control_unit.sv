@@ -33,12 +33,11 @@ module control_unit
 	/** Input ports **/
 	input clk,
 	input rst,
-	input start,
-	input complete,
+	input [ONE:ZERO] current_state,
 	
 	/** Output ports **/
-	output logic permit,
-	output logic init_FSM
+	output logic l_s,
+	output logic permit
 
 );
 
@@ -48,27 +47,36 @@ module control_unit
 		if(~rst)
 		begin
 			/** Clean outputs **/
-			init_FSM <= BIT_ZERO; 
 			permit <= BIT_ZERO;
+			l_s <= BIT_ZERO;
 		end
 		
 		else
 		begin 
-			if(start)
-			begin
-				/** Init FSM using start signal **/
-				permit <= BIT_ZERO;
-				init_FSM <= BIT_ONE;	
-			end
+			case(current_state)
+				IDLE:
+				begin
+					permit <= BIT_ZERO;
+				end
+				
+				LOAD:
+				begin
+					l_s <= BIT_ONE;
+				end
+				
+				MULTIPLYING:
+				begin
+					l_s <= BIT_ZERO;
+					permit <= BIT_ONE;
+				end
+				
+				default:
+				begin
+					l_s <= BIT_ZERO;
+					permit <= BIT_ZERO;
+				end
 			
-			if(complete)
-			begin
-				//Mandar senal al multiplicador de que se mantenga el resultado
-				//Hasta que alguien modifique las entradas o el start.
-				permit <= BIT_ONE;
-				init_FSM <= BIT_ZERO;
-			end
-			
+			endcase
 		end 
 		
 	end 
