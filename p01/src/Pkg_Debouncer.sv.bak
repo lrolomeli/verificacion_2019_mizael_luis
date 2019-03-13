@@ -34,16 +34,11 @@ import Pkg_Global::*;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Parameters
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//	parameter MILLIS = 20;		// (2^(20))/ 50 MHz = 20 ms debouncer time
-//	parameter COUNT = 200;  // Max Counting with 20 bits
+	parameter MILLIS = 20;		// (2^(20))/ 50 MHz = 20 ms debouncer time
+	parameter COUNT = 1048575;  // Max Counting with 20 bits
 	
-	//parameter FREQ = 50000000;
-	//parameter MILLIS = 0.002;
-	//parameter COUNT = 1000000; //FREQ * TIME_COUNT = 50MHz * 20ms
-	parameter COUNT = 200; //FREQ * TIME_COUNT = 10kHz * 20ms
-	parameter BITS = $clog2(COUNT);
 	/** Logic counter **/ 
-	logic [BITS : ZERO]	counter;							
+	logic [MILLIS-ONE : ZERO]	counter;							
 	
 	/** Input flip-flops **/
 	logic DFF1;
