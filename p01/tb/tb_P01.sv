@@ -43,17 +43,6 @@ initial begin
     #MAX_COUNT
 	multiplier = 4'b1010;
 	multiplicand = 4'b0101;	
-	start = 0;
-	multiplier = 4'b0111;
-	multiplicand = 4'b1100;
-    #MAX_COUNT
-	multiplier = 4'b1010;
-	multiplicand = 4'b0101;
-	start = 0;	
-    #MAX_COUNT
-	multiplier = 4'b1111;
-	multiplicand = 4'b1100;
-	start = 0;
     #MAX_COUNT
     $stop;
 end
