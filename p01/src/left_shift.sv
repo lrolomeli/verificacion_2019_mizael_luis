@@ -60,7 +60,7 @@ module left_shift
 				shift_out <= rgstr2;
 			end
 			
-			else if(~permit)
+			else if(permit)
 			begin
 				/** Shift apply **/
 				shift_out <= {shift_out[DW_2-TWO:ZERO], BIT_ZERO};

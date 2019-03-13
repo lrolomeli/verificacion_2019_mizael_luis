@@ -3,16 +3,15 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /tb_P01/P01/clk
 add wave -noupdate /tb_P01/P01/rst
 add wave -noupdate /tb_P01/P01/start
-add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/multiplier
-add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/multiplicand
+add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplier
+add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplicand
 add wave -noupdate /tb_P01/P01/sign
-add wave -noupdate -color Magenta -radix hexadecimal /tb_P01/P01/product
+add wave -noupdate -color Magenta -radix decimal /tb_P01/P01/product
 add wave -noupdate -color Yellow /tb_P01/P01/start_w
 add wave -noupdate -color {Blue Violet} /tb_P01/P01/done_w
 add wave -noupdate -color {Blue Violet} /tb_P01/P01/l_s_w
 add wave -noupdate -color {Blue Violet} /tb_P01/P01/permit_w
 add wave -noupdate -color {Blue Violet} /tb_P01/P01/charged_w
-add wave -noupdate -color White /tb_P01/P01/current_state_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/multiplier_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/multiplicand_w
 add wave -noupdate -color White -radix hexadecimal /tb_P01/P01/rgstr1_w
@@ -40,3 +39,4 @@ configure wave -timeline 0
 configure wave -timelineunits ps
 update
 WaveRestoreZoom {62914470600 ps} {62914829 ns}
+

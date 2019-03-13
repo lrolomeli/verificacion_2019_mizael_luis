@@ -67,6 +67,7 @@ module sweep_sequential_adder
 			begin
 				count <= BIT_ZERO;
 				product <= BIT_ZERO;
+				done <= BIT_ZERO;
 			end
 			//Esta senal de permit directa de control unit es para mantener el resultado
 			//cuando esta en estado de listo (done) y se limpia cuando hay una senal de
@@ -95,11 +96,17 @@ module sweep_sequential_adder
 				begin
 					done <= BIT_ONE;
 				end
+				
+				else
+				begin
+					count <= count + BIT_ONE;
+				end
 						
 			end
 			
 			else
 			begin
+				count <= BIT_ZERO;
 				done <= BIT_ZERO;
 			end
 			
