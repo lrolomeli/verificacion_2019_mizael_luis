@@ -38,6 +38,7 @@ module complemento_a2
 	
 	/** Output ports **/
 	output logic sign,
+	output logic [DW_2-ONE:ZERO] result_dec,
 	output logic [DW_2-ONE:ZERO] result
 
 );
@@ -50,6 +51,7 @@ module complemento_a2
 		begin
 			/** Put on A2 complement **/
 			result = ~(product [DW_2-TWO:ZERO]) + BIT_ONE;
+			result_dec = result;
 			sign = multiplier_msb ^ multiplicand_msb;
 		end
 		
@@ -57,6 +59,7 @@ module complemento_a2
 		begin
 			/** Normal result **/
 			result = product [DW_2-TWO:ZERO];
+			result_dec = result;
 			sign = multiplier_msb ^ multiplicand_msb;
 		end
 			

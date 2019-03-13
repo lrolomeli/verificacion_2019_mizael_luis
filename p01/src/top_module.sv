@@ -167,7 +167,8 @@ complemento_a2 a(
 	.product(product_w),
 	
 	.sign(sign),
-	.result(result_w)
+	.result(product),
+	.result_dec(result_w)
 
 );
 
