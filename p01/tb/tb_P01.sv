@@ -33,17 +33,15 @@ initial begin
         clk = 0;
         rst = 0;
 	start = 0;
-	multiplier = 4'b0111;
-	multiplicand = 4'b1111;
+	multiplier = 8'b10000000;
+	multiplicand = 8'b10000000;
     #2  rst = 1;
 	start = 0;
     #MAX_COUNT
-	multiplier = 4'b0111;
-	multiplicand = 4'b1100;
+	multiplier = 8'b10000001;
+	multiplicand = 8'b10000001;
     #MAX_COUNT
-	multiplier = 4'b1010;
-	multiplicand = 4'b0101;	
-    #MAX_COUNT
+
     $stop;
 end
 

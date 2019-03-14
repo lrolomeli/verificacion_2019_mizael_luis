@@ -39,8 +39,8 @@ import Pkg_Global::*;
 	
 	//parameter FREQ = 50000000;
 	//parameter MILLIS = 0.002;
-	parameter COUNT = 1000000; //FREQ * TIME_COUNT = 50MHz * 20ms
-	//parameter COUNT = 200; //FREQ * TIME_COUNT = 10kHz * 20ms
+	//parameter COUNT = 1000000; //FREQ * TIME_COUNT = 50MHz * 20ms
+	parameter COUNT = 200; //FREQ * TIME_COUNT = 10kHz * 20ms
 	parameter BITS = $clog2(COUNT);
 	/** Logic counter **/ 
 	logic [BITS : ZERO]	counter;							

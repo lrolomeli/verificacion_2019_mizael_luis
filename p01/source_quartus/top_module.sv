@@ -66,11 +66,16 @@ wire [3:0] units_w;
 wire [3:0] tens_w;
 wire [3:0] hundreds_w;
 
+pll_50M_10k pll_clk(
+	.inclk0(clk),
+	
+	.c0(clk_w)
+);
 
 /** Create module debounce **/
 debouncer db(
 
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.start(start),
 	
@@ -81,7 +86,7 @@ debouncer db(
 /** Create module Control Unit **/
 control_unit cu(
 
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.current_state(current_state_w),
 	
@@ -93,7 +98,7 @@ control_unit cu(
 /** Create module FSM **/
 FSM sm(
 
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.start(start_w),
 	.l_s(l_s_w),
@@ -121,7 +126,7 @@ complemento_a2_in multiplicand_a2
 /** Create module load **/
 load ld(
 	
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.l_s(l_s_w),
 	.multiplier(multiplier_w),
@@ -136,7 +141,7 @@ load ld(
 /** Create module secuencial adder **/
 sweep_sequential_adder sa(
 
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.l_s(charged_w),
 	.rgstr1(rgstr1_w),
@@ -151,7 +156,7 @@ sweep_sequential_adder sa(
 /** Create module left shift **/
 left_shift ls(
 
-	.clk(clk),
+	.clk(clk_w),
 	.rst(rst),
 	.l_s(charged_w),
 	.permit(permit_w),
@@ -169,7 +174,7 @@ complemento_a2 a(
 	.product(product_w),
 	.permit(permit_w),
 	.rst(rst),
-	.clk(clk),
+	.clk(clk_w),
 	
 	.sign(sign),
 	.result(product),

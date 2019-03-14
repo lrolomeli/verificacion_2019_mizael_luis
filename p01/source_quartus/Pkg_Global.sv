@@ -1,5 +1,5 @@
 /*********************************************************************************
-* Description: Debouncer
+* Description: Global Package 
 
 * Version: 1.0
 
@@ -19,42 +19,35 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Package Declaration
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-package Pkg_Debouncer;
-
-//================================================================================
-// Import the Packages
-//================================================================================
-import Pkg_Global::*;
+package Pkg_Global;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Type defs
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+	typedef enum {FALSE, TRUE} bool;
+	typedef enum {ZERO, ONE, TWO} NUMBERS;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Parameters
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//	parameter MILLIS = 20;		// (2^(20))/ 50 MHz = 20 ms debouncer time
-//	parameter COUNT = 200;  // Max Counting with 20 bits
-	
-	//parameter FREQ = 50000000;
-	//parameter MILLIS = 0.002;
-	parameter COUNT = 1000000; //FREQ * TIME_COUNT = 50MHz * 20ms
-	//parameter COUNT = 200; //FREQ * TIME_COUNT = 10kHz * 20ms
-	parameter BITS = $clog2(COUNT);
-	/** Logic counter **/ 
-	logic [BITS : ZERO]	counter;							
-	
-	/** Input flip-flops **/
-	logic DFF1;
-	logic DFF2;
+	parameter BIT_ZERO = '0;
+	parameter BIT_ONE = 1'b1;
+	parameter DW_2 = 8;
+	parameter DW = 4;
+	parameter DWlogb2 = $clog2(DW);
+	parameter MAX_COUNT = 2097181;
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	/** enum used to select type of register **/
+	enum logic [1:0] {IDLE, LOAD, MULTIPLYING} state;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // wires
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 endpackage 
+
+

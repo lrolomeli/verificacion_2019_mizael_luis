@@ -32,8 +32,8 @@ package Pkg_Global;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	parameter BIT_ZERO = '0;
 	parameter BIT_ONE = 1'b1;
-	parameter DW_2 = 8;
-	parameter DW = 4;
+	parameter DW_2 = 16;
+	parameter DW = 8;
 	parameter DWlogb2 = $clog2(DW);
 	parameter MAX_COUNT = 2097181;
 
