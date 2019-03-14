@@ -35,6 +35,9 @@ module complemento_a2
 	input multiplier_msb,
 	input multiplicand_msb,
 	input [DW_2-ONE : ZERO]product,
+	input permit,
+	input rst,
+	input clk,
 	
 	/** Output ports **/
 	output logic sign,
@@ -43,26 +46,35 @@ module complemento_a2
 
 );
 
-	always_comb 
+	always_ff@(posedge clk, negedge rst) 
 	begin
-
-		/** Use an XOR logic gate to check the sign  **/
-		if (multiplier_msb ^ multiplicand_msb)
-		begin
-			/** Put on A2 complement **/
-			result = ~(product [DW_2-TWO:ZERO]) + BIT_ONE;
-			result_dec = result;
-			sign = multiplier_msb ^ multiplicand_msb;
+		
+		if(~rst)
+		begin;
+			sign <= BIT_ZERO; 
+			result_dec <= BIT_ZERO;
+			result <= BIT_ZERO;
 		end
 		
-		else 
-		begin
-			/** Normal result **/
-			result = product [DW_2-TWO:ZERO];
-			result_dec = result;
-			sign = multiplier_msb ^ multiplicand_msb;
-		end
+		else if (permit)
+		begin 
+			/** Use an XOR logic gate to check the sign  **/
+			if (multiplier_msb ^ multiplicand_msb)
+			begin
+				/** Put on A2 complement **/
+				result = ~(product [DW_2-TWO:ZERO]) + BIT_ONE;
+				result_dec = result;
+				sign = multiplier_msb ^ multiplicand_msb;
+			end
 			
+			else 
+			begin
+				/** Normal result **/
+				result = product [DW_2-TWO:ZERO];
+				result_dec = result;
+				sign = multiplier_msb ^ multiplicand_msb;
+			end
+		end	
 	end
 
 endmodule

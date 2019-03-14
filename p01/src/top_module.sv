@@ -172,6 +172,9 @@ complemento_a2 a(
 	.multiplier_msb(multiplier[DW-1]),
 	.multiplicand_msb(multiplicand[DW-1]),
 	.product(product_w),
+	.permit(permit_w),
+	.rst(rst),
+	.clk(clk_w),
 	
 	.sign(sign),
 	.result(product),
