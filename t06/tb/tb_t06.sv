@@ -14,17 +14,15 @@ top t6(
 .units		(units     	),
 .tens		(tens    	),
 .hundreds	(hundreds       ),
-.sign		(sing		)
+.sign		(sign		)
 );
 
 initial begin
 
-    #2  bits = 8'b01111111;
-    #12 bits = 8'b11111111;
-    #22	bits = 8'b01010101;
-    #32 bits = 8'b10101010;
-    #42 bits = 8'b01001100;
-	
+    bits = 8'b10101001;
+	#1
+    bits = 8'b11101101;
+	#2	
     $stop;
 end
 
