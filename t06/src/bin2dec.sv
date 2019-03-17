@@ -17,18 +17,22 @@
 module bin2dec
 (
     input [7:0] bin,
-    output logic [11:0] bcd
+    output logic [11:0] bcd,
+	 output sign
 );
+logic [7:0] in;
 
-	
-	
+assign in = (bin[7]) ? ~(bin) + 1'b1 : bin;
+assign sign = ~bin[7];
+
 always_comb
 begin
 	bcd = '0;
+	
 	for (integer i = 0; i < 8; i = i+1'b1)
 	begin : generate_block
 
-		bcd = {bcd[10:0],bin[7-i]};
+		bcd = {bcd[10:0],in[7-i]};
 			
 		bcd[3:0] = (bcd[3:0] > 4) ? bcd[3:0] + 4'd3 : bcd[3:0];
 
@@ -37,6 +41,7 @@ begin
 		bcd[11:8] = (bcd[11:8] > 4) ? bcd[11:8] + 4'd3 : bcd[11:8];  
 
 	end
+	
 end
    
                 

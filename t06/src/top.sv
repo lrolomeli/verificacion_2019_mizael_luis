@@ -23,7 +23,8 @@ input [7:0] bits,
 
 output [6:0] units,
 output [6:0] tens,
-output [6:0] hundreds
+output [6:0] hundreds,
+output sign
 
 );
 
@@ -35,7 +36,8 @@ bin2dec b2d
 (
 	.bin(bits),
 	
-	.bcd({hundreds_w,tens_w,units_w})
+	.bcd({hundreds_w,tens_w,units_w}),
+	.sign(sign)
 );
 
 segments units_segment
