@@ -1,17 +1,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: ITESO
 // Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
-// 
+//
 // Create Date:  04/02/2019
-// Design Name:  
+// Design Name:
 // Module Name:  segments
 // Project Name: tarea1
 // Target Devices: FPGA ALTERA DE2-115
 // Tool versions: Quartus Prime
 //
-// Revision: 
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -19,15 +19,15 @@ module segments
 (
 	 //entradas para mostrar del 0 al 9
 	 input w,
-    input x,    
+    input x,
     input y,
     input z,
-	 
+
 	 //salidas para representar cada uno de los segmentos
     output a,
     output b,
     output c,
-    output d, 
+    output d,
     output e,
     output f,
     output g
@@ -41,5 +41,5 @@ module segments
 	 assign e = ~w&(z|(x&~y))|(w&~x&~y&z);
 	 assign f = (~w&~x&y)|((~y&z)&((~w&~x)|(w&x)))|(~w&x&y&z);
 	 assign g = (~y&((~w&~x)|(w&x&~z)))|(~w&x&y&z);
-	 
+
 endmodule

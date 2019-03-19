@@ -1,48 +1,66 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: ITESO
 // Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
-// 
+//
 // Create Date:  16/03/2019
-// Design Name:  
+// Design Name:
 // Module Name:  bin2dec
 // Project Name: pbd
 // Target Devices: FPGA ALTERA DE2-115
 // Tool versions: Quartus Prime
 //
-// Revision: 
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Global_Pkg::*;
+
 module bin2dec
 (
-    input [7:0] bin,
-    output logic [11:0] bcd,
+	 /** Input ports **/
+    input [W_IN:ZERO] bin,
+
+	 /** Output ports **/
+    output logic [W_OUT:ZERO] bcd,
 	 output sign
 );
-logic [7:0] in;
 
-assign in = (bin[7]) ? ~(bin) + 1'b1 : bin;
-assign sign = ~bin[7];
+/** VARIABLE TO SAVE INPUT **/
+logic [W_IN:ZERO] in;
+
+/** LOGIC TO APLICATE COMPLEMENT a2 **/
+assign in = (bin[SEVEN]) ? ~(bin) + BIT_ONE : bin;
+assign sign = bin[SEVEN];
 
 always_comb
 begin
-	bcd = '0;
-	
-	for (integer i = 0; i < 8; i = i+1'b1)
+	/** INIT TO OUT WITH ZERO **/
+	bcd = BIT_ZERO;
+
+	/** USE TO GENERATE **/
+	for (integer i = ZERO; i < EIGHT; i = i + BIT_ONE)
 	begin : generate_block
 
-		bcd = {bcd[10:0],in[7-i]};
-			
-		bcd[3:0] =  (i < 7 && bcd[3:0] > 4) ? bcd[3:0] + 4'd3 : bcd[3:0];
+		/** ACCOMMODATION OF THE OUTPUT TO SEVEN SEGMENTS **/
+		bcd = {bcd[TEEN:ZERO],in[SEVEN-i]};
 
-		bcd[7:4] =  (i < 7 && bcd[7:4] > 4) ? bcd[7:4] + 4'd3 : bcd[7:4];
+		/** LOGIC TO ASSIGN UNIT **/
+		bcd[THREE:ZERO] =  (i < SEVEN && bcd[THREE:ZERO] > FOUR) ? bcd[THREE:ZERO] + BIT_THREE : bcd[THREE:ZERO];
 
-		bcd[11:8] = (i < 7 && bcd[11:8] > 4) ? bcd[11:8] + 4'd3 : bcd[11:8];  
+		/** LOGIC TO ASSIGN TESNS **/
+		bcd[SEVEN:FOUR] =  (i < SEVEN && bcd[SEVEN:FOUR] > FOUR) ? bcd[SEVEN:FOUR] + BIT_THREE : bcd[SEVEN:FOUR];
+
+		/** LOGIC TO ASSIGN HUNDREDS **/
+		bcd[ELEVEN:EIGHT] = (i < SEVEN && bcd[ELEVEN:EIGHT] > FOUR) ? bcd[ELEVEN:EIGHT] + BIT_THREE : bcd[ELEVEN:EIGHT];
 
 	end
-	
+
 end
-   
-                
+
+
 endmodule
