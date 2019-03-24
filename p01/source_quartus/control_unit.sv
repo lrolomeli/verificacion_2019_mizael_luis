@@ -31,9 +31,9 @@ module control_unit
 (
 
 	/** Input ports **/
-	input clk,
-	input rst,
-	input [ONE:ZERO] current_state,
+	input idle,
+	input load,
+	input ready,
 	
 	/** Output ports **/
 	output logic l_s,
@@ -41,44 +41,43 @@ module control_unit
 
 );
 
-	always_ff@(posedge clk, negedge rst)
-	begin 
 
-		if(~rst)
-		begin
-			/** Clean outputs **/
-			permit <= BIT_ZERO;
-			l_s <= BIT_ZERO;
-		end
-		
-		else
-		begin 
-			case(current_state)
-				IDLE:
-				begin
-					permit <= BIT_ZERO;
-				end
-				
-				LOAD:
-				begin
-					l_s <= BIT_ONE;
-				end
-				
-				MULTIPLYING:
-				begin
-					l_s <= BIT_ZERO;
-					permit <= BIT_ONE;
-				end
-				
-				default:
-				begin
-					l_s <= BIT_ZERO;
-					permit <= BIT_ZERO;
-				end
-			
-			endcase
-		end 
-		
-	end 
+always_comb
+begin
+
+	if(idle)
+	begin
+		permit = BIT_ZERO;
+		l_s = BIT_ZERO;
+	end
+	
+	else
+	begin
+		permit = BIT_ZERO;
+		l_s = BIT_ZERO;
+	end
+	
+	if(load)
+	begin
+		l_s = BIT_ONE;
+	end
+	
+	else
+	begin
+		l_s = BIT_ZERO;
+	end
+
+	if(ready)
+	begin
+		permit = BIT_ONE;
+	end
+	
+	else
+	begin
+		permit = BIT_ZERO;
+	end
+
+end
+
 
 endmodule

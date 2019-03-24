@@ -1,28 +1,29 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_P01/P01/clk
-add wave -noupdate /tb_P01/P01/rst
-add wave -noupdate /tb_P01/P01/start
-add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplier
-add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplicand
-add wave -noupdate /tb_P01/P01/sign
-add wave -noupdate -color Magenta -radix decimal /tb_P01/P01/product
-add wave -noupdate -color Yellow /tb_P01/P01/start_w
-add wave -noupdate -color {Blue Violet} /tb_P01/P01/done_w
-add wave -noupdate -color {Blue Violet} /tb_P01/P01/l_s_w
-add wave -noupdate -color {Blue Violet} /tb_P01/P01/permit_w
-add wave -noupdate -color {Blue Violet} /tb_P01/P01/charged_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplier_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/multiplicand_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/rgstr1_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/rgstr2_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/shift_reg_w
-add wave -noupdate -color White -radix decimal /tb_P01/P01/product_w
-add wave -noupdate -color Blue /Pkg_Global::state
-add wave -noupdate /tb_P01/P01/sa/count
-add wave -noupdate /tb_P01/P01/result_w
+add wave -noupdate /tb_P01/P01/sm/clk
+add wave -noupdate /tb_P01/P01/sm/rst
+add wave -noupdate /tb_P01/P01/sm/start
+add wave -noupdate /tb_P01/P01/sm/l_s
+add wave -noupdate /tb_P01/P01/sm/done
+add wave -noupdate /tb_P01/P01/sm/idle
+add wave -noupdate /tb_P01/P01/sm/load
+add wave -noupdate /tb_P01/P01/sm/ready
+add wave -noupdate /tb_P01/P01/sm/state
+add wave -noupdate /tb_P01/P01/cu/idle
+add wave -noupdate /tb_P01/P01/cu/load
+add wave -noupdate /tb_P01/P01/cu/ready
+add wave -noupdate /tb_P01/P01/cu/l_s
+add wave -noupdate /tb_P01/P01/cu/permit
+add wave -noupdate -radix decimal /tb_P01/P01/product
+add wave -noupdate -radix decimal /tb_P01/P01/shift_reg_w
+add wave -noupdate -radix decimal /tb_P01/P01/multiplier
+add wave -noupdate -radix decimal /tb_P01/P01/multiplicand
+add wave -noupdate -radix decimal /tb_P01/P01/sa/count
+add wave -noupdate -radix decimal /tb_P01/P01/ld/rgstr1
+add wave -noupdate -radix decimal /tb_P01/P01/ld/rgstr2
+add wave -noupdate /tb_P01/P01/ld/charged
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {20000310000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {250000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -38,4 +39,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {19999878800 ps} {20000551200 ps}
+WaveRestoreZoom {0 ps} {1533 ns}

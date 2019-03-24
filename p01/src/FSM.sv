@@ -36,9 +36,13 @@ module FSM
 	input l_s,
 	input done,
 	
-	output [ONE:ZERO] current_state
+	output logic idle,
+	output logic load,
+	output logic ready
+	
 );
 
+STATE state;
 
 	always_ff@(posedge clk, negedge rst)
 	begin
@@ -47,6 +51,9 @@ module FSM
 		begin
 			/** Init FSM **/
 			state <= IDLE;
+			idle <= BIT_ZERO;
+			load <= BIT_ZERO;
+			ready <= BIT_ZERO;
 		end
 		
 		else
@@ -61,6 +68,16 @@ module FSM
 						//Vamos a estar en este estado mientras la
 						//senal de start sea igual a cero
 						state <= LOAD;
+						idle <= BIT_ZERO;
+						load <= BIT_ONE;
+						ready <= BIT_ZERO;
+					end
+					else
+					begin
+						state <= IDLE;
+						idle <= BIT_ONE;
+						load <= BIT_ZERO;
+						ready <= BIT_ZERO;
 					end
 
 				end
@@ -72,6 +89,16 @@ module FSM
 					if(l_s)
 					begin
 						state <= MULTIPLYING;
+						idle <= BIT_ZERO;
+						load <= BIT_ZERO;
+						ready <= BIT_ONE;
+					end
+					else
+					begin
+						state <= LOAD;
+						idle <= BIT_ZERO;
+						load <= BIT_ONE;
+						ready <= BIT_ZERO;
 					end
 				end
 				
@@ -83,6 +110,16 @@ module FSM
 					if(done)
 					begin
 						state <= IDLE;
+						idle <= BIT_ONE;
+						load <= BIT_ZERO;
+						ready <= BIT_ZERO;
+					end
+					else
+					begin
+						state <= MULTIPLYING;
+						idle <= BIT_ZERO;
+						load <= BIT_ZERO;
+						ready <= BIT_ONE;
 					end
 
 				end		
@@ -90,6 +127,9 @@ module FSM
 				default: 
 				begin 
 					state <= IDLE;
+					idle <= BIT_ZERO;
+					load <= BIT_ZERO;
+					ready <= BIT_ONE;
 				end
 			
 			endcase
@@ -97,7 +137,5 @@ module FSM
 		end
 			
 	end
-	
-	assign current_state = state;
 
 endmodule

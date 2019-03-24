@@ -33,7 +33,6 @@ module sweep_sequential_adder
 	/** Input ports **/
 	input clk,
 	input rst,
-	input l_s,
 	input permit,
 	input [DW-ONE:ZERO] rgstr1,
 	input [DW_2-ONE:ZERO] rgstr2,
@@ -61,18 +60,10 @@ module sweep_sequential_adder
 		
 		else
 		begin
-		
-			//La misma senal de start no puede indicar el inicio del contador		
-			if(l_s)
-			begin
-				count <= BIT_ZERO;
-				product <= BIT_ZERO;
-				done <= BIT_ZERO;
-			end
 			//Esta senal de permit directa de control unit es para mantener el resultado
 			//cuando esta en estado de listo (done) y se limpia cuando hay una senal de
 			//start.
-			else if(permit)
+			if(permit)
 			begin
 			
 				//Barrido de cada bit en "multiplier"
@@ -92,7 +83,7 @@ module sweep_sequential_adder
 				//en este punto ya tenemos un resultado al que faltaria simplemente comprobar si hacer
 				//el calculo del complemento a2 o mostrar el dato obtenido a la salida en resultado.
 				
-				else if(count == DW)
+				if(count == DW)
 				begin
 					done <= BIT_ONE;
 				end
@@ -104,9 +95,11 @@ module sweep_sequential_adder
 						
 			end
 			
+			//La misma senal de start no puede indicar el inicio del contador		
 			else
 			begin
 				count <= BIT_ZERO;
+				product <= BIT_ZERO;
 				done <= BIT_ZERO;
 			end
 			

@@ -37,19 +37,17 @@ module top_module
 	input [DW-ONE:ZERO] multiplicand,
 	
 	/** Output ports **/
-	output sign,
-	output [6:0] units,
-	output [6:0] tens,
-	output [6:0] hundreds,
+	output logic sign,
 	output logic [DW_2-ONE:ZERO] product
 );
 
-logic start_w;
 logic done_w;
 logic l_s_w;
 logic permit_w;
 logic charged_w;
-logic clk_w;
+logic idle_w;
+logic load_w;
+logic ready_w;
 
 logic [ONE:ZERO] current_state_w;
 
@@ -60,30 +58,13 @@ logic [DW-ONE:ZERO] rgstr1_w;
 logic [DW_2-ONE:ZERO] rgstr2_w;
 logic [DW_2-ONE:ZERO] shift_reg_w;
 logic [DW_2-ONE:ZERO] product_w;
-logic [DW_2-ONE:ZERO] result_w;
-
-wire [3:0] units_w;
-wire [3:0] tens_w;
-wire [3:0] hundreds_w;
-
-
-/** Create module debounce **/
-debouncer db(
-
-	.clk(clk),
-	.rst(rst),
-	.start(start),
-	
-	.db_out(start_w)	
-
-);
 
 /** Create module Control Unit **/
 control_unit cu(
 
-	.clk(clk),
-	.rst(rst),
-	.current_state(current_state_w),
+	.idle(idle_w),
+	.load(load_w),
+	.ready(ready_w),
 	
 	.l_s(l_s_w),
 	.permit(permit_w)
@@ -95,11 +76,13 @@ FSM sm(
 
 	.clk(clk),
 	.rst(rst),
-	.start(start_w),
-	.l_s(l_s_w),
+	.start(start),
+	.l_s(charged_w),
 	.done(done_w),
 
-	.current_state(current_state_w)
+	.idle(idle_w),
+	.load(load_w),
+	.ready(ready_w)
 	
 	
 );
@@ -138,7 +121,6 @@ sweep_sequential_adder sa(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(charged_w),
 	.rgstr1(rgstr1_w),
 	.rgstr2(shift_reg_w),
 	.permit(permit_w),
@@ -153,7 +135,6 @@ left_shift ls(
 
 	.clk(clk),
 	.rst(rst),
-	.l_s(charged_w),
 	.permit(permit_w),
 	.rgstr2(rgstr2_w),
 	
@@ -172,74 +153,8 @@ complemento_a2 a(
 	.clk(clk),
 	
 	.sign(sign),
-	.result(product),
-	.result_dec(result_w)
+	.result(product)
 
-);
-
-
-bin2dec b2d
-(
-	.bin(result_w),
-	
-	.bcd({hundreds_w,tens_w,units_w})
-);
-
-segments units_segment
-(
-     //inputs 
-     .w(units_w[3]),
-     .x(units_w[2]),
-     .y(units_w[1]),
-     .z(units_w[0]),
-	  
-	  //outputs 
-     .a(units[0]),
-     .b(units[1]),
-     .c(units[2]),
-     .d(units[3]),
-     .e(units[4]),
-     .f(units[5]),
-     .g(units[6])
-	 
-);
-
-segments tens_segment
-(
-	  //inputs 
-     .w(tens_w[3]),
-     .x(tens_w[2]),
-     .y(tens_w[1]),
-     .z(tens_w[0]),
-	  
-	  //outputs 
-     .a(tens[0]),
-     .b(tens[1]),
-     .c(tens[2]),
-     .d(tens[3]),
-     .e(tens[4]),
-     .f(tens[5]),
-     .g(tens[6])
-	 
-);
-	
-segments hundreds_segment
-(
-     //inputs 
-     .w(hundreds_w[3]),
-     .x(hundreds_w[2]),  
-     .y(hundreds_w[1]),
-     .z(hundreds_w[0]),
-	  
-	  //outputs 
-     .a(hundreds[0]),
-     .b(hundreds[1]),
-     .c(hundreds[2]),
-     .d(hundreds[3]), 
-     .e(hundreds[4]),
-     .f(hundreds[5]),
-     .g(hundreds[6])
-	 
 );	
 
 

@@ -32,8 +32,8 @@ package Pkg_Global;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	parameter BIT_ZERO = '0;
 	parameter BIT_ONE = 1'b1;
-	parameter DW_2 = 16;
-	parameter DW = 8;
+	parameter DW_2 = 18;
+	parameter DW = 9;
 	parameter DWlogb2 = $clog2(DW);
 	parameter MAX_COUNT = 2097181;
 
@@ -42,7 +42,7 @@ package Pkg_Global;
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/** enum used to select type of register **/
-	enum logic [1:0] {IDLE, LOAD, MULTIPLYING} state;
+	typedef enum logic [1:0] {IDLE, LOAD, MULTIPLYING} STATE;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // wires

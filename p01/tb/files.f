@@ -1,14 +1,10 @@
 ../src/Pkg_Global.sv
-../src/Pkg_Debouncer.sv
 ../src/top_module.sv
 ../src/complemento_a2.sv
 ../src/control_unit.sv
-../src/debouncer.sv
 ../src/FSM.sv
 ../src/left_shift.sv
 ../src/load.sv
 ../src/sweep_sequential_adder.sv
 ../src/complemento_a2_in.sv
-../src/bin2dec.sv
-../src/segments.sv
 tb_P01.sv

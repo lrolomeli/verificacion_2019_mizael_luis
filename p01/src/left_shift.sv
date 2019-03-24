@@ -32,7 +32,6 @@ module left_shift
 	
 	/** Input ports **/
 	input clk,
-	input l_s,
 	input rst,
 	input permit,
 	input [DW_2-ONE:ZERO] rgstr2,
@@ -54,16 +53,15 @@ module left_shift
 		
 		else
 		begin 
-			if(l_s)
-			begin
-				/** Load value to register **/
-				shift_out <= rgstr2;
-			end
-			
-			else if(permit)
+
+			if(permit)
 			begin
 				/** Shift apply **/
 				shift_out <= {shift_out[DW_2-TWO:ZERO], BIT_ZERO};
+			end
+			else
+			begin
+				shift_out <= rgstr2;
 			end
 			
 		end 
