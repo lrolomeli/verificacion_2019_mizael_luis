@@ -38,8 +38,7 @@ module a2_complement
 
 );
 
-
-assign out = ~(in) + 1'b1;
+	assign out = ~(in) + 1'b1;
 
 
 endmodule

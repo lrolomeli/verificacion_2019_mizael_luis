@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: left_shift.sv
+* Module Name: Load.sv
 
-* Description: left shift register 
+* Description: Load data to diferents registers  
 
-* Inputs: clk, l_s, rst, rgstr2
+* Inputs: clk, rst, l_s, [N-1:0] in
 
-* Outputs: shift_out
+* Outputs: [N-1:0] reg_in,
 
 * Version: 1.0
 
@@ -25,49 +25,53 @@
 //================================================================================
 // Import the Packages
 //================================================================================
-import Pkg_Global::*;
 
-module left_shift
-(
-	
+module load
+#(
+	parameter N = 4
+)(
 	/** Input ports **/
 	input clk,
-	input l_s,
 	input rst,
-	input permit,
-	input [DW_2-ONE:ZERO] rgstr2,
-
-	/** Output ports **/
-	output logic [DW_2-ONE:ZERO] shift_out
+	input l_s, //Senal de carga de datos de entrada o senal de start
+	input [N-1:0] in,
 	
+	/** Output ports **/
+	output logic [N-1:0] reg_in,
+	output logic loaded
 );
 
 
+
 	always_ff@(posedge clk, negedge rst)
-	begin 
+	begin: load
 
 		if(~rst)
 		begin
-			/** Clean out register **/
-			shift_out <= BIT_ZERO;
+			/** Clean registers **/
+			reg_in <= '0;
+			loaded <= '0;
 		end
 		
 		else
-		begin 
-			if(l_s)
-			begin
-				/** Load value to register **/
-				shift_out <= rgstr2;
-			end
+		begin
 			
-			else if(permit)
+			if (l_s)
 			begin
-				/** Shift apply **/
-				shift_out <= {shift_out[DW_2-TWO:ZERO], BIT_ZERO};
+				/** Load input **/
+				reg_in <= in;
+				loaded <= 1'b1;
 			end
-			
-		end 
-		
-	end 
 
-endmodule 
+			else
+			begin
+				/** maintain register data **/
+				loaded <= loaded;
+				reg_in <= reg_in;				
+			end
+
+		end
+
+	end: load
+
+endmodule

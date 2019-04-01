@@ -2,7 +2,6 @@ module adder
 #(
 	parameter N = 4
 )(
-
 	input [N-1:0] a,
 	input [N-1:0] m,
 
@@ -10,8 +9,7 @@ module adder
 );
 
 
+	assign s = a + m;
 
-	assign s = a+m;
-
-
+		
 endmodule
