@@ -40,7 +40,7 @@ initial begin
     	load = 1;
     	op = 0;
     #12 rst = 1;
-    #15	load = 0;
+    #13	load = 0;
     #20
     	
 

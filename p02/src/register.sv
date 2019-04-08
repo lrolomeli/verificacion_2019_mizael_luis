@@ -5,6 +5,7 @@ module register
 	/** Input ports **/
 	input clk,
 	input rst,
+	input clear,
 	input [N-1:0] in,
 	
 	/** Output ports **/
@@ -24,8 +25,15 @@ begin: register
 	
 	else
 	begin
-		/** Load input **/
-		reg_in <= in;
+		if(clear)
+		begin
+			reg_in <= '0;
+		end
+		else
+		begin
+			/** Load input **/
+			reg_in <= in;
+		end
 	end
 
 end: register

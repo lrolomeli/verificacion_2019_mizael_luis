@@ -1,9 +1,9 @@
-../../p02/top_module.sv
-../../p02/reg_aq.sv
+../../p02/top_md.sv
+../../p02/register.sv
 ../../p02/mux2_1.sv
-../../p02/a2_complement.sv
-../../p02/mux3_1.sv
+../../p02/mix_regs.sv
+../../p02/left_shift.sv
 ../../p02/adder.sv
-../../p02/signed_shift.sv
-../../p02/product.sv
+../../p02/subtractor.sv
+../../p02/conditions.sv
 tb_p02.sv

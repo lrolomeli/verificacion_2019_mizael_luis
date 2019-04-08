@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY top_module
+set_global_assignment -name TOP_LEVEL_ENTITY top_md
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:04:53  MARCH 30, 2019"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -63,6 +63,11 @@ set_global_assignment -name SYSTEMVERILOG_FILE load.sv
 set_global_assignment -name SYSTEMVERILOG_FILE reg_aq.sv
 set_global_assignment -name SYSTEMVERILOG_FILE top_module.sv
 set_global_assignment -name SYSTEMVERILOG_FILE register.sv
+set_global_assignment -name SYSTEMVERILOG_FILE subtractor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE top_md.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mix_regs.sv
+set_global_assignment -name SYSTEMVERILOG_FILE left_shift.sv
+set_global_assignment -name SYSTEMVERILOG_FILE conditions.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

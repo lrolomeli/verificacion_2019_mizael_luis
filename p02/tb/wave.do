@@ -2,22 +2,28 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /tb_p02/p02/clk
 add wave -noupdate /tb_p02/p02/rst
-add wave -noupdate /tb_p02/p02/l_s
-add wave -noupdate /tb_p02/p02/q
-add wave -noupdate /tb_p02/p02/m
+add wave -noupdate /tb_p02/p02/load
+add wave -noupdate /tb_p02/p02/op
+add wave -noupdate /tb_p02/p02/clear
+add wave -noupdate /tb_p02/p02/Q
+add wave -noupdate /tb_p02/p02/M
 add wave -noupdate /tb_p02/p02/product
-add wave -noupdate /tb_p02/p02/m_w
-add wave -noupdate /tb_p02/p02/m_a2_w
-add wave -noupdate /tb_p02/p02/a_out_w
+add wave -noupdate /tb_p02/p02/clear_w
+add wave -noupdate /tb_p02/p02/op_w
+add wave -noupdate /tb_p02/p02/regQ_w
+add wave -noupdate /tb_p02/p02/regM_w
 add wave -noupdate /tb_p02/p02/aq_w
+add wave -noupdate /tb_p02/p02/aq_op_w
+add wave -noupdate /tb_p02/p02/aq_ls_w
+add wave -noupdate /tb_p02/p02/a_w
+add wave -noupdate /tb_p02/p02/a_p_w
+add wave -noupdate /tb_p02/p02/a_subs_w
+add wave -noupdate /tb_p02/p02/a_add_w
+add wave -noupdate /tb_p02/p02/q_w
+add wave -noupdate /tb_p02/p02/aq_out_w
 add wave -noupdate /tb_p02/p02/aq_reg_w
-add wave -noupdate /tb_p02/p02/shift_out_w
-add wave -noupdate /tb_p02/p02/mux_n2/out
-add wave -noupdate /tb_p02/p02/mux_n2/selector
-add wave -noupdate /tb_p02/p02/mux_n2/a
-add wave -noupdate /tb_p02/p02/mux_n2/b
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {147900 ps} 0}
+WaveRestoreCursors {{Cursor 1} {23900 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -33,4 +39,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {178500 ps}
+WaveRestoreZoom {0 ps} {630 ns}
