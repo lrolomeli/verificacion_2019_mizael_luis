@@ -1,0 +1,28 @@
+Son algunos guidelines que podrian seguir para mejorar
+1)  No requiren subir el work/ directory a git, ese directorio se 
+    autogenera cada vez que corren el script de do run.do
+2)  Los archivos .bak los puedes agregar al archivo .gitignore para que
+    no se suban por favor.
+3)  No estan utilizando tipos de datos "typedef" en el package y en su
+    diseño.
+4)  Lo que llaman "control_unit" y "FSM" van en un solo archivo.
+5)  Tienen un "FSM" con salidas registradas lo cual va a consumir 
+    ciclos de reloj extras en su diseño. Lo unico registrado, es decir
+    dentro de un always_ff es el "state".
+6)  En archivo sweep_sequential_addr, no es necesario tanto comentario
+7)  En archivo top_module.sv, el termino correcto seria instanciate en 
+    lugar de "create"
+
+EVALUACION:
+1) Numeros de ciclos gastados en operacion:  13 y se esperaba 10 FALLA
+    N=8
+    Permitido: 1 ciclo para carga
+    Permitido: N ciclos para operacion
+    Permitido: 1 ciclo para registrar salida.
+2) Cambios de parametros en N y diseño sigue funcionando: PASA
+    Se cambia a DW=12.
+3) Revision que operacion este ejecutada en SC2:
+    a) Positivo x positivo maximos valores PASA
+    b) Positivo x negativo maximos valores  
+    c) Negativo x Positivo maximos valores
+    d) Negativo x Negativo maximos valores
