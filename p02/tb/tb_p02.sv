@@ -6,11 +6,11 @@ parameter N = 4;
 	logic rst;
 	logic load;
 	logic op;
-	logic clear;
-	logic [N-1:0] Q;
-	logic [N-1:0] M;
+	logic start;
+	logic [N-1:0] data;
 	
-	logic [2*N:0]product;
+	logic [N-1:0] result;
+	logic [N-1:0] remainder;
 
 top_md p02
 (
@@ -18,30 +18,31 @@ top_md p02
 	.rst(rst),
 	.load(load),
 	.op(op),
-	.clear(clear),
-	.Q(Q),
-	.M(M),
+	.start(start),
+	.data(data),
 	
-	.product(product)
+	.result(result),
+	.remainder(remainder)
 );
 
 initial begin
         clk = 0;
         rst = 0;
-	load = 1;
-	clear = 0;
 	op = 1;
-	Q = 4'b0111;
-	M = 4'b0011;
+	
+	start = 0;
+	data = 4'b0111;
+	
     #2  rst = 1;
-    #5	load = 0;
-    #10
-    #11 rst = 0;
-    	load = 1;
-    	op = 0;
-    #12 rst = 1;
-    #15	load = 0;
-    #20
+	load = 1;
+    #2	load = 0;
+    #5	data = 4'b0011;
+    #1	load = 1;
+    #2	load = 0;
+    #10	start = 1;
+    #2 start = 0;
+    #12	
+    #21
     	
 
     $stop;

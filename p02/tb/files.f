@@ -6,4 +6,7 @@
 ../../p02/adder.sv
 ../../p02/subtractor.sv
 ../../p02/conditions.sv
+../../p02/statemachine.sv
+../../p02/counter.sv
+../../p02/demux.sv
 tb_p02.sv
