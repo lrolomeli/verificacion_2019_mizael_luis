@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: Load.sv
+* Module Name: mix_regs
 
-* Description: Load data to diferents registers  
+* Description: the module register the values to multiplication and division operation  
 
-* Inputs: clk, rst, l_s, [N-1:0] in
+* Inputs: Q
 
-* Outputs: [N-1:0] reg_in,
+* Outputs: mix_reg
 
 * Version: 1.0
 
@@ -13,9 +13,9 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  14/04/2019
 
-* Project Name: P01
+* Project Name: P02
 
 * Target Devices: FPGA ALTERA DE2-115
 
@@ -30,12 +30,15 @@ module mix_regs
 #(
 	parameter N = 4
 )(
+	/** Input ports **/
 	input [N-1:0] Q,
 //	input [1:0] op,
+	
+	/** Output ports **/
 	output logic [2*N:0] mix_reg
 );
 
-
+/** out to module **/
 assign mix_reg = {4'b0000, Q, 1'b0};
 //always_comb
 //begin

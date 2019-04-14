@@ -1,8 +1,38 @@
+/*********************************************************************************
+* Module Name: condicions
+
+* Description: this module send diferents outputs depending of some signals 
+
+* Inputs:	a_plus_m, a_minus_m, a, q, op, a_sign, Q0, Q1,
+
+* Outputs: aq_out
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  14/04/2019
+
+* Project Name: P02
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module conditions
 #(
 	parameter N = 4
 )
 (
+	/** Input ports **/
 	input [N-1:0] a_plus_m,
 	input [N-1:0] a_minus_m,
 	input [N-1:0] a,
@@ -12,6 +42,7 @@ module conditions
 	input Q0,
 	input Q1,
 	
+	/** Output ports **/
 	output logic [2*N:0] aq_out
 );
 

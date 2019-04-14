@@ -1,5 +1,35 @@
+/*********************************************************************************
+* Module Name: statemachine
+
+* Description: state machine
+
+* Inputs:		clk, rst, start, load, loaded_x, loaded_y, done,
+
+* Outputs:		sel, go, stop
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  13/04/2019
+
+* Project Name: P02
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module statemachine
 (
+	/** Input ports **/
 	input clk,
 	input rst,
 	input start,
@@ -8,14 +38,13 @@ module statemachine
 	input loaded_y,
 	input done,
 	
+	/** Output ports **/
 	output logic sel,
 	output logic go,
 	output logic stop
 );
 
-typedef enum logic [1:0] {IDLE, PROCESSING} STATE;
 
-STATE state;
 
 always_ff@(posedge clk, negedge rst)
 begin
@@ -26,7 +55,7 @@ begin
 	end
 	
 	else
-	begin
+	begin	//** Idle state**//
 			case(state)
 				IDLE :
 				begin
@@ -36,6 +65,7 @@ begin
 						state <= IDLE;
 				end
 				
+				//** Processing state: in this state the operation select is started**//
 				PROCESSING :
 				begin
 					if(done)
@@ -44,6 +74,7 @@ begin
 						state <= PROCESSING;
 				end		
 				
+				//** Default state **//
 				default: state <= IDLE;
 				
 			endcase

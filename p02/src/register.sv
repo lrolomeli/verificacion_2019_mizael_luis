@@ -1,3 +1,32 @@
+/*********************************************************************************
+* Module Name: register
+
+* Description: this module load input values 
+
+* Inputs: clk, rst, load, in,
+
+* Outputs: 	reg_in, loaded
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  14/04/2019
+
+* Project Name: P01
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module register
 #(
 	parameter N = 4
@@ -27,12 +56,15 @@ begin: register
 	
 	else
 	begin
-
+		
+		/** the values to register was upload **/
 		if(load)
 		begin
 			reg_in <= in;
 			loaded <= 1'b1; 
 		end
+		
+		/**  **/
 		else
 		begin
 			reg_in <= reg_in;
