@@ -1,32 +1,3 @@
-/*********************************************************************************
-* Module Name: couter
-
-* Description: this module is a counter
-
-* Inputs:	clk, rst, load,
-
-* Outputs:	ov_counter, able
-
-* Version: 1.0
-
-* Company: ITESO
-
-* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
-
-* Create Date:  09/04/2019
-
-* Project Name: P01
-
-* Target Devices: FPGA ALTERA DE2-115
-
-* Tool versions: Quartus Prime
-*********************************************************************************/
-
-//================================================================================
-// Import the Packages
-//================================================================================
-import Pkg_Global::*;
-
 module counter
 #(
 	parameter N = 4,
@@ -35,14 +6,16 @@ module counter
 	/** Input ports **/
 	input clk,
 	input rst,
-	input load,
+	input start,
 	
 	/** Output ports **/
 	output logic ov_counter,
-	output logic able
+	output logic flag_r,
+	output logic able,
+	output logic [C:0] count
 );
 
-logic [C:0] count;
+
 
 
 always_ff@(posedge clk, negedge rst)
@@ -54,31 +27,34 @@ begin
 		count <= '0;
 		ov_counter <= '0;
 		able <= '0;
+		flag_r <= '0;
 	end
 	
 	else
 	begin
-		if(load)
+		if(start)
 		begin
-			/** load teh values to register **/
-			count <= '0;
+			count <= N;
 			ov_counter <= '0;
 			able <= 1'b1;
 		end
 		
 		else if(able)
 		begin
-			if(count==N-1)
+			if(count==0)
 			begin
-				/** the count is over **/
 				ov_counter <= 1'b1;
 				able <= '0;
 			end
 			else
 			begin
-				/** the count increase **/
-				count <= count + 1'b1;
+				count <= count - 1'b1;
 			end
+		end
+		
+		if(ov_counter)
+		begin
+			flag_r <= 1'b1;
 		end
 		
 	end
@@ -86,3 +62,4 @@ begin
 end
 
 endmodule
+

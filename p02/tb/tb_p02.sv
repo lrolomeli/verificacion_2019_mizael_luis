@@ -5,14 +5,14 @@ parameter N = 4;
 	logic clk;
 	logic rst;
 	logic load;
-	logic op;
+	logic [1:0] op;
 	logic start;
 	logic [N-1:0] data;
 	
 	logic [N-1:0] result;
 	logic [N-1:0] remainder;
 
-top_md p02
+top_mdr p02
 (
 	.clk(clk),
 	.rst(rst),
@@ -26,21 +26,30 @@ top_md p02
 );
 
 initial begin
-        clk = 0;
-        rst = 0;
+    clk = 0;
+    rst = 0;
 	op = 1;
 	
 	start = 0;
-	data = 4'b0111;
+	data = 4'b0010;
 	
     #2  rst = 1;
 	load = 1;
     #2	load = 0;
-    #5	data = 4'b0011;
+    #5	data = 4'b0100;
     #1	load = 1;
     #2	load = 0;
     #10	start = 1;
     #2 start = 0;
+    
+    #12	op = 0;
+    #2	start = 1;
+    #2 start = 0;
+    
+	#12	op = 2;
+    #2	start = 1;
+    #2 start = 0;
+    
     #12	
     #21
     	

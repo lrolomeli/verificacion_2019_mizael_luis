@@ -56,15 +56,12 @@ begin: register
 	
 	else
 	begin
-		
-		/** the values to register was upload **/
+
 		if(load)
 		begin
 			reg_in <= in;
 			loaded <= 1'b1; 
 		end
-		
-		/**  **/
 		else
 		begin
 			reg_in <= reg_in;

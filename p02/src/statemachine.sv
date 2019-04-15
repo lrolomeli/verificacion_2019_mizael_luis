@@ -40,11 +40,10 @@ module statemachine
 	
 	/** Output ports **/
 	output logic sel,
-	output logic go,
 	output logic stop
 );
 
-
+STATE state;
 
 always_ff@(posedge clk, negedge rst)
 begin
@@ -86,6 +85,7 @@ end
 
 assign sel  = loaded_x;
 assign stop = done;
-assign go = start;
+
+
 
 endmodule
