@@ -34,21 +34,21 @@ begin
 	begin
 		if(start)
 		begin
-			count <= N;
+			count <= N-1'b1;
 			ov_counter <= '0;
 			able <= 1'b1;
 		end
 		
 		else if(able)
 		begin
-			if(count==0)
+			if(count)
 			begin
-				ov_counter <= 1'b1;
-				able <= '0;
+				count <= count - 1'b1;
 			end
 			else
 			begin
-				count <= count - 1'b1;
+				ov_counter <= 1'b1;
+				able <= '0;
 			end
 		end
 		

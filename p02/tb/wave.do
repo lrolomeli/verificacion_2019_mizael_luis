@@ -45,8 +45,10 @@ add wave -noupdate /tb_p02/p02/aq_mux_w
 add wave -noupdate /tb_p02/p02/aq_out_w
 add wave -noupdate -radix binary /tb_p02/p02/aq_reg_w
 add wave -noupdate /tb_p02/p02/sel_w
+add wave -noupdate /tb_p02/p02/count/count
+add wave -noupdate /tb_p02/p02/co_inst/aq
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {766200 ps} 0}
+WaveRestoreCursors {{Cursor 1} {249900 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -62,4 +64,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {934500 ps}
+WaveRestoreZoom {0 ps} {598500 ps}

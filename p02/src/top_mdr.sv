@@ -1,6 +1,6 @@
 module top_mdr
 #(
-	parameter N = 4,
+	parameter N = 5,
 	parameter C = $clog2(2*N)
 )(
 	input clk,
@@ -177,7 +177,7 @@ or_m
 )
 or_inst
 (
-	.a(M_sh_w),
+	.a(A_sh_w),
 	.b({{N-2{1'b0}},M_sh_w[1:0]}),
 	
 	.out(am_or_w)
@@ -411,8 +411,8 @@ aq_rgstr
 
 //assign remainder = (flag_r_w) ? aq_reg_w[2*N:N+1] : '0;
 //assign result = (done_w) ? aq_reg_w[N:1] : '0;
-assign result = aq_reg_w[2*N:N+1];
-assign remainder = aq_reg_w[N:1];
+assign remainder = aq_reg_w[2*N:N+1];
+assign result = aq_reg_w[N:1];
 
 
 

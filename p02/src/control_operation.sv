@@ -37,9 +37,9 @@ begin
 		begin
 			//Si a_sign es positiva
 			if(a_minus_m[N-1])
-				aq_out = {a_plus_m, q[N-1:1], 1'b0, 1'b0};
+				aq_out = {a_plus_m, q[N:2], 1'b0, 1'b0};
 			else
-				aq_out = {a_minus_m, q[N-1:1], 1'b1, 1'b0};
+				aq_out = {a_minus_m, q[N:2], 1'b1, 1'b0};
 		end
 		2'b10://Raiz
 		begin
@@ -54,11 +54,11 @@ begin
 				end
 				2'b10:
 				begin
-					aq_out = {a_plus_m, q[N:0]};
+					aq_out = aq_reg;
 				end
 				2'b11:
 				begin
-					aq_out = aq_reg;
+					aq_out = {a_plus_m, q[N:0]};
 				end		
 				default:
 				begin

@@ -1,6 +1,6 @@
 `timescale 10ns / 100ps
 module tb_p02;
-parameter N = 4;
+parameter N = 5;
 
 	logic clk;
 	logic rst;
@@ -28,26 +28,18 @@ top_mdr p02
 initial begin
     clk = 0;
     rst = 0;
-	op = 1;
+	op = 2;
 	
-	start = 0;
-	data = 4'b0010;
+	start = 2;
+	data = 5'b1111;
 	
     #2  rst = 1;
 	load = 1;
     #2	load = 0;
-    #5	data = 4'b0100;
+    #5	data = 5'b1111;
     #1	load = 1;
     #2	load = 0;
     #10	start = 1;
-    #2 start = 0;
-    
-    #12	op = 0;
-    #2	start = 1;
-    #2 start = 0;
-    
-	#12	op = 2;
-    #2	start = 1;
     #2 start = 0;
     
     #12	
