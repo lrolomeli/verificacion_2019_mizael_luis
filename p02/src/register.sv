@@ -35,6 +35,7 @@ module register
 	input clk,
 	input rst,
 	input load,
+	input done,
 	input [N-1:0] in,
 	
 	/** Output ports **/
@@ -61,6 +62,11 @@ begin: register
 		begin
 			reg_in <= in;
 			loaded <= 1'b1; 
+		end
+		else if(done)
+		begin
+			reg_in <= reg_in;
+			loaded <= 1'b0;
 		end
 		else
 		begin

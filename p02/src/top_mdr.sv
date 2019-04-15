@@ -1,8 +1,10 @@
+//================================================================================
+// Import the Packages
+//================================================================================
+import Pkg_Global::*;
+
 module top_mdr
-#(
-	parameter N = 5,
-	parameter C = $clog2(2*N)
-)(
+(
 	input clk,
 	input rst,
 	input load,
@@ -73,22 +75,22 @@ register rQ
 (
 	.clk(clk),
 	.rst(rst),
-	.load(load_y_w),
+	.load(load_x_w),
 	.in(data),
 	
 	.reg_in(regQ_w),
-	.loaded(loaded_y_w)
+	.loaded(loaded_x_w)
 );
 
 register rM
 (
 	.clk(clk),
 	.rst(rst),
-	.load(load_x_w),
+	.load(load_y_w),
 	.in(data),
 	
 	.reg_in(regM_w),
-	.loaded(loaded_x_w)
+	.loaded(loaded_y_w)
 );
 
 mix_regs mixAQ
@@ -398,6 +400,7 @@ aq_rgstr
 (
 	.clk(clk),
 	.rst(rst),
+	.done(stop_w),
 	.load(operating_w),	//Esta senal debe permanecer N ciclos arriba y cuando se desborde overflow
 				//la senal que viene desde control unit baja y por lo tanto el registro se queda con el ultimo
 				//valor registrado.

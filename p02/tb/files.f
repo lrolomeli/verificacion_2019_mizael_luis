@@ -1,5 +1,5 @@
-../src/top_mdr.sv
 ../src/Global_Pkg.sv
+../src/top_mdr.sv
 ../src/adder.sv
 ../src/comb_qshift1.sv
 ../src/comb_qshift2.sv

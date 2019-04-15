@@ -1,6 +1,6 @@
 `timescale 10ns / 100ps
+import Pkg_Global::*;
 module tb_p02;
-parameter N = 5;
 
 	logic clk;
 	logic rst;
@@ -29,17 +29,25 @@ initial begin
     clk = 0;
     rst = 0;
 	op = 2;
-	
+	load = 0;
 	start = 2;
-	data = 5'b1111;
+	data = 4'b0111;
 	
     #2  rst = 1;
 	load = 1;
     #2	load = 0;
-    #5	data = 5'b1111;
+    #5	data = 4'b0011;
     #1	load = 1;
     #2	load = 0;
     #10	start = 1;
+    #2 start = 0;
+    
+    #10	op = 1;	
+	#2 start = 1;
+    #2 start = 0;
+    
+    #10	op = 0;	
+	#2 start = 1;
     #2 start = 0;
     
     #12	
