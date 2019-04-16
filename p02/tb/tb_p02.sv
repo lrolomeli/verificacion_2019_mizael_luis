@@ -31,28 +31,26 @@ initial begin
 	op = 2;
 	load = 0;
 	start = 2;
-	data = 4'b0111;
+	data = 16'b11111111;
 	
     #2  rst = 1;
 	load = 1;
     #2	load = 0;
-    #5	data = 4'b0011;
+    #5	data = 16'b01111111;
     #1	load = 1;
     #2	load = 0;
     #10	start = 1;
     #2 start = 0;
     
-    #10	op = 1;	
+    #40	op = 1;	
 	#2 start = 1;
     #2 start = 0;
     
-    #10	op = 0;	
+    #40	op = 0;	
 	#2 start = 1;
     #2 start = 0;
     
-    #12	
-    #21
-    	
+    #40    	
 
     $stop;
 end

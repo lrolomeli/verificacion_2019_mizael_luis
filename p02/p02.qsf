@@ -50,6 +50,14 @@ set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SYSTEMVERILOG_FILE src/shifting.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/separator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/segments.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/comparer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/btd.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/mux_result.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/top_mdr.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/mux3_1.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/subtractor.sv
@@ -70,6 +78,68 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/control_operation.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/comb_qshift2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/comb_qshift1.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/adder.sv
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_location_assignment PIN_AB28 -to data[0]
+set_location_assignment PIN_AA23 -to data[14]
+set_location_assignment PIN_AA24 -to data[13]
+set_location_assignment PIN_AB23 -to data[12]
+set_location_assignment PIN_AB24 -to data[11]
+set_location_assignment PIN_AC24 -to data[10]
+set_location_assignment PIN_AB25 -to data[9]
+set_location_assignment PIN_AC25 -to data[8]
+set_location_assignment PIN_AB26 -to data[7]
+set_location_assignment PIN_AD26 -to data[6]
+set_location_assignment PIN_AC26 -to data[5]
+set_location_assignment PIN_AB27 -to data[4]
+set_location_assignment PIN_AD27 -to data[3]
+set_location_assignment PIN_AC27 -to data[2]
+set_location_assignment PIN_AC28 -to data[1]
+set_location_assignment PIN_AA22 -to data[15]
+set_location_assignment PIN_H22 -to seg[0][0]
+set_location_assignment PIN_J22 -to seg[0][1]
+set_location_assignment PIN_L25 -to seg[0][2]
+set_location_assignment PIN_L26 -to seg[0][3]
+set_location_assignment PIN_E17 -to seg[0][4]
+set_location_assignment PIN_F22 -to seg[0][5]
+set_location_assignment PIN_G18 -to seg[0][6]
+set_location_assignment PIN_U24 -to seg[1][0]
+set_location_assignment PIN_U23 -to seg[1][1]
+set_location_assignment PIN_W25 -to seg[1][2]
+set_location_assignment PIN_W22 -to seg[1][3]
+set_location_assignment PIN_W21 -to seg[1][4]
+set_location_assignment PIN_Y22 -to seg[1][5]
+set_location_assignment PIN_M24 -to seg[1][6]
+set_location_assignment PIN_W28 -to seg[2][0]
+set_location_assignment PIN_W27 -to seg[2][1]
+set_location_assignment PIN_Y26 -to seg[2][2]
+set_location_assignment PIN_W26 -to seg[2][3]
+set_location_assignment PIN_Y25 -to seg[2][4]
+set_location_assignment PIN_AA26 -to seg[2][5]
+set_location_assignment PIN_AA25 -to seg[2][6]
+set_location_assignment PIN_Y19 -to seg[3][0]
+set_location_assignment PIN_AF23 -to seg[3][1]
+set_location_assignment PIN_AD24 -to seg[3][2]
+set_location_assignment PIN_AA21 -to seg[3][3]
+set_location_assignment PIN_AB20 -to seg[3][4]
+set_location_assignment PIN_U21 -to seg[3][5]
+set_location_assignment PIN_V21 -to seg[3][6]
+set_location_assignment PIN_AE18 -to seg[4][0]
+set_location_assignment PIN_AF19 -to seg[4][1]
+set_location_assignment PIN_AE19 -to seg[4][2]
+set_location_assignment PIN_AH21 -to seg[4][3]
+set_location_assignment PIN_AG21 -to seg[4][4]
+set_location_assignment PIN_AA19 -to seg[4][5]
+set_location_assignment PIN_AB19 -to seg[4][6]
+set_location_assignment PIN_AH18 -to seg[5][0]
+set_location_assignment PIN_AF18 -to seg[5][1]
+set_location_assignment PIN_G19 -to seg[5][2]
+set_location_assignment PIN_AH19 -to seg[5][3]
+set_location_assignment PIN_AB18 -to seg[5][4]
+set_location_assignment PIN_AC18 -to seg[5][5]
+set_location_assignment PIN_AD18 -to seg[5][6]
+set_location_assignment PIN_Y23 -to op[1]
+set_location_assignment PIN_Y24 -to op[0]
+set_location_assignment PIN_R24 -to rst
+set_location_assignment PIN_N21 -to load
+set_location_assignment PIN_Y2 -to clk
+set_location_assignment PIN_M21 -to start
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

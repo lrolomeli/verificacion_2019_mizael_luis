@@ -12,12 +12,18 @@ module top_mdr
 	input start,
 	input [N-1:0] data,
 	
+	`ifdef MODELSIM
 	output [N-1:0]result,
-	output [N-1:0]remainder
+	output [N-1:0]remainder,
+	`endif
+	output segment [TAM-1:0] seg
+	
 );
 
 
 logic [1:0] op_w;
+logic load_w;
+logic start_w;
 logic load_x_w;
 logic load_y_w;
 logic loaded_x_w;
@@ -28,6 +34,7 @@ logic operating_w;
 logic go_w;
 logic done_w;
 logic stop_w;
+logic sel_w;
 
 logic [N-1:0] regQ_w;
 logic [N-1:0] regM_w;
@@ -53,25 +60,63 @@ logic [N-1:0] a_add_w;
 logic [N:0] q_exit_w;
 
 logic [(2*N)-1:0] aq_ls_w;
+logic [(2*N)-1:0] in_segments_w;
 logic [2*N:0] aq_mux_w;
 logic [2*N:0] aq_out_w;
 logic [2*N:0] aq_reg_w;
 
-logic sel_w;
-
+buses out;
 
 assign op_w = op;
 
+
+`ifdef MODELSIM
+assign load_w = load;
+assign start_w = start;
+`endif
+
+`ifndef MODELSIM
+
+debounce dbload_inst
+(
+	/** Input ports **/
+	.clk(clk),
+	.rst(rst), 
+	.start(load),
+
+	/** Output ports **/
+	.db_out(load_w)													
+);
+
+
+debounce dbstart_inst
+(
+	/** Input ports **/
+	.clk(clk),
+	.rst(rst), 
+	.start(start),
+
+	/** Output ports **/
+	.db_out(start_w)													
+);
+
+`endif 
+
+
 demux demux_inst
 (
-	.load(load),
+	.load(load_w),
 	.sel(sel_w),
 	
 	.load_y(load_y_w),
 	.load_x(load_x_w)
 );
 
-register rQ
+register 
+#(
+	.N(N)
+)
+rQ
 (
 	.clk(clk),
 	.rst(rst),
@@ -82,7 +127,11 @@ register rQ
 	.loaded(loaded_x_w)
 );
 
-register rM
+register
+#(
+	.N(N)
+)
+rM
 (
 	.clk(clk),
 	.rst(rst),
@@ -135,7 +184,7 @@ count
 (
 	.clk(clk),
 	.rst(rst),
-	.start(start),
+	.start(start_w),
 	
 	/** Output ports **/
 	.ov_counter(done_w),
@@ -371,8 +420,8 @@ statemachine fsm
 (
 	.clk(clk),
 	.rst(rst),
-	.start(start),
-	.load(load),
+	.start(start_w),
+	.load(load_w),
 	.loaded_x(loaded_x_w),
 	.loaded_y(loaded_y_w),
 	.done(done_w),
@@ -402,8 +451,8 @@ aq_rgstr
 	.rst(rst),
 	.done(stop_w),
 	.load(operating_w),	//Esta senal debe permanecer N ciclos arriba y cuando se desborde overflow
-				//la senal que viene desde control unit baja y por lo tanto el registro se queda con el ultimo
-				//valor registrado.
+								//la senal que viene desde control unit baja y por lo tanto el registro se queda con el ultimo
+								//valor registrado.
 	.in(aq_out_w),
 	
 	.reg_in(aq_reg_w),
@@ -412,11 +461,56 @@ aq_rgstr
 
 
 
-//assign remainder = (flag_r_w) ? aq_reg_w[2*N:N+1] : '0;
-//assign result = (done_w) ? aq_reg_w[N:1] : '0;
+`ifndef MODELSIM
+
+mux_result result_inst
+(
+	.in(aq_reg_w[2*N:1]),
+	.sel(op_w),
+	
+	.out(in_segments_w)
+);
+
+
+btd btd1 //algoritmo double dabble bin to dec
+(
+	.in_bits(in_segments_w),
+
+	.out(out)
+);
+
+
+genvar i;
+generate
+	for(i=0; i<TAM; i=i+1'b1)
+	begin : gen
+		segments segment
+		(
+			  //inputs
+			  .w(out[(i*4)+3]),
+			  .x(out[(i*4)+2]),
+			  .y(out[(i*4)+1]),
+			  .z(out[(i*4)+0]),
+
+			  //outputs
+			  .a(seg[i][6]),
+			  .b(seg[i][5]),
+			  .c(seg[i][4]),
+			  .d(seg[i][3]),
+			  .e(seg[i][2]),
+			  .f(seg[i][1]),
+			  .g(seg[i][0])
+
+		);
+	end : gen
+endgenerate
+
+`endif
+
+`ifdef MODELSIM
 assign remainder = aq_reg_w[2*N:N+1];
 assign result = aq_reg_w[N:1];
-
+`endif
 
 
 endmodule 

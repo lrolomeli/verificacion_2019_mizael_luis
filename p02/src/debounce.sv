@@ -27,12 +27,6 @@
 import Pkg_Global::*;
 
 module debounce
-#(
-	parameter FPGA_CLK = 50000000,
-	parameter MILLIS = 20,
-	parameter COUNT = (FPGA_CLK / MILLIS),
-	parameter BITS = $clog2(COUNT)
-)
 (
 	/** Input ports **/
 	input clk,
