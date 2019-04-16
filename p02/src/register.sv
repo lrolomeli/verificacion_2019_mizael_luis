@@ -60,11 +60,13 @@ begin: register
 
 		if(load)
 		begin
+			/** load in **/
 			reg_in <= in;
 			loaded <= 1'b1; 
 		end
 		else if(done)
 		begin
+			/** load in reg **/
 			reg_in <= reg_in;
 			loaded <= 1'b0;
 		end

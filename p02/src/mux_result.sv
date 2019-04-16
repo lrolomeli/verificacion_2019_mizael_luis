@@ -1,3 +1,27 @@
+/*********************************************************************************
+* Module Name: mux_result
+
+* Description: multiplexor 
+
+* Inputs:	in, sel
+
+* Outputs:	out
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  14/04/2019
+
+* Project Name: P02
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
 //================================================================================
 // Import the Packages
 //================================================================================
@@ -5,9 +29,11 @@ import Pkg_Global::*;
 
 module mux_result
 (
+	/** Input ports **/
 	input [2*N-1:0] in,
 	input [1:0]sel,
 	
+	/** Output ports **/
 	output logic [2*N-1:0] out
 
 );

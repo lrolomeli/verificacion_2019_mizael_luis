@@ -1,3 +1,27 @@
+/*********************************************************************************
+* Module Name: control_operation
+
+* Description: this module passs in the output the correct operation
+
+* Inputs:	a_plus_m, a_minus_m, a, q, aq_reg, msb_AM, ov_count, msb_reg_A, op,
+
+* Outputs:	msb_aq, aq?out
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  13/04/2019
+
+* Project Name: P02
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
+
 //================================================================================
 // Import the Packages
 //================================================================================
@@ -8,6 +32,7 @@ module control_operation
 	parameter N = 4
 )
 (
+	/** Inputs ports **/
 	input [N-1:0] a_plus_m,
 	input [N-1:0] a_minus_m,
 	input [N-1:0] a,
@@ -18,6 +43,7 @@ module control_operation
 	input msb_reg_A,
 	input [1:0] op,
 	
+	/** Outputs ports **/
 	output logic msb_aq,//bit que va al multiplexor de Q
 	output logic [2*N:0] aq_out
 );
