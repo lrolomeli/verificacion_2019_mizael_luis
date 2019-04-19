@@ -16,6 +16,10 @@ module top_mdr
 	output [N-1:0]result,
 	output [N-1:0]remainder,
 	`endif
+	output load_x,
+	output load_y,
+	output ready,
+	output error,
 	output segment [TAM-1:0] seg
 	
 );
@@ -512,5 +516,12 @@ assign remainder = aq_reg_w[2*N:N+1];
 assign result = aq_reg_w[N:1];
 `endif
 
+assign load_x = (loaded_x_w == 1) ? 1'b1 : 1'b0;
+
+
+assign load_y = (loaded_y_w == 1) ? 1'b1 : 1'b0;
+
+
+assign ready = flag_r_w;
 
 endmodule 
