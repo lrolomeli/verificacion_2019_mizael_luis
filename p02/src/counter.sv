@@ -41,7 +41,7 @@ module counter
 	output logic ov_counter,
 	output logic flag_r,
 	output logic able,
-	output [C:0] count
+	output logic [C:0] count
 );
 
 
