@@ -30,8 +30,9 @@ import Pkg_Global::*;
 module demux
 (
 	/** Input ports **/
+	input clk,
+	input rst,
 	input load,
-	input sel,
 
 	/** Output ports **/
 	output load_y,
@@ -39,10 +40,27 @@ module demux
 
 );
 
+logic sel;
+
+always_ff@(posedge clk, negedge rst)
+begin
+	if(~rst)
+	begin
+		sel <= '0;
+	end
+	else
+	begin
+		if(load)
+			sel <= ~sel;
+		else
+			sel <= sel;
+	end
+	
+end
+
 /** the values tu register are load **/
 assign load_y = (sel) ? load : '0;
 assign load_x = (sel) ? '0 : load; 
-
 
 
 endmodule

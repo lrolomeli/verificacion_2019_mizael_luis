@@ -46,6 +46,12 @@
 	typedef logic [LENGTH-1:0] buses;
 	typedef logic [7-1:0] segment;
 	
+	typedef logic [N-1:0] wsizeN;
+	typedef logic [N:0] wqsize;
+	typedef logic [(2*N)-1:0] wsize2N;
+	typedef logic [2*N:0] waqsize;
+	typedef logic [C:0] wcountsize;
+	typedef logic [1:0] twobits;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -33,14 +33,7 @@ module statemachine
 	input clk,
 	input rst,
 	input start,
-	input load,
-	input loaded_x,
-	input loaded_y,
-	input done,
-	
-	/** Output ports **/
-	output logic sel,
-	output logic stop
+	input done
 );
 
 STATE state;
@@ -81,11 +74,6 @@ begin
 	end
 
 end
-
-
-assign sel  = loaded_x;
-assign stop = done;
-
 
 
 endmodule

@@ -39,7 +39,8 @@ module debounce
 
 logic [BITS:0]	counter;
 logic DFF1;
-logic DFF2;
+logic DFF2;	
+logic oneshot;
 	
 always_ff@(posedge clk, negedge rst)
 begin: debounce
@@ -50,6 +51,7 @@ begin: debounce
 		DFF2 <= '0;
 		counter <= '0;
 		db_out <= '0;
+		oneshot <= '0;
 	end
 	
 	else
@@ -58,24 +60,28 @@ begin: debounce
 		DFF1 <= start;		/** Input to ff1 **/
 		DFF2 <= DFF1;		/** Of ff1 to ff2 **/
 		
+		//If ff1 and ff2 are equals but start is 1 the button wasnt pressed so its a false shot.
 		if((DFF1 ^ DFF2) || start)	/** If ff1 and ff2 are differents, result is 1 **/
 		begin
 			counter <= '0;	/** clean counter **/
+			oneshot <= '0;
 		end
 		
 		else	/** ff1 and ff2 are equals, ckeck to couenter finished **/
 		begin
 		
-			if(counter == COUNT)
+			if(counter == COUNT && ~oneshot)
 			begin
 				/** check the couter have same value count and clean count **/
 				db_out <= 1'b1;	//si termina de contar asigna la salida como la entrada
 				counter <= '0;
+				oneshot <= 1'b1;
 			end
 			
 			else
 			begin
 				/** counter count to max value **/
+				oneshot <= oneshot;
 				db_out <= '0;
 				counter <= counter + 1'b1;
 			end

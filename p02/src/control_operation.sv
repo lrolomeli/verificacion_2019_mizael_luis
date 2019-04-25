@@ -28,27 +28,24 @@
 import Pkg_Global::*;
 
 module control_operation
-#(
-	parameter N = 4
-)
 (
 	/** Inputs ports **/
-	input [N-1:0] a_plus_m,
-	input [N-1:0] a_minus_m,
-	input [N-1:0] a,
-	input [N:0] q,
-	input [2*N:0] aq_reg,
+	input wsizeN a_plus_m,
+	input wsizeN a_minus_m,
+	input wsizeN a,
+	input wqsize q,
+	input waqsize aq_reg,
 	input msb_AM,
 	input ov_count,
 	input msb_reg_A,
-	input [1:0] op,
+	input twobits op,
 	
 	/** Outputs ports **/
 	output logic msb_aq,//bit que va al multiplexor de Q
-	output logic [2*N:0] aq_out
+	output waqsize aq_out
 );
 
-logic [2*N:0] aq;
+waqsize aq;
 
 
 always_comb

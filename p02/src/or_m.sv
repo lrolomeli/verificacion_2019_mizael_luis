@@ -28,16 +28,13 @@
 import Pkg_Global::*;
 
 module or_m
-#(
-	parameter N = 4
-)
 (
 	/** Input ports **/
-	input [N-1:0] a,
-	input [N-1:0] b,
+	input wsizeN a,
+	input wsizeN b,
 	
 	/** Output ports **/
-	output [N-1:0] out
+	output wsizeN out
 
 );
 	

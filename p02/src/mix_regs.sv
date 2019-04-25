@@ -30,11 +30,11 @@ import Pkg_Global::*;
 module mix_regs
 (
 	/** Input ports **/
-	input [N-1:0] Q,
+	input wsizeN Q,
 	input op,
 	
 	/** Output ports **/
-	output logic [2*N:0] mix_reg
+	output waqsize mix_reg
 );
 
 /** out to module **/

@@ -29,8 +29,8 @@ import Pkg_Global::*;
 
 module separator
 (
-	input [LENGTH-1:0] shifted_in,
-	output [LENGTH-1:0] dec_out
+	input buses shifted_in,
+	output buses dec_out
 
 );
 

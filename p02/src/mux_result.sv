@@ -30,11 +30,11 @@ import Pkg_Global::*;
 module mux_result
 (
 	/** Input ports **/
-	input [2*N-1:0] in,
-	input [1:0]sel,
+	input wsize2N in,
+	input twobits sel,
 	
 	/** Output ports **/
-	output logic [2*N-1:0] out
+	output wsize2N out
 
 );
 

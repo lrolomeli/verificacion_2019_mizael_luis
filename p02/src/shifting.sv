@@ -32,10 +32,10 @@ module shifting
 (
 	/** Input ports **/
 	input bin,
-	input [LENGTH-1:0] ins,
+	input buses ins,
 	
 	/** Output ports **/
-	output logic [LENGTH-1:0] shifted_out
+	output buses shifted_out
 
 );
 

@@ -28,15 +28,13 @@
 import Pkg_Global::*;
 
 module subtractor
-#(
-	parameter N = 4
-)(
+(
 	/** Input ports **/
-	input [N-1:0] a,
-	input [N-1:0] m,
+	input wsizeN a,
+	input wsizeN m,
 
 	/** output ports **/
-	output [N-1:0] s
+	output wsizeN s
 );
 
 	//** math operation **//

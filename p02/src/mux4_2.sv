@@ -29,19 +29,17 @@
 import Pkg_Global::*;
 
 module mux4_2
-#(
-	parameter N = 4
-)(
+(
 	/** Input ports **/
-	input [N-1:0] a,
-	input [N-1:0] b,
-	input [N-1:0] c,
-	input [N-1:0] d,
+	input wsizeN a,
+	input wsizeN b,
+	input wsizeN c,
+	input wsizeN d,
 	input selector,
 	
 	/** Output ports **/
-	output logic [N-1:0]out1,
-	output logic [N-1:0]out2
+	output wsizeN out1,
+	output wsizeN out2
 
 );
 

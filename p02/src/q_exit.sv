@@ -29,19 +29,17 @@
 import Pkg_Global::*;
 
 module q_exit
-#(
-	parameter N = 4
-)(
+(
 	/** Input ports **/
-	input [N:0] QD, /** division **/
-	input [N:0] QM, /** multiplication **/
-	input [N:0] QR1,/** sqrt one **/
-	input [N:0] QR0,/** sqrt two **/
-	input [1:0] op, /** select operation **/
+	input wqsize QD, /** division **/
+	input wqsize QM, /** multiplication **/
+	input wqsize QR1,/** sqrt one **/
+	input wqsize QR0,/** sqrt two **/
+	input twobits op, /** select operation **/
 	input msb_aq,
 	
 	/** Output ports **/
-	output logic [N:0]out
+	output wqsize out
 
 );
 

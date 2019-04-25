@@ -29,15 +29,13 @@
 import Pkg_Global::*;
 
 module comb_qshift1
-#(
-	parameter N = 4
-)(
+(
 	/** Input ports **/
-	input [N-1:0] Q,
+	input wsizeN Q,
 	
 	/** Output ports **/
-	output [N-1:0] q,
-	output [N-1:0] q1
+	output wsizeN q,
+	output wsizeN q1
 
 );
 

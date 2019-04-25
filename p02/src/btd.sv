@@ -30,10 +30,10 @@ import Pkg_Global::*;
 
 module btd
 (	/** Input ports **/
-	input [N-1:0] in_bits,
+	input wsizeN in_bits,
 	
 	/** Input ports **/
-	output logic [LENGTH-1:0] out
+	output buses out
 );
 
 

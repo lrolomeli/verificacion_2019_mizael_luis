@@ -8,13 +8,13 @@ module top_mdr
 	input clk,
 	input rst,
 	input load,
-	input [1:0] op,
+	input twobits op,
 	input start,
-	input [N-1:0] data,
+	input wsizeN data,
 	
 	`ifdef MODELSIM
-	output [N-1:0]result,
-	output [N-1:0]remainder,
+	output wsizeN result,
+	output wsizeN remainder,
 	`endif
 	output load_x,
 	output load_y,
@@ -25,7 +25,7 @@ module top_mdr
 );
 
 
-logic [1:0] op_w;
+twobits op_w;
 logic load_w;
 logic start_w;
 logic load_x_w;
@@ -37,37 +37,37 @@ logic msb_aq_w;
 logic operating_w;
 logic go_w;
 logic done_w;
-logic stop_w;
-logic sel_w;
-
-logic [N-1:0] regQ_w;
-logic [N-1:0] regM_w;
-logic [2*N:0] aq_w;
-logic [N-1:0] A_sh_w;
 logic flag_r_w;
-logic [C:0] count_w;
-logic [C:0] count_sh_w;
-logic [N-1:0] M_sh_w; 
-logic [N-1:0] am_or_w;
-logic [N-1:0] qor1_w;
-logic [N-1:0] qor3_w;
-logic [N-1:0] q1_sh_w;
-logic [N-1:0] q_sh_w;
-logic [N-1:0] subs1_w;
-logic [N-1:0] subs2_w;
-logic [N-1:0] q_mux1_w;
-logic [N-1:0] q_mux2_w;
-logic [N-1:0] add1_w;
-logic [N-1:0] add2_w;
-logic [N-1:0] a_subs_w;
-logic [N-1:0] a_add_w;
-logic [N:0] q_exit_w;
 
-logic [(2*N)-1:0] aq_ls_w;
-logic [(2*N)-1:0] in_segments_w;
-logic [2*N:0] aq_mux_w;
-logic [2*N:0] aq_out_w;
-logic [2*N:0] aq_reg_w;
+wcountsize count_w;
+wcountsize count_sh_w;
+
+wsizeN regQ_w;
+wsizeN regM_w;
+wsizeN A_sh_w;
+wsizeN M_sh_w; 
+wsizeN am_or_w;
+wsizeN qor1_w;
+wsizeN qor3_w;
+wsizeN q1_sh_w;
+wsizeN q_sh_w;
+wsizeN subs1_w;
+wsizeN subs2_w;
+wsizeN q_mux1_w;
+wsizeN q_mux2_w;
+wsizeN add1_w;
+wsizeN add2_w;
+wsizeN a_subs_w;
+wsizeN a_add_w;
+
+wqsize q_exit_w;
+
+wsize2N aq_ls_w;
+wsize2N in_segments_w;
+waqsize aq_mux_w;
+waqsize aq_out_w;
+waqsize aq_reg_w;
+waqsize aq_w;
 
 buses out;
 
@@ -109,8 +109,9 @@ debounce dbstart_inst
 
 demux demux_inst
 (
+	.clk(clk),
+	.rst(rst),
 	.load(load_w),
-	.sel(sel_w),
 	
 	.load_y(load_y_w),
 	.load_x(load_x_w)
@@ -211,12 +212,7 @@ Q_shift
 );
 
 
-rightvshift
-#(
-	.N(N),
-	.C(C)
-)
-D_shift
+rightvshift D_shift
 (
 	.in(regM_w),
 	.shift(count_sh_w),
@@ -226,11 +222,7 @@ D_shift
 
 
 
-or_m
-#(
-	.N(N)
-)
-or_inst
+or_m or_inst
 (
 	.a(A_sh_w),
 	.b({{N-2{1'b0}},M_sh_w[1:0]}),
@@ -239,11 +231,7 @@ or_inst
 
 );
 
-comb_qshift2
-#(
-	.N(N)
-)
-q_shift2
+comb_qshift2 q_shift2
 (
 	.Q(aq_mux_w[N:1]),
 	
@@ -253,11 +241,7 @@ q_shift2
 );
 
 
-comb_qshift1
-#(
-	.N(N)
-)
-q_shift1
+comb_qshift1 q_shift1
 (
 	.Q(aq_mux_w[N:1]),
 	.q(q_sh_w),
@@ -278,11 +262,7 @@ ls
 );
 
 
-mux3_1
-#(
-	.N(N)
-)
-mux_subs1_inst
+mux3_1 mux_subs1_inst
 (
 	.r(am_or_w),
 	.d(aq_ls_w[(2*N)-1:N]),
@@ -292,11 +272,7 @@ mux_subs1_inst
 	.out(subs1_w)
 );
 
-mux3_1
-#(
-	.N(N)
-)
-mux_subs2_inst
+mux3_1 mux_subs2_inst
 (
 	.r(qor1_w),
 	.d(regM_w),
@@ -307,11 +283,7 @@ mux_subs2_inst
 );
 
 
-mux4_2
-#(
-	.N(N)
-)
-mux4_2_inst
+mux4_2 mux4_2_inst
 (
 	.a(q1_sh_w),
 	.b(aq_reg_w[2*N:N+1]),//retroalimentacion de A
@@ -325,11 +297,7 @@ mux4_2_inst
 );
 
 
-subtractor
-#(
-	.N(N)
-)
-subs
+subtractor subs
 (
 	.a(subs1_w),
 	.m(subs2_w),
@@ -338,11 +306,7 @@ subs
 );
 
 
-q_exit
-#(
-	.N(N)
-)
-q_exit_inst
+q_exit q_exit_inst
 (
 	.QD({aq_ls_w[N-1:0], 1'b0}),
 	.QM(aq_mux_w[N:0]),
@@ -357,11 +321,7 @@ q_exit_inst
 );
 
 
-mux3_1
-#(
-	.N(N)
-)
-mux_add1_inst
+mux3_1 mux_add1_inst
 (
 	.m(subs1_w),
 	.d(a_subs_w),
@@ -372,11 +332,7 @@ mux_add1_inst
 );
 
 
-mux3_1
-#(
-	.N(N)
-)
-mux_add2_inst
+mux3_1 mux_add2_inst
 (
 	.r(q_mux2_w),
 	.d(regM_w),
@@ -386,11 +342,7 @@ mux_add2_inst
 	.out(add2_w)
 );
 
-adder
-#(
-	.N(N)
-)
-add
+adder add
 (
 	.a(add1_w),
 	.m(add2_w),
@@ -398,11 +350,7 @@ add
 	.s(a_add_w)
 );
 
-control_operation
-#(
-	.N(N)
-)
-co_inst
+control_operation co_inst
 (
 	.a_plus_m(a_add_w),
 	.a_minus_m(a_subs_w),
@@ -425,16 +373,9 @@ statemachine fsm
 	.clk(clk),
 	.rst(rst),
 	.start(start_w),
-	.load(load_w),
-	.loaded_x(loaded_x_w),
-	.loaded_y(loaded_y_w),
-	.done(done_w),
-	
-	.sel(sel_w),
-	.stop(stop_w)
+	.done(done_w)
 
 );
-
 
 
 /*
@@ -453,12 +394,11 @@ aq_rgstr
 (
 	.clk(clk),
 	.rst(rst),
-	.done(stop_w),
+	.done(done_w),
 	.load(operating_w),	//Esta senal debe permanecer N ciclos arriba y cuando se desborde overflow
 								//la senal que viene desde control unit baja y por lo tanto el registro se queda con el ultimo
 								//valor registrado.
 	.in(aq_out_w),
-	
 	.reg_in(aq_reg_w),
 	.loaded(loaded_res_w)
 );
@@ -516,12 +456,8 @@ assign remainder = aq_reg_w[2*N:N+1];
 assign result = aq_reg_w[N:1];
 `endif
 
-assign load_x = (loaded_x_w == 1) ? 1'b1 : 1'b0;
-
-
-assign load_y = (loaded_y_w == 1) ? 1'b1 : 1'b0;
-
-
-assign ready = flag_r_w;
+assign load_x = loaded_x_w;
+assign load_y = loaded_y_w;
+assign ready = done_w;
 
 endmodule 

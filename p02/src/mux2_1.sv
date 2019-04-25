@@ -37,7 +37,7 @@ module mux2_1
 	input selector,
 	
 	/** Output ports **/
-	output logic [N-1:0]out
+	output [N-1:0] out
 
 );
 	/** Out to module **/

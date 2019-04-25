@@ -28,17 +28,15 @@
 import Pkg_Global::*;
 
 module mux3_1
-#(
-	parameter N = 4
-)(
+(
 	/** Input ports **/
-	input [N-1:0] m,
-	input [N-1:0] d,
-	input [N-1:0] r,
-	input [1:0]sel,
+	input wsizeN m,
+	input wsizeN d,
+	input wsizeN r,
+	input twobits sel,
 	
 	/** Output ports **/
-	output logic [N-1:0]out
+	output wsizeN out
 
 );
 

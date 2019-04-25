@@ -29,16 +29,13 @@
 import Pkg_Global::*;
 
 module rightvshift
-#(
-	parameter N = 4,
-	parameter C = $clog2(2*N)
-)(
+(
 	/** Input ports **/
-	input [N-1:0] in,
-	input [C:0] shift,
+	input wsizeN in,
+	input wcountsize shift,
 	
 	/** Output ports **/
-	output [N-1:0] out
+	output wsizeN out
 
 );
 
