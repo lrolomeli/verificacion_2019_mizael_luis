@@ -50,6 +50,7 @@ package global_pkg ;
 	 typedef logic [COUNT_N-1:0]       				counter_t;
 	 typedef logic [W_DATA : 0] [N-1:0] [N-1:0] 	matrix_t;	 
 	 typedef logic [W_DATA : 0] [N-1:0] 			vector_t;
+	 typedef logic [1:0]									uint2_t;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
