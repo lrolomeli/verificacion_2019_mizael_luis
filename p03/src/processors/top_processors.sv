@@ -19,7 +19,16 @@
 module top_processors
 (
 	input clk,
-	input rst
+	input rst,
+	input start,
+	input load,
+	input A,
+	input B,
+	
+	output logic pop,
+	output logic ov_counter,
+	output uint2_t sel,
+	output logic done
 
 );
 	 
@@ -35,10 +44,22 @@ processor processor1_inst
 	.processor(proc1_itf)
 );
 
+provider provider1_inst
+(
+	.*,
+	.client(proc1_itf)
+);
+
 processor processor2_inst
 (
 	.*,
 	.processor(proc2_itf)
+);
+
+provider provider2_inst
+(
+	.*,
+	.client(proc2_itf)
 );
 
 processor processor3_inst
@@ -47,19 +68,32 @@ processor processor3_inst
 	.processor(proc3_itf)
 );
 
+provider provider3_inst
+(
+	.*,
+	.client(proc3_itf)
+);
+
 processor processor4_inst
 (
 	.*,
 	.processor(proc4_itf)
 );
 
-//fsm
-//(
-//	.client1(proc1_itf)
-//	.client2(proc2_itf)
-//	.client3(proc3_itf)
-//	.client4(proc4_itf)
-//);
+provider provider4_inst
+(
+	.*,
+	.client(proc4_itf)
+);
+
+fsm
+(
+	.*,
+	.client1(proc1_itf),
+	.client2(proc2_itf),
+	.client3(proc3_itf),
+	.client4(proc4_itf)
+);
 
 
 endmodule

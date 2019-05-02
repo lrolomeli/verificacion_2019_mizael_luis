@@ -30,38 +30,21 @@ import global_pkg::*;
 module fsm
 (
 	/** Input ports **/
-	input start,
-	input load,
 	input clk,
 	input rst,
-	input p1_done,//processor 1
-	input p2_done,//processor 2
-	input p3_done,//processor 3
-	input p4_done,//processor 4
-	
+	input start,
+	input load,
+
 	
 	output logic pop,
-	
-	output logic retro_p1,//processor 1
-	output logic retro_p2,//processor 2
-	output logic retro_p3,//processor 3
-	output logic retro_p4,//processor 4
-	
-	output logic enable_p1,//processor 1
-	output logic enable_p2,//processor 2
-	output logic enable_p3,//processor 3
-	output logic enable_p4,//processor 4
-	
 	output logic ov_counter,
 	output uint2_t sel,
-	
-	output logic done
-	
-		
-//	processors_if.client client1,
-//	processors_if.client client2,
-//	processors_if.client client3,
-//	processors_if.client client4
+	output logic done,
+
+	processors_if.ctrl client1,
+	processors_if.ctrl client2,
+	processors_if.ctrl client3,
+	processors_if.ctrl client4
 	
 );
 
@@ -149,66 +132,66 @@ begin
 			IDLE :
 			begin
 				pop = '0;
-				retro_p1 = '0;
-				retro_p2 = '0;
-				retro_p3 = '0;
-				retro_p4 = '0;
-				enable_p1 = '0;
-				enable_p2 = '0;
-				enable_p3 = '0;
-				enable_p4 = '0;
+				client1.retro = '0;
+				client2.retro = '0;
+				client3.retro = '0;
+				client4.retro = '0;
+				client1.enable = '0;
+				client2.enable = '0;
+				client3.enable = '0;
+				client4.enable = '0;
 				sel = '0;
 			end
 			
 			LOAD :
 			begin
 				pop = '0;
-				retro_p1 = '0;
-				retro_p2 = '0;
-				retro_p3 = '0;
-				retro_p4 = '0;
-				enable_p1 = '0;
-				enable_p2 = '0;
-				enable_p3 = '0;
-				enable_p4 = '0;
+				client1.retro = '0;
+				client2.retro = '0;
+				client3.retro = '0;
+				client4.retro = '0;
+				client1.enable = '0;
+				client2.enable = '0;
+				client3.enable = '0;
+				client4.enable = '0;
 				sel = '0;
 			end
 		
 			MULTIPLYING :
 			begin 
 				pop = '0;
-				retro_p1 = '0;
-				retro_p2 = '0;
-				retro_p3 = '0;
-				retro_p4 = '0;
-				enable_p1 = '0;
-				enable_p2 = '0;
-				enable_p3 = '0;
-				enable_p4 = '0;
+				client1.retro = '0;
+				client2.retro = '0;
+				client3.retro = '0;
+				client4.retro = '0;
+				client1.enable = '0;
+				client2.enable = '0;
+				client3.enable = '0;
+				client4.enable = '0;
 				sel = '0;
 				
-				if(p4_done||flag_start)
+				if(client4.done||flag_start)
 				begin
 						
-					enable_p1 = 1'b1;//HABILITAMOS EL SIGUIENTE
+					client1.enable = 1'b1;//HABILITAMOS EL SIGUIENTE
 					
 					if(flag_start)
 					begin
 						//POP DATOS
 						pop = 1'b1;
-						retro_p1 = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
+						client1.retro = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
 					end
 					
-					if(p4_done)//LOS 4 PROCESADORES TERMINARON
+					if(client4.done)//LOS 4 PROCESADORES TERMINARON
 					begin
 						if(ov_counter)//ESTE PROCESADOR TIENE EL RESULTADO
 						begin
 							sel = '0;//EL RESULTADO ESTA EN LA POSICION CERO DEL SELECTOR
-							retro_p1 = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
+							client1.retro = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
 						end
 						else
 						begin
-							retro_p1 = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
+							client1.retro = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
 						end
 						pop = 1'b1;//NECESITAMOS CARGAR NUEVOS VALORES
 					end
@@ -216,51 +199,51 @@ begin
 				end
 				
 				
-				if(p1_done)
+				if(client1.done)
 				begin
-					enable_p2 = 1'b1;
+					client2.enable = 1'b1;
 					
 					if(ov_counter)
 					begin
 						sel = 2'b01;//EL RESULTADO ESTA EN LA POSICION 1 DEL SELECTOR
-						retro_p2 = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
+						client2.retro = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
 					end
 					else
 					begin
-						retro_p2 = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
+						client2.retro = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
 					end
 				end
 
 
 				
-				if(p2_done)
+				if(client2.done)
 				begin
-					enable_p3 = 1'b1;//DESHABILITAMOS EL ANTERIOR
+					client3.enable = 1'b1;//DESHABILITAMOS EL ANTERIOR
 
 					if(ov_counter)
 					begin
 						sel = 2'b10;//EL RESULTADO ESTA EN LA POSICION 2 DEL SELECTOR
-						retro_p3 = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
+						client3.retro = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
 					end
 					else
 					begin
-						retro_p3 = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
+						client3.retro = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
 					end
 				end
 
 				
-				if(p3_done)
+				if(client3.done)
 				begin
-					enable_p4 = 1'b1;
+					client4.enable = 1'b1;
 					
 					if(ov_counter)
 					begin
 						sel = 2'b11;//EL RESULTADO ESTA EN LA POSICION 3 DEL SELECTOR
-						retro_p4 = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
+						client4.retro = 1'b0;//LA SIGUIENTE OPERACION DEBE EMPEZAR A SUMAR CON CERO
 					end
 					else
 					begin
-						retro_p4 = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
+						client4.retro = 1'b1;//LA SUMA CON EL DATO PASADO DEBE CONTINUAR
 					end
 				end
 			
@@ -269,14 +252,14 @@ begin
 			default: 
 			begin
 				pop = '0;
-				retro_p1 = '0;
-				retro_p2 = '0;
-				retro_p3 = '0;
-				retro_p4 = '0;
-				enable_p1 = '0;
-				enable_p2 = '0;
-				enable_p3 = '0;
-				enable_p4 = '0;
+				client1.retro = '0;
+				client2.retro = '0;
+				client3.retro = '0;
+				client4.retro = '0;
+				client1.enable = '0;
+				client2.enable = '0;
+				client3.enable = '0;
+				client4.enable = '0;
 				sel = '0;
 			end
 			
@@ -296,7 +279,7 @@ begin:counters
 	else
 	begin
 	
-		if(p1_done||p2_done||p3_done||p4_done)
+		if(client1.done||client2.done||client3.done||client4.done)
 		begin
 			count_col<=count_col+1'b1;
 		end

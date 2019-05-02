@@ -1,0 +1,7 @@
+
+State Machine - |FSM_Moore_2always|Edo_Actual
+Name Edo_Actual.S3 Edo_Actual.S2 Edo_Actual.S1 Edo_Actual.00 
+Edo_Actual.00 0 0 0 0 
+Edo_Actual.S1 0 0 1 1 
+Edo_Actual.S2 0 1 0 1 
+Edo_Actual.S3 1 0 0 1 

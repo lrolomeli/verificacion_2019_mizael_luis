@@ -51,6 +51,9 @@ STATE state;
 		begin
 			/** Init FSM **/
 			state <= IDLE;
+			idle <= BIT_ZERO;
+			load <= BIT_ZERO;
+			ready <= BIT_ZERO;
 		end
 		
 		else
@@ -65,10 +68,16 @@ STATE state;
 						//Vamos a estar en este estado mientras la
 						//senal de start sea igual a cero
 						state <= LOAD;
+						idle <= BIT_ZERO;
+						load <= BIT_ONE;
+						ready <= BIT_ZERO;
 					end
 					else
 					begin
 						state <= IDLE;
+						idle <= BIT_ONE;
+						load <= BIT_ZERO;
+						ready <= BIT_ZERO;
 					end
 
 				end
@@ -80,10 +89,16 @@ STATE state;
 					if(l_s)
 					begin
 						state <= MULTIPLYING;
+						idle <= BIT_ZERO;
+						load <= BIT_ZERO;
+						ready <= BIT_ONE;
 					end
 					else
 					begin
 						state <= LOAD;
+						idle <= BIT_ZERO;
+						load <= BIT_ONE;
+						ready <= BIT_ZERO;
 					end
 				end
 				
@@ -95,10 +110,16 @@ STATE state;
 					if(done)
 					begin
 						state <= IDLE;
+						idle <= BIT_ONE;
+						load <= BIT_ZERO;
+						ready <= BIT_ZERO;
 					end
 					else
 					begin
 						state <= MULTIPLYING;
+						idle <= BIT_ZERO;
+						load <= BIT_ZERO;
+						ready <= BIT_ONE;
 					end
 
 				end		
@@ -106,55 +127,14 @@ STATE state;
 				default: 
 				begin 
 					state <= IDLE;
-
+					idle <= BIT_ZERO;
+					load <= BIT_ZERO;
+					ready <= BIT_ONE;
 				end
 			
 			endcase
 		
 		end
-			
-	end
-	
-	
-	
-	always_comb
-	begin
-		idle <= BIT_ZERO;
-		load <= BIT_ZERO;
-		ready <= BIT_ZERO;
-		
-		case(state)
-			IDLE :
-			begin
-				idle <= BIT_ONE;
-				load <= BIT_ZERO;
-				ready <= BIT_ZERO;
-			end
-			
-			LOAD :
-			/** Init load state **/
-			begin
-				idle <= BIT_ZERO;
-				load <= BIT_ONE;
-				ready <= BIT_ZERO;
-			end
-			
-			MULTIPLYING :
-			begin
-				idle <= BIT_ZERO;
-				load <= BIT_ZERO;
-				ready <= BIT_ONE;
-			end		
-			
-			default: 
-			begin 
-				idle <= BIT_ZERO;
-				load <= BIT_ZERO;
-				ready <= BIT_ONE;
-			end
-		
-		endcase
-		
 			
 	end
 

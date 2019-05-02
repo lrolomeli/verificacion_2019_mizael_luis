@@ -23,15 +23,23 @@ output done
 );
 
 
-modport client(
-output A,
-output B,
-output prev,
+modport ctrl
+(
+
 output retro,
 output enable,
 
-input out,
 input done
+);
+
+modport data
+(
+output A,
+output B,
+output prev,
+
+input out
+
 );
 
 endinterface
