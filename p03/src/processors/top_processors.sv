@@ -15,7 +15,7 @@
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+import global_pkg ::*;
 module top_processors
 (
 	input clk,
@@ -27,7 +27,7 @@ module top_processors
 	
 	output logic pop,
 	output logic ov_counter,
-	output uint2_t sel,
+	output logic[1 : 0] sel,
 	output logic done
 
 );
@@ -86,10 +86,10 @@ provider provider4_inst
 	.client(proc4_itf)
 );
 
-fsm
+fsm FSM1
 (
 	.*,
-	.client1(proc1_itf),
+	.client1(proc1_itf.ctrl),
 	.client2(proc2_itf),
 	.client3(proc3_itf),
 	.client4(proc4_itf)

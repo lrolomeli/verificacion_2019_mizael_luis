@@ -40,29 +40,30 @@ module provider
 );
 
 
-
-always_ff@(posedge clk, negedge rst)
-begin
-
-	if(~rst)
-	begin
-		client.A <= '0;
-		client.B <= '0;
-	end
-	else
-	begin
-		if(pop)
-		begin
-			client.A <= A;
-			client.B <= B;
-		end
-		else
-		begin
-			client.A <= client.A;
-			client.B <= client.B;
-		end
-	end
-	
-end
+assign client.A = A;
+assign client.B = B;
+//always_ff@(posedge clk, negedge rst)
+//begin
+//
+//	if(~rst)
+//	begin
+//		client.A <= '0;
+//		client.B <= '0;
+//	end
+//	else
+//	begin
+//		if(pop)
+//		begin
+//			client.A <= A;
+//			client.B <= B;
+//		end
+//		else
+//		begin
+//			client.A <= client.A;
+//			client.B <= client.B;
+//		end
+//	end
+//	
+//end
 
 endmodule

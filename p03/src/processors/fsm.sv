@@ -164,15 +164,12 @@ begin
 				client2.retro = '0;
 				client3.retro = '0;
 				client4.retro = '0;
-				client1.enable = '0;
-				client2.enable = '0;
-				client3.enable = '0;
-				client4.enable = '0;
+
 				sel = '0;
 				
 				if(client4.done||flag_start)
 				begin
-						
+				
 					client1.enable = 1'b1;//HABILITAMOS EL SIGUIENTE
 					
 					if(flag_start)
@@ -184,6 +181,7 @@ begin
 					
 					if(client4.done)//LOS 4 PROCESADORES TERMINARON
 					begin
+						client1.enable = 1'b0;//DESHABILITAMOS EL ANTERIOR
 						if(ov_counter)//ESTE PROCESADOR TIENE EL RESULTADO
 						begin
 							sel = '0;//EL RESULTADO ESTA EN LA POSICION CERO DEL SELECTOR
@@ -201,6 +199,7 @@ begin
 				
 				if(client1.done)
 				begin
+					client4.enable = 1'b0;//DESHABILITAMOS EL ANTERIOR
 					client2.enable = 1'b1;
 					
 					if(ov_counter)
@@ -218,6 +217,7 @@ begin
 				
 				if(client2.done)
 				begin
+					client1.enable = 1'b0;//DESHABILITAMOS EL ANTERIOR
 					client3.enable = 1'b1;//DESHABILITAMOS EL ANTERIOR
 
 					if(ov_counter)
@@ -234,6 +234,7 @@ begin
 				
 				if(client3.done)
 				begin
+					client2.enable = 1'b0;//DESHABILITAMOS EL ANTERIOR
 					client4.enable = 1'b1;
 					
 					if(ov_counter)

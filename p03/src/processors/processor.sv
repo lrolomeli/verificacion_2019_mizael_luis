@@ -36,9 +36,8 @@ module processor
 	
 );
 
-data_t result;
 data_t product;
-
+data_t result;
 
 assign product = processor.A*processor.B;
 assign result = (processor.retro) ? (product + processor.prev) : product;
@@ -49,18 +48,20 @@ begin
 	if(~rst)
 	begin
 		processor.done <= '0;
-		processor.out <= '0;
+		processor.out <= '0; 
 	end
 	
+
 	else if(processor.enable)
 	begin
 		processor.out <= result;
 		processor.done <= 1'b1;
+		
 	end
 	else
 	begin 
-		processor.out <= '0;
-		processor.done <= 1'b0;
+		processor.out <= processor.out;
+		processor.done <= '0;
 	end
 
 end
