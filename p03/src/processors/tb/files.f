@@ -1,5 +1,5 @@
 ../global_pkg.sv
-../fsm.sv
+../fsm_processor.sv
 ../processor.sv
 ../processors_if.sv
 ../provider.sv

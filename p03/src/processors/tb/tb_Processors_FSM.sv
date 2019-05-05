@@ -7,28 +7,21 @@ module tb_Processors_FSM;
 	logic clk;
 	logic rst;
 	logic start;
-	logic load;
 	logic A;
 	logic B;
 	
 	logic pop;
-	logic ov_counter;
-	uint2_t sel;
-	logic done;
+	logic push;
 
 top_processors p03
 (
 	.clk(clk),
 	.rst(rst),
 	.start(start),
-	.load(load),
 	.A(A),
 	.B(B),
 	
-	.pop(pop),
-	.ov_counter(ov_counter),
-	.sel(sel),
-	.done(done)
+	.push(push)
 );
 
 /**************************************************************************/
@@ -54,27 +47,6 @@ initial begin
 	# 0 start = 1'b0;
 	# 2 start = 1'b1;
 	# 4 start = 1'b0;	
-	# 14 load = 1'b0;
-	# 15 load = 1'b1;
-	# 20 load = 1'b0;
-
-	
-	
-	# 25 load = 1'b1;
-	# 30 load = 1'b0;
-
-	# 35 load = 1'b1;
-	# 40 load = 1'b0;
-
-	# 45 load = 1'b1;
-	# 50 load = 1'b0;
-
-	# 55 load = 1'b1;
-	# 60 load = 1'b0;
-
-	# 65 load = 1'b1;
-	# 70 load = 1'b0;
-	
 	
     	$stop;
 end

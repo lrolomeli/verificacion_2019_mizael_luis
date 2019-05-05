@@ -15,28 +15,23 @@
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-import global_pkg ::*;
+
 module top_processors
 (
 	input clk,
 	input rst,
 	input start,
-	input load,
 	input A,
 	input B,
 	
-	output logic pop,
-	output logic ov_counter,
-	output logic[1 : 0] sel,
-	output logic done
+	output push
 
 );
-	 
-processors_if proc1_itf();
-processors_if proc2_itf();
-processors_if proc3_itf();
-processors_if proc4_itf();
 
+logic pop_done_w;
+logic pop_w;
+
+processors_if proc1_itf();
 
 processor processor1_inst
 (
@@ -47,52 +42,18 @@ processor processor1_inst
 provider provider1_inst
 (
 	.*,
+	.pop(pop_w),
+	.pop_done(pop_done_w),
 	.client(proc1_itf)
 );
 
-processor processor2_inst
-(
-	.*,
-	.processor(proc2_itf)
-);
 
-provider provider2_inst
+fsm_processor fsm_p_inst
 (
 	.*,
-	.client(proc2_itf)
-);
-
-processor processor3_inst
-(
-	.*,
-	.processor(proc3_itf)
-);
-
-provider provider3_inst
-(
-	.*,
-	.client(proc3_itf)
-);
-
-processor processor4_inst
-(
-	.*,
-	.processor(proc4_itf)
-);
-
-provider provider4_inst
-(
-	.*,
-	.client(proc4_itf)
-);
-
-fsm FSM1
-(
-	.*,
-	.client1(proc1_itf.ctrl),
-	.client2(proc2_itf),
-	.client3(proc3_itf),
-	.client4(proc4_itf)
+	.pop(pop_w),
+	.pop_done(pop_done_w),
+	.p(proc1_itf)
 );
 
 

@@ -3,7 +3,6 @@ import global_pkg::*;
 
 data_t A;
 data_t B;
-data_t prev;
 logic retro;
 logic enable;
 
@@ -14,7 +13,6 @@ logic done;
 modport proc(
 input A,
 input B,
-input prev,
 input retro,
 input enable,
 
@@ -36,7 +34,6 @@ modport data
 (
 output A,
 output B,
-output prev,
 
 input out
 

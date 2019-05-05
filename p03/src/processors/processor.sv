@@ -36,11 +36,12 @@ module processor
 	
 );
 
-data_t product;
 data_t result;
+data_t product;
+logic flag;
 
 assign product = processor.A*processor.B;
-assign result = (processor.retro) ? (product + processor.prev) : product;
+assign result = (processor.retro) ? (product + processor.out) : product;
 
 always_ff@(posedge clk, negedge rst)
 begin
@@ -48,20 +49,21 @@ begin
 	if(~rst)
 	begin
 		processor.done <= '0;
-		processor.out <= '0; 
+		processor.out <= '0;
+		flag <= 1'b1;
 	end
 	
-
-	else if(processor.enable)
+	else if(processor.enable && flag)
 	begin
 		processor.out <= result;
 		processor.done <= 1'b1;
-		
+		flag <= '0;
 	end
 	else
 	begin 
 		processor.out <= processor.out;
-		processor.done <= '0;
+		processor.done <= 1'b0;
+		flag <= 1'b1;
 	end
 
 end

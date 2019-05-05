@@ -55,7 +55,7 @@ package global_pkg ;
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/** enum used to select type of register **/
-	typedef enum logic [2:0] {IDLE, LOAD, MULTIPLYING} STATE_e;
+	typedef enum logic [2:0] {IDLE, POP, OP, OVERFLOW, RESULT} STATE_e;
 	 
 	 
 endpackage
