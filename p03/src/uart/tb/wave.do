@@ -1,21 +1,36 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_p03/p03/rst
-add wave -noupdate /tb_p03/p03/clk
-add wave -noupdate /tb_p03/p03/tx_data
-add wave -noupdate /tb_p03/p03/transmit
-add wave -noupdate /tb_p03/p03/serial_rx
-add wave -noupdate /tb_p03/p03/rx_data
-add wave -noupdate /tb_p03/p03/serial_tx
-add wave -noupdate /tb_p03/p03/receiving
-add wave -noupdate /tb_p03/p03/sending
-add wave -noupdate /tb_p03/p03/tx_count
-add wave -noupdate /tb_p03/p03/rx_count
-add wave -noupdate /tb_p03/p03/clk_w
-add wave -noupdate /tb_p03/p03/transmit_w
-add wave -noupdate /tb_p03/p03/uart
+add wave -noupdate /tb_p03/uart/tx_top_inst/clk
+add wave -noupdate /tb_p03/uart/tx_top_inst/rst
+add wave -noupdate /tb_p03/uart/tx_top_inst/transmit
+add wave -noupdate /tb_p03/uart/tx_top_inst/tx_data
+add wave -noupdate /tb_p03/uart/tx_top_inst/tx
+add wave -noupdate /tb_p03/uart/tx_top_inst/tx_fsm_inst/state
+add wave -noupdate /tb_p03/uart/tx_top_inst/clk_w
+add wave -noupdate /tb_p03/uart/tx_top_inst/enb_w
+add wave -noupdate /tb_p03/uart/tx_top_inst/sel_w
+add wave -noupdate /tb_p03/uart/tx_top_inst/load_w
+add wave -noupdate /tb_p03/uart/tx_top_inst/data_out_w
+add wave -noupdate /tb_p03/uart/tx_top_inst/parity_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/clk
+add wave -noupdate /tb_p03/uart/rx_top_inst/rst
+add wave -noupdate /tb_p03/uart/rx_top_inst/rx
+add wave -noupdate /tb_p03/uart/rx_top_inst/rx_fsm_inst/state
+add wave -noupdate /tb_p03/uart/rx_top_inst/parity_err
+add wave -noupdate /tb_p03/uart/rx_top_inst/rx_data
+add wave -noupdate /tb_p03/uart/rx_top_inst/count_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/ovf_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/sel_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/enb_count_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/enb_sipo_fsm
+add wave -noupdate /tb_p03/uart/rx_top_inst/enb_sipo
+add wave -noupdate /tb_p03/uart/rx_top_inst/enb_parity_fsm
+add wave -noupdate /tb_p03/uart/rx_top_inst/parity_w
+add wave -noupdate /tb_p03/uart/rx_top_inst/enb_parity
+add wave -noupdate /tb_p03/uart/rx_top_inst/parity
+add wave -noupdate /tb_p03/uart/transmit
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {80800 ps} 0}
+WaveRestoreCursors {{Cursor 1} {95392600 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -31,4 +46,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {393800 ps}
+WaveRestoreZoom {0 ps} {132394600 ps}

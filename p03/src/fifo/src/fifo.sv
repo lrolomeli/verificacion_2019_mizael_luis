@@ -47,7 +47,7 @@ begin
 			cln_if.wr_addr_a <= wr_ptr;
 			cln_if.data_a <= data;
 			
-			if(rd_ptr == W_DEPTH)
+			if(wr_ptr == W_DEPTH)
 				wr_ptr <= '0;
 			else
 				wr_ptr++;

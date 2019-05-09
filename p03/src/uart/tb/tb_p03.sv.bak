@@ -11,7 +11,7 @@ import uart_pkg::*;
 	data_t rx_data;
 	logic parity_err;
 	
-top uart
+uart p03
 (
 	// Port declarations
 	.rst(rst),				//senal de reset
@@ -32,9 +32,8 @@ initial begin
     transmit = 0;
 #4	rst = 1'b1;
     transmit = 1'b1;
-    
-#868 transmit = 0;	
-#100000
+#2	transmit = 0;	
+#10000
     $stop;
 end
 
