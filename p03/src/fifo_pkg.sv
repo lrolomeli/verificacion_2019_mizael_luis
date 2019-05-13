@@ -27,7 +27,7 @@ package fifo_pkg ;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Parameters
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	parameter NIBBLE = 4;
+	
 
    parameter  W_ADDR      = 8;			// ancho de la direcciones
    //parameter  W_DEPTH     = 2**W_ADDR;	// localidades de memoria[0 : W_DEPTH - 1]
@@ -47,7 +47,7 @@ package fifo_pkg ;
 	 typedef logic [COUNT_N:0]       				counter_t;
 	 typedef logic [COUNT_N_N-1:0]       			M_address_t;
 	 typedef logic [COUNT_N_N:0]       				M_counter_t;
-	 typedef logic [NIBBLE-1:0]						nibble_t;
+	 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

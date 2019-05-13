@@ -1,12 +1,12 @@
 import global_pkg::*;
 
-module top_p03
+module top_p03_tb
 (
 	input clk,
 	input rst,
-	input rx,
+	input rx_interrupt,
+	input data,
 	
-	output parity_err,
 	output tx,
 	output ready,
 	output full_A,
@@ -17,29 +17,33 @@ module top_p03
 `ifdef MODELSIM
 `endif
 
-data_t data_w;
 data_t result_w;
 nibble_t N_w;
 logic enable_n_w;
 logic push_A_w;
 logic push_B_w;
 logic transmit_w;
+wire clear_interrupt_w;
+data_t data_w;
 logic clear_w;
 
-top_cmd top_cmd_inst
+
+
+assign data_w = data;
+
+
+cmd_fsm cmd_fsm_inst
 (
 	.*,
-	.transmit(transmit_w),
-	.tx_data(result_w),
-	
-	.rcvd_data(data_w),
+	.enable_n(enable_n_w),
 	.push_A(push_A_w),
 	.push_B(push_B_w),
-	.enable_n(enable_n_w),
-	.clear(clear_w)
+	.uart_data(data_w),
+	.rx_interrupt(rx_interrupt),
+	.clear(clear_w),
 	
-);	
-	
+	.clear_interrupt(clear_interrupt_w)
+);
 
 
 nibb_reg size_register
