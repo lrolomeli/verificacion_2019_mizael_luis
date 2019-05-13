@@ -4,32 +4,28 @@ timeprecision 1ps;// It specifies the resolution in the simulation.
 import fifo_pkg::*;
 module tb_Processors_FSM;
 
-	input clk,
-	input rst,
-	input rx_interrupt,
-	input data_t data,
+	logic clk;
+	logic rst;
+	logic rx_interrupt;
+	data_t data;
 	
-	output tx,
-	output ready,
-	output full_A,
-	output empty_A
+	logic tx;
+	logic ready;
+	logic full_A;
+	logic empty_A;
 	
 
 top_processors p03
 (
 	.clk(clk),
 	.rst(rst),
-	.start(start),
-	.uart(uart),
-	.pop_uart(pop_uart),
-	.push_A(push_A),
-	.push_B(push_B),
-	.N(N),
+	.rx_interrupt(rx_interrupt),
+	.data(data),
 	
+	.tx(tx),
+	.ready(ready),
 	.full_A(full_A),
-	.empty_A(empty_A),
-	
-	.result_uart_w(result_uart_w)
+	.empty_A(empty_A)
 	
 );
 
@@ -65,23 +61,23 @@ initial begin
 	# 9 push_A = 1'b1;
 		push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 20  push_A = 1'b1;
-push_B = 1'b1;
+	push_B = 1'b1;
 	# 4 push_A = '0;
-push_B = '0;
+	push_B = '0;
 	
 	
 end
