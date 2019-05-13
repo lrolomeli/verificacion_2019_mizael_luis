@@ -5,7 +5,7 @@ module top_p03_tb
 	input clk,
 	input rst,
 	input rx_interrupt,
-	input data,
+	input data_t data,
 	
 	output tx,
 	output ready,
