@@ -1,4 +1,5 @@
 import uart_pkg::*;
+import global_pkg::*;
 `ifndef PISO_LSB
 	`define PISO_LSB
 module piso_lsb

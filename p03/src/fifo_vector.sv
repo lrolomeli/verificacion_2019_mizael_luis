@@ -26,7 +26,7 @@
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
-
+import global_pkg::*;
 module fifo_vector
 (
 	/** Input ports **/

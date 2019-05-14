@@ -26,7 +26,7 @@
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
-
+import global_pkg::*;
 `ifndef RAM_MATRIX
     `define RAM_MATRIX
 

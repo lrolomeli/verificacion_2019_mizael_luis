@@ -26,6 +26,8 @@
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
+import processor_pkg::*;
+import global_pkg::*;
 `ifndef CMD_FSM
 	`define CMD_FSM
 module cmd_fsm

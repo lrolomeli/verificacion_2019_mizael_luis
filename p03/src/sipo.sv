@@ -1,5 +1,5 @@
 import uart_pkg::*;
-
+import global_pkg::*;
 `ifndef SIPO
 	`define SIPO
 module sipo

@@ -2,7 +2,10 @@ timeunit 1ps; //It specifies the time unit that all the delay will take in the s
 timeprecision 1ps;// It specifies the resolution in the simulation.
 
 import fifo_pkg::*;
-module tb_Processors_FSM;
+import uart_pkg::*;
+import processor_pkg::*;
+import global_pkg::*;
+module top_tb_p03;
 
 	logic clk;
 	logic rst;
@@ -15,7 +18,7 @@ module tb_Processors_FSM;
 	logic empty_A;
 	
 
-top_processors p03
+top_p03_tb DUV
 (
 	.clk(clk),
 	.rst(rst),
@@ -47,62 +50,45 @@ end
 
 
 initial begin
-	# 0 start = 1'b0;
-	# 4 start = 1'b0;
-	# 200 start = 1'b1;
-	# 4 start = 1'b0;
+	# 0 rx_interrupt = 1'b0;
+	# 4 rx_interrupt = 1'b0;
 	
-end
-
-initial begin
-
-	# 0 push_A = '0;
-		push_B = '0;
-	# 9 push_A = 1'b1;
-		push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 20  push_A = 1'b1;
-	push_B = 1'b1;
-	# 4 push_A = '0;
-	push_B = '0;
+	# 6 rx_interrupt = 1'b1;	
+	# 8 data = 8'h FE;
+	# 10 rx_interrupt = 1'b0;
+	
+	# 26 rx_interrupt = 1'b1;
+	# 28 data = 8'h 03;
+	# 30 rx_interrupt = 1'b0;
+	
+	# 46 rx_interrupt = 1'b1;
+	# 48 data = 8'h 01;
+	# 50 rx_interrupt = 1'b0;
+	
+	# 66 rx_interrupt = 1'b1;
+	# 68 data = 8'h 04;
+	# 70 rx_interrupt = 1'b0;
+	
+	# 106 rx_interrupt = 1'b1;	
+	# 108 data = 8'h EF;
+	# 110 rx_interrupt = 1'b0;
 	
 	
+	
+	
+	# 24 data = 8'h 03;
+	# 24 data = 8'h 03;
+	
+	# 6 rx_interrupt = 1'b1;
+	# 7 rx_interrupt = 1'b0;	
+
+	# 7 data = 8'h EF;
+	# 9 rx_interrupt = 1'b1;
+	# 10 rx_interrupt = 1'b0;
 end
 
-initial begin
-	# 0 uart = '0;
-	# 8 uart = 1;
-	# 20 uart = 2;
-	# 20 uart = 3;	
-	# 20 uart = 4;
-	# 20 uart = 5;
-	# 20 uart = 6;
-	# 20 uart = 7;
-	# 4 uart = 8;
 
-end
 
-initial begin
-	# 0 pop_uart = 1'b0;
-
-end
-
-initial begin
-	# 0 N = 3'd5;
-end
 
 endmodule
 

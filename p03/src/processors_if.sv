@@ -1,6 +1,6 @@
 interface processors_if();
 import processor_pkg::*;
-
+import global_pkg::*;
 
 data_t A;
 data_t B;

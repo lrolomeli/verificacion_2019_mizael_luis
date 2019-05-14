@@ -1,4 +1,5 @@
 import uart_pkg::*;
+import global_pkg::*;
 `ifndef UART
 	`define UART
 module uart

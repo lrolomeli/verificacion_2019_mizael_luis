@@ -1,5 +1,5 @@
 import uart_pkg::*;
-
+import global_pkg::*;
 module top_cmd
 (
 	input clk,

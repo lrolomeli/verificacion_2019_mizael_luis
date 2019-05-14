@@ -17,6 +17,7 @@
 *********************************************************************************/
 import processor_pkg::*;
 import fifo_pkg::*;
+import global_pkg::*;
 module top_processors
 (
 	input data_t uart,

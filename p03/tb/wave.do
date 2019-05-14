@@ -1,32 +1,26 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/rst
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/start
-add wave -noupdate -expand -group cosas -radix unsigned /tb_Processors_FSM/uart
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/pop_uart
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/N
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/full_A
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/empty_A
-add wave -noupdate -expand -group cosas /tb_Processors_FSM/result_uart_w
-add wave -noupdate -expand -group cosas -expand /tb_Processors_FSM/p03/matrix/ramM/ram
-add wave -noupdate -expand -group procesador -radix unsigned /tb_Processors_FSM/p03/proc1_itf/A
-add wave -noupdate -expand -group procesador -radix unsigned /tb_Processors_FSM/p03/proc1_itf/B
-add wave -noupdate -expand -group procesador /tb_Processors_FSM/p03/proc1_itf/retro
-add wave -noupdate -expand -group procesador /tb_Processors_FSM/p03/proc1_itf/enable
-add wave -noupdate -expand -group procesador -radix unsigned /tb_Processors_FSM/p03/proc1_itf/out
-add wave -noupdate -expand -group procesador /tb_Processors_FSM/p03/proc1_itf/done
-add wave -noupdate -expand -group procesador -radix unsigned /tb_Processors_FSM/p03/processor1_inst/result
-add wave -noupdate -expand -group procesador -radix unsigned /tb_Processors_FSM/p03/processor1_inst/product
-add wave -noupdate -expand -group procesador /tb_Processors_FSM/clk
-add wave -noupdate /tb_Processors_FSM/p03/fsm_p_inst/state
-add wave -noupdate /tb_Processors_FSM/p03/fsm_p_inst/count_N
-add wave -noupdate /tb_Processors_FSM/p03/fsm_p_inst/overflow_n
-add wave -noupdate /tb_Processors_FSM/p03/fsm_p_inst/count_N_N
-add wave -noupdate /tb_Processors_FSM/p03/fsm_p_inst/ov_n_n
-add wave -noupdate -childformat {{{/tb_Processors_FSM/p03/vector/ramV/ram[5]} -radix unsigned} {{/tb_Processors_FSM/p03/vector/ramV/ram[4]} -radix unsigned} {{/tb_Processors_FSM/p03/vector/ramV/ram[3]} -radix unsigned} {{/tb_Processors_FSM/p03/vector/ramV/ram[2]} -radix unsigned} {{/tb_Processors_FSM/p03/vector/ramV/ram[1]} -radix unsigned} {{/tb_Processors_FSM/p03/vector/ramV/ram[0]} -radix unsigned}} -expand -subitemconfig {{/tb_Processors_FSM/p03/vector/ramV/ram[5]} {-radix unsigned} {/tb_Processors_FSM/p03/vector/ramV/ram[4]} {-radix unsigned} {/tb_Processors_FSM/p03/vector/ramV/ram[3]} {-radix unsigned} {/tb_Processors_FSM/p03/vector/ramV/ram[2]} {-radix unsigned} {/tb_Processors_FSM/p03/vector/ramV/ram[1]} {-radix unsigned} {/tb_Processors_FSM/p03/vector/ramV/ram[0]} {-radix unsigned}} /tb_Processors_FSM/p03/vector/ramV/ram
-add wave -noupdate -radix unsigned -childformat {{{/tb_Processors_FSM/p03/fifo_result/ramV/ram[4]} -radix unsigned} {{/tb_Processors_FSM/p03/fifo_result/ramV/ram[3]} -radix unsigned} {{/tb_Processors_FSM/p03/fifo_result/ramV/ram[2]} -radix unsigned} {{/tb_Processors_FSM/p03/fifo_result/ramV/ram[1]} -radix unsigned} {{/tb_Processors_FSM/p03/fifo_result/ramV/ram[0]} -radix unsigned}} -expand -subitemconfig {{/tb_Processors_FSM/p03/fifo_result/ramV/ram[4]} {-radix unsigned} {/tb_Processors_FSM/p03/fifo_result/ramV/ram[3]} {-radix unsigned} {/tb_Processors_FSM/p03/fifo_result/ramV/ram[2]} {-radix unsigned} {/tb_Processors_FSM/p03/fifo_result/ramV/ram[1]} {-radix unsigned} {/tb_Processors_FSM/p03/fifo_result/ramV/ram[0]} {-radix unsigned}} /tb_Processors_FSM/p03/fifo_result/ramV/ram
+add wave -noupdate /top_tb_p03/DUV/clk
+add wave -noupdate /top_tb_p03/DUV/rst
+add wave -noupdate /top_tb_p03/DUV/rx_interrupt
+add wave -noupdate /top_tb_p03/DUV/data
+add wave -noupdate /top_tb_p03/DUV/tx
+add wave -noupdate /top_tb_p03/DUV/ready
+add wave -noupdate /top_tb_p03/DUV/full_A
+add wave -noupdate /top_tb_p03/DUV/empty_A
+add wave -noupdate /top_tb_p03/DUV/result_w
+add wave -noupdate /top_tb_p03/DUV/N_w
+add wave -noupdate /top_tb_p03/DUV/enable_n_w
+add wave -noupdate /top_tb_p03/DUV/push_A_w
+add wave -noupdate /top_tb_p03/DUV/push_B_w
+add wave -noupdate /top_tb_p03/DUV/transmit_w
+add wave -noupdate /top_tb_p03/DUV/clear_interrupt_w
+add wave -noupdate /top_tb_p03/DUV/data_w
+add wave -noupdate /top_tb_p03/DUV/clear_w
+add wave -noupdate /top_tb_p03/DUV/cmd_fsm_inst/uart_data
+add wave -noupdate /top_tb_p03/DUV/cmd_fsm_inst/state
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {428 ps} 0}
+WaveRestoreCursors {{Cursor 1} {18 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -42,4 +36,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {174 ps} {438 ps}
+WaveRestoreZoom {0 ps} {660 ps}

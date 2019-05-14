@@ -26,7 +26,7 @@
 // Import the Packages
 //================================================================================
 import processor_pkg::*;
-import fifo_pkg::nibble_t;
+import global_pkg::*;
 
 module fsm_processor
 (

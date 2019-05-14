@@ -1,4 +1,5 @@
 import uart_pkg::*;
+import global_pkg::*;
 `ifndef RX_TOP
 	`define RX_TOP
 module rx_top

@@ -26,7 +26,7 @@
 // Import the Packages
 //================================================================================
 import processor_pkg::*;
-
+import global_pkg::*;
 
 module processor
 (

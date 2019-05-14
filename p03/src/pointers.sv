@@ -26,7 +26,8 @@
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
-
+import processor_pkg::*;
+import global_pkg::*;
 `ifndef POINTERS
     `define POINTERS
 

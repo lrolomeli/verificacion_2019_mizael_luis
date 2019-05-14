@@ -1,4 +1,5 @@
 import uart_pkg::*;
+import global_pkg::*;
 `ifndef TX_TOP
 	`define TX_TOP
 module tx_top
