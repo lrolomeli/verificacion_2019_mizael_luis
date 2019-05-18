@@ -45,23 +45,23 @@ timer_t count_r; //variable para contar
 
 always_ff@(posedge clk, negedge rst)begin: counter
 	if(!rst)
-		count_r <= FALSE;
+		count_r <= '0;
 	else if (enable)
 	begin
 		if(ovf)
-			count_r <= FALSE; //reiniciamos el contador
+			count_r <= '0; //reiniciamos el contador
 		else
 			count_r++; //continuamos el conteo
 	end
 	else
-		count_r <= FALSE; //reiniciamos el contador
+		count_r <= '0; //reiniciamos el contador
 end:counter
 
 always_comb begin: comparator
 	if(count_r == count-1)
-		ovf = TRUE; //encendemos la bandera de overflow
+		ovf = 1'b1; //encendemos la bandera de overflow
    else
-	ovf = FALSE; //apagamos la bandera de overflow
+	ovf = '0; //apagamos la bandera de overflow
 end
 
 

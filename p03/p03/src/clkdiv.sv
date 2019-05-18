@@ -56,7 +56,7 @@ begin: Counter
 	begin
 		if (time_count == HALFCOUNT)
 		begin
-			time_count <= FALSE; //reiniciamos el contador
+			time_count <= '0; //reiniciamos el contador
 			clk_div <= ~clk_div; //negamos la señal
 		end
 

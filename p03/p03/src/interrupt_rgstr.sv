@@ -43,11 +43,11 @@ module interrupt_rgstr
 
 always_ff@(posedge clk, negedge rst) begin : rgstr
 	if(~rst)
-		out <= FALSE; //limpiamos el valor del registro al inicio
+		out <= '0; //limpiamos el valor del registro al inicio
 	else if(rx_interrupt)
-		out <= TRUE;  //levantantamos la bandera
+		out <= 1'b1;  //levantantamos la bandera
 	else if(clear)
-		out <= FALSE; //limpiamos la bandera
+		out <= '0; //limpiamos la bandera
 	else
 		out <= out;   //mantenemos el valor de la bandera
 end : rgstr
