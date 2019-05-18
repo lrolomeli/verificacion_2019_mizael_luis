@@ -38,6 +38,7 @@ module pointers
 	input push,
 	input pop,
 	input nibble_t N,
+	input clr,
 	
 	output counter_t count_push,	
 	output counter_t count_pop,
@@ -55,11 +56,15 @@ begin: counter
 	end
 	
 	else begin
+	
 		if(pop)
-			count_pop <= (count_pop==N) ? '0 : count_pop + 1'b1;
+			count_pop++;
 
 		if(push)
-			count_push <= (count_push==N) ? '0 : count_push + 1'b1;
+			count_push++;
+			
+		if(clr)
+			count_pop<='0;
 
 	end
 end:counter

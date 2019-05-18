@@ -40,7 +40,8 @@ module fsm_processor
 	output logic pop_result,
 	output logic transmit,
 	output logic pop,
-	output logic push
+	output logic push,
+	output logic clr
 	
 );
 
@@ -130,6 +131,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b0;
 				transmit = 1'b0;
+				clr = 1'b0;
 			end
 			
 			LOAD :
@@ -143,6 +145,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b0;
 				transmit = 1'b0;
+				clr = 1'b0;
 			end
 		
 			OP :
@@ -156,6 +159,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b0;
 				transmit = 1'b0;
+				clr = 1'b0;
 			end
 			
 			RESULT :
@@ -169,6 +173,7 @@ begin
 				p_retro = 1'b1;
 				pop_result = 1'b0;
 				transmit = 1'b0;
+				clr = 1'b1;
 				
 			end
 			
@@ -183,6 +188,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b1;
 				transmit = 1'b0;
+				clr = 1'b0;
 			end
 			
 			TRANSMIT :
@@ -196,6 +202,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b0;
 				transmit = 1'b1;
+				clr = 1'b0;
 			end
 			
 			
@@ -210,6 +217,7 @@ begin
 				p_retro = 1'b0;
 				pop_result = 1'b0;
 				transmit = 1'b0;
+				clr = 1'b0;
 			end
 			
 		endcase

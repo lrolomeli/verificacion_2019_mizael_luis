@@ -51,6 +51,7 @@ logic vector_ready;
 
 logic p_enable_w;
 logic p_retro_w;
+logic clr_w;
 
 
 fifo_matrix matrix(
@@ -74,6 +75,7 @@ fifo_vector vector(
 	.data_in(uart),
 	.N(N),
 	.ready(vector_ready),
+	.clr(clr_w),
 
 	.data_out(B_w)
 );
@@ -97,6 +99,7 @@ fifo_vector fifo_result
 	.data_in(out_w),
 	.N(N),
 	.ready(ready),
+	.clr(clr_w),
 	
 	.data_out(result_uart_w)
 );
@@ -121,10 +124,12 @@ fsm_processor fsm_p_inst
 	.p_retro(p_retro_w),
 	.p_enable(p_enable_w),
 	
+	
 	.pop(pop_w),
 	.push(push_result_w),
 	.pop_result(pop_result_w),
-	.transmit(transmit)
+	.transmit(transmit),
+	.clr(clr_w)
 );
 
 

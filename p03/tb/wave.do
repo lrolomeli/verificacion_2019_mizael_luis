@@ -75,7 +75,7 @@ add wave -noupdate /top_tb_p03/DUV/top_processors_inst/vector/ramV/rd_en
 add wave -noupdate /top_tb_p03/DUV/top_processors_inst/matrix/ready
 add wave -noupdate /top_tb_p03/DUV/top_processors_inst/vector/ready
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1620 ps} 0}
+WaveRestoreCursors {{Cursor 1} {1654 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -91,4 +91,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {1634 ps} {1708 ps}
+WaveRestoreZoom {1593 ps} {1715 ps}

@@ -36,7 +36,7 @@ module fifo_vector
 	input push,
 	input data_t data_in,
 	input nibble_t N,
-	
+	input clr,
 //	output full,
 //	output empty,
 	output data_t data_out,
@@ -101,6 +101,7 @@ pointers pointers_inst
 	.push(push),
 	.pop(pop),
 	.N(N),
+	.clr(clr),
 	
 	.count_push(count_push_w[COUNT_N-1:0]),	
 	.count_pop(count_pop_w[COUNT_N-1:0]),
