@@ -1,5 +1,5 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: tx_fsm.sv
 
 * Description: FSM to description hardwere   
 
@@ -13,21 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef TX_FSM
+	`define TX_FSM
+	
 //================================================================================
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
-`ifndef TX_FSM
-	`define TX_FSM
+import global_pkg::*;
+
 module tx_fsm
 (
 	/** Input ports **/
@@ -82,92 +84,92 @@ begin
 		IDLE :
 		begin
 			sel = 2'b00;
-			load = 1'b0;
-			enb = 1'b0;
+			load = FALSE;
+			enb = FALSE;
 		end
 		
 		START :
 		begin
 			sel = 2'b01;
-			load = 1'b1;
-			enb = 1'b1;
+			load = TRUE;
+			enb = TRUE;
 		end
 		
 		BIT1 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT2 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT3 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT4 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT5 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT6 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT7 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		BIT8 :	
 		begin
 			sel = 2'b10;
-			load = 1'b0;
-			enb = 1'b1;
+			load = FALSE;
+			enb = TRUE;
 		end
 		
 		PARITY :	
 		begin
 			sel = 2'b11;
-			load = 1'b0;
-			enb = 1'b0;
+			load = FALSE;
+			enb = FALSE;
 		end
 		
 		STOP :	
 		begin
 			sel = 2'b00;
-			load = 1'b0;
-			enb = 1'b0;
+			load = FALSE;
+			enb = FALSE;
 		end
 		
 		default: 
 		begin
 			sel = 2'b00;
-			load = 1'b0;
-			enb = 1'b0;
+			load = FALSE;
+			enb = FALSE;
 		end
 	
 	endcase

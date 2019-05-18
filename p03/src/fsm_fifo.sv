@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: fsm_fifo.sv
 
-* Description: FSM to FIFO  
+* Description: FSM to FIFO
 
-* Inputs: 
+* Inputs: clk, rst, pop, push, full, empty,
 
-* Outputs: 
+* Outputs: wr_en, rd_en
 
 * Version: 1.0
 
@@ -21,14 +21,14 @@
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
+`ifndef FSM_FIFO_SV
+    `define FSM_FIFO_SV
 
 //================================================================================
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
-
-`ifndef FSM_FIFO_SV
-    `define FSM_FIFO_SV
+import global_pkg::*;
 
 module fsm_fifo(
 	/** Input ports **/
@@ -38,12 +38,14 @@ module fsm_fifo(
 	input push,
 	input full,
 	input empty,
-	
+
+	/** Input ports **/
 	output logic wr_en,
 	output logic rd_en
-	
+
 );
 
+// Fue decidido no implementar esta seccion por diseño
 //STATE_FIFO_e state;
 //
 //always_ff@(posedge clk, negedge rst)
@@ -52,9 +54,9 @@ module fsm_fifo(
 //	if(~rst)
 //	begin
 //		/** Init FSM **/
-//		state <= IDLE;	
+//		state <= IDLE;
 //	end
-//	
+//
 //	else
 //	begin
 //		case(state)
@@ -67,56 +69,57 @@ module fsm_fifo(
 //				else
 //					state <= IDLE;
 //			end
-//			
+//
 //			PUSH :
-//			begin 
-//				state <= IDLE; 
+//			begin
+//				state <= IDLE;
 //			end
-//			
+//
 //			POP :
 //			begin
-//				state <= IDLE; 
+//				state <= IDLE;
 //			end
-//			
+//
 //			default : state <= IDLE;
 //		endcase
 //	end
-//		
+//
 //end:statemachine
 //
 //always_comb
 //begin
 //	case(state)
 //		IDLE:
-//		begin 
+//		begin
 //			rd_en = FALSE;
 //			wr_en = FALSE;
 //		end
-//		
+//
 //		POP :
 //		begin
 //			rd_en = TRUE;
 //			wr_en = FALSE;
 //
 //		end
-//		
+//
 //		PUSH :
 //		begin
 //			rd_en = FALSE;
 //			wr_en = TRUE;
 //		end
-//		
-//		default: 
+//
+//		default:
 //		begin
 //			rd_en = FALSE;
 //			wr_en = FALSE;
 //		end
-//	
+//
 //	endcase
 //end
+
+/* Analisis de es estado de la memoria y su manera de escribir */
 always_comb
 begin
-
 		if(pop && ~empty)
 			rd_en = TRUE;
 		else
@@ -126,9 +129,5 @@ begin
 		else
 			wr_en = FALSE;
 end
-
-
-
-
 endmodule
 `endif

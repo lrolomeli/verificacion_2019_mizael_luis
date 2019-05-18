@@ -3,9 +3,9 @@
 
 * Description: FSM to description hardwere   
 
-* Inputs: 
+* Inputs: clk, rst, A, B, enable, retro,
 
-* Outputs: 
+* Outputs: out
 
 * Version: 1.0
 
@@ -13,15 +13,17 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef AND_START
+	`define AND_START
+	
 //================================================================================
 // Import the Packages
 //================================================================================
@@ -38,12 +40,14 @@ module processor
 	input enable,
 	input retro,
 	
+	/** Output ports **/	
 	output data_t out
 	
 );
 
 data_t product;
 
+//MULTIPLICACION DEL PRODUCTO
 assign product = A * B;
 
 always_ff@(posedge clk, negedge rst)
@@ -51,22 +55,23 @@ begin
 
 	if(~rst)
 	begin
-		out <= '0;
+		out <= FALSE; //limpiamos la salida 
 	end
 	
 	else if(enable)
 	begin
-		out <= product + out;
+		out <= product + out; //si esta saca el producto y lo suma con lo anterior 
 	end
 	else if(retro)
 	begin
-		out <= '0;
+		out <= FALSE; //saca un cero 
 	end
 	else
 	begin 
-		out <= out;
+		out <= out; //mantiene el valor 
 	end
 
 end
 
 endmodule
+`endif

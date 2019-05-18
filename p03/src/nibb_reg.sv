@@ -1,7 +1,7 @@
 /*********************************************************************************
 * Module Name: nibb_reg.sv
 
-* Description: The module is a register, he save a nibble data   
+* Description: The module is a register, he save a nibble data
 
 * Inputs: clk, rst, enb, in
 
@@ -27,6 +27,7 @@
 //================================================================================
 import uart_pkg::*;
 import global_pkg::*;
+
 `ifndef NIBB_REG
 	`define NIBB_REG
 module nibb_reg
@@ -36,16 +37,17 @@ module nibb_reg
 	input rst,
 	input enb,
 	input nibble_t in,
-	
+
 	/** output ports **/
 	output nibble_t out
 );
 
 always_ff@(posedge clk, negedge rst) begin : rgstr
 	if(~rst)
-		/**/
-		out <= '0;
+		/* se limpia el registro*/
+		out <= FALSE;
 	else if(enb)
+		/* El registro es igual a la salida */
 		out <= in;
 end : rgstr
 

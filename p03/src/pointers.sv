@@ -1,7 +1,7 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: pointers.sv
 
-* Description: FSM to description hardwere   
+* Description: Este modulo sirve para tener las direcciones en las fifos  
 
 * Inputs: 
 
@@ -13,22 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
+`ifndef POINTERS
+    `define POINTERS
 
 //================================================================================
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
 import global_pkg::*;
-`ifndef POINTERS
-    `define POINTERS
+
 
 module pointers
 (
@@ -40,19 +41,19 @@ module pointers
 	input nibble_t N,
 	input clr,
 	
+	/** Input ports **/
 	output counter_t count_push,	
 	output counter_t count_pop,
 	output logic ready
-//	output logic empty,
-//	output logic full
+
 );
 
 
 always_ff@(posedge clk, negedge rst)
 begin: counter
 	if(~rst) begin
-		count_pop <= '0;
-		count_push <= '0;
+		count_pop <= FALSE;
+		count_push <= FALSE;
 	end
 	
 	else begin
@@ -64,16 +65,16 @@ begin: counter
 			count_push++;
 			
 		if(clr)
-			count_pop<='0;
+			count_pop <= FALSE;
 
 	end
 end:counter
 
 always_comb begin
 	if(count_push==N)
-		ready = 1'b1;
+		ready = TRUE;
 	else
-		ready = 1'b0;
+		ready = FALSE;
 
 end
 

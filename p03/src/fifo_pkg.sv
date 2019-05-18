@@ -27,13 +27,10 @@ package fifo_pkg ;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Parameters
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
 
-   parameter  W_ADDR      = 8;			// ancho de la direcciones
-   //parameter  W_DEPTH     = 2**W_ADDR;	// localidades de memoria[0 : W_DEPTH - 1]
+    parameter  W_ADDR      = 8;			// ancho de la direcciones
+    //parameter  W_DEPTH     = 2**W_ADDR;	// localidades de memoria[0 : W_DEPTH - 1]
 	//parameter  W_DEPTH     = N*N;	// localidades de memoria[0 : W_DEPTH - 1]
-	parameter  TRUE = 1'b1;
-	parameter  FALSE = 1'b0;
 	parameter  VECTOR_SIZE = 8;
 	parameter  MATRIX_SIZE = 64;
 	parameter  COUNT_N 	  = $clog2(VECTOR_SIZE);
@@ -42,12 +39,12 @@ package fifo_pkg ;
 // Type defs
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    typedef logic [W_ADDR-1:0]        				addr_t;
+     typedef logic [W_ADDR-1:0]        				addr_t;
 	 typedef logic [COUNT_N-1:0]       				address_t;
 	 typedef logic [COUNT_N:0]       				counter_t;
 	 typedef logic [COUNT_N_N-1:0]       			M_address_t;
 	 typedef logic [COUNT_N_N:0]       				M_counter_t;
-	 
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

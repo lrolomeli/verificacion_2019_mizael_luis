@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: counter.sv
 
-* Description: FSM to description hardwere   
+* Description: Es un contador
 
-* Inputs: 
+* Inputs: clk, rst, enable, count,
 
-* Outputs: 
+* Outputs: ovf
 
 * Version: 1.0
 
@@ -13,21 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  14/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
+`ifndef COUNTER
+	`define COUNTER
 
 //================================================================================
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
-`ifndef COUNTER
-	`define COUNTER
+import global_pkg::*;
+
 module counter
 (
 	/** Input ports **/
@@ -35,31 +37,32 @@ module counter
 	input rst,
 	input enable,
 	input timer_t count,
-	
+
+	/** Output ports **/
 	output logic ovf
 );
 
-timer_t count_r;
+timer_t count_r; //variable para contar
 
 always_ff@(posedge clk, negedge rst)begin: counter
 	if(!rst)
-		count_r <= '0;
+		count_r <= FALSE;
 	else if (enable)
 	begin
 		if(ovf)
-			count_r <= '0;
+			count_r <= FALSE; //reiniciamos el contador
 		else
-			count_r++;
+			count_r++; //continuamos el conteo
 	end
 	else
-		count_r <= '0;
+		count_r <= FALSE; //reiniciamos el contador
 end:counter
 
 always_comb begin: comparator
-	if(count_r == count-1'b1)
-		ovf = 1'b1;    
+	if(count_r == count-1)
+		ovf = TRUE; //encendemos la bandera de overflow
    else
-      ovf = 1'b0;
+	ovf = FALSE; //apagamos la bandera de overflow
 end
 
 

@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: pointers_M.sv
 
-* Description: FSM to description hardwere   
+* Description: este modulo sirve tener las direcciones de la fifo de la matruz, y de la misma manera ver si esta llena o vacia 
 
-* Inputs: 
+* Inputs: clk, rst, push, pop, N,
 
-* Outputs: 
+* Outputs: count_push, count_pop, empty, full, ready
 
 * Version: 1.0
 
@@ -13,22 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
+`ifndef POINTERS_M
+    `define POINTERS_M
 
 //================================================================================
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
 import global_pkg::*;
-`ifndef POINTERS_M
-    `define POINTERS_M
+
 
 module pointers_M
 (
@@ -69,16 +70,19 @@ end:counter
 
 always_comb
 begin: FULL_EMPTY 
+	//comparacion de indices para ver si esta vacia 
 	if(count_push == count_pop)
 		empty = TRUE;
 	else
 		empty = FALSE;
 	
+	//comparacion de indices para ver si esta llena 
 	if(((count_push[COUNT_N_N-1:0] == count_pop[COUNT_N_N-1:0]) ) && (count_push[COUNT_N_N] != count_pop[COUNT_N_N]))
 		full = TRUE;
 	else
 		full = FALSE;
 	
+	//comparacion de indices para ver si ya se pueden realizar operaciones
 	if(count_push)
 		ready = (count_push == count_N) ? 1'b1 : 1'b0;
 	else

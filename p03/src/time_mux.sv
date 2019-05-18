@@ -1,7 +1,7 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: time_mux.sv
 
-* Description: FSM to description hardwere   
+* Description:    
 
 * Inputs: 
 
@@ -22,13 +22,14 @@
 * Tool versions: Quartus Prime
 *********************************************************************************/
 
+`ifndef TIME_MUX
+	`define TIME_MUX
+	
 //================================================================================
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
 
-`ifndef TIME_MUX
-	`define TIME_MUX
 	
 module time_mux
 (

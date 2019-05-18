@@ -29,6 +29,8 @@ package global_pkg ;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    parameter  W_DATA      = 8;			// ancho de los datos
 	parameter NIBBLE = 4;
+	parameter TRUE = 1'b1;
+	parameter FALSE = 1'b0;
 	parameter PAYLOAD66 = 7;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Type defs

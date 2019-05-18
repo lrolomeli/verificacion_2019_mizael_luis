@@ -1,7 +1,34 @@
-import uart_pkg::*;
-import global_pkg::*;
+/*********************************************************************************
+* Module Name: rx_fsm.sv
+
+* Description: uart rx   
+
+* Inputs: 
+
+* Outputs: 
+
+* Version: 1.0
+
+* Company: ITESO
+
+* Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
+
+* Create Date:  15/05/2019
+
+* Project Name: P03
+
+* Target Devices: FPGA ALTERA DE2-115
+
+* Tool versions: Quartus Prime
+*********************************************************************************/
 `ifndef RX_TOP
 	`define RX_TOP
+//================================================================================
+// Import the Packages
+//================================================================================
+import uart_pkg::*;
+import global_pkg::*;
+
 module rx_top
 (
 	input clk,

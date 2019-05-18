@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: tx_mux.sv
 
-* Description: FSM to description hardwere   
+* Description: multiplexos de datos  
 
-* Inputs: 
+* Inputs: sel, data, parity,
 
-* Outputs: 
+* Outputs: tx_out
 
 * Version: 1.0
 
@@ -15,19 +15,20 @@
 
 * Create Date:  09/04/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
+`ifndef TX_MUX
+	`define TX_MUX
 
 //================================================================================
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
-`ifndef TX_MUX
-	`define TX_MUX
+import global_pkg::*;
 
 module tx_mux
 (
@@ -36,15 +37,16 @@ module tx_mux
 	input data,
 	input	parity,
 	
+	/** Output ports **/
 	output logic tx_out
 );
 
 always_comb begin : mux_tx
 	
 	case(sel)
-	
-	2'b00 : tx_out = 1'b1;
-	2'b01 : tx_out = 1'b0;
+	//dependien del del selector se deja salir una bandera 
+	2'b00 : tx_out = TRUE;
+	2'b01 : tx_out = FALSE;
 	2'b10 : tx_out = data;
 	2'b11 : tx_out = parity;
 	

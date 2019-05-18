@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: fifo_vector.sv
 
-* Description: FSM to description hardwere   
+* Description: es la fifo que conserva los valores del vector  
 
-* Inputs: 
-
-* Outputs: 
+* Inputs: clk, rst, pop, push, data_in, N, clr
+ 
+* Outputs: ready, data_out
 
 * Version: 1.0
 
@@ -15,7 +15,7 @@
 
 * Create Date:  09/04/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
@@ -37,8 +37,8 @@ module fifo_vector
 	input data_t data_in,
 	input nibble_t N,
 	input clr,
-//	output full,
-//	output empty,
+
+	/** Output ports **/
 	output data_t data_out,
 	output ready
 	

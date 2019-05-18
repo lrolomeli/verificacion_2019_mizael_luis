@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: fsm_processor.sv
 
-* Description: FSM to description hardwere   
+* Description: LA MAQUINA DE ESTADOS PARA EL PROCESADOR DE OPERACIONES  
 
-* Inputs: 
+* Inputs: clk, rst, start, nibble_t N,
 
-* Outputs: 
+* Outputs: p_retro, p_enable, pop_result, transmit, pop, push, clr
 
 * Version: 1.0
 
@@ -13,20 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef FSM_PROCESSOR
+	`define FSM_PROCESSOR
+	
 //================================================================================
 // Import the Packages
 //================================================================================
 import processor_pkg::*;
 import global_pkg::*;
+
 module fsm_processor
 (
 	/** Input ports **/
@@ -122,102 +125,102 @@ begin
 		case(state)
 			NP :
 			begin
-				enb = 1'b0;
-				clrcnt = 1'b1;
-				clrchain = 1'b1;
-				push = 1'b0;
-				pop = 1'b0;
-				p_enable = 1'b0;
-				p_retro = 1'b0;
-				pop_result = 1'b0;
-				transmit = 1'b0;
-				clr = 1'b0;
+				enb = FALSE;
+				clrcnt = TRUE;
+				clrchain = TRUE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = FALSE;
 			end
 			
 			LOAD :
 			begin
-				enb = 1'b1;
-				clrcnt = 1'b0;
-				clrchain = 1'b0;
-				push = 1'b0;
-				pop = 1'b1;
-				p_enable = 1'b0;
-				p_retro = 1'b0;
-				pop_result = 1'b0;
-				transmit = 1'b0;
-				clr = 1'b0;
+				enb = TRUE;
+				clrcnt = FALSE;
+				clrchain = FALSE;
+				push = FALSE;
+				pop = TRUE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = FALSE;
 			end
 		
 			OP :
 			begin 
-				enb = 1'b0;
-				clrcnt = 1'b0;
-				clrchain = 1'b0;
-				push = 1'b0;
-				pop = 1'b0;
-				p_enable = 1'b1;
-				p_retro = 1'b0;
-				pop_result = 1'b0;
-				transmit = 1'b0;
-				clr = 1'b0;
+				enb = FALSE;
+				clrcnt = FALSE;
+				clrchain = FALSE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = TRUE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = FALSE;
 			end
 			
 			RESULT :
 			begin
-				enb = 1'b0;
-				clrcnt = 1'b1;
-				clrchain = 1'b0;
-				push = 1'b1;
-				pop = 1'b0;
-				p_enable = 1'b0;
-				p_retro = 1'b1;
-				pop_result = 1'b0;
-				transmit = 1'b0;
-				clr = 1'b1;
+				enb = FALSE;
+				clrcnt = TRUE;
+				clrchain = FALSE;
+				push = TRUE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = TRUE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = TRUE;
 				
 			end
 			
 			POP_RES :
 			begin
-				enb = 1'b1;
-				clrcnt = 1'b0;
-				clrchain = 1'b1;
-				push = 1'b0;
-				pop = 1'b0;
-				p_enable = 1'b0;
-				p_retro = 1'b0;
-				pop_result = 1'b1;
-				transmit = 1'b0;
-				clr = 1'b0;
+				enb = TRUE;
+				clrcnt = FALSE;
+				clrchain = TRUE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = TRUE;
+				transmit = FALSE;
+				clr = FALSE;
 			end
 			
 			TRANSMIT :
 			begin
-				enb = 1'b0;
-				clrcnt = 1'b0;
-				clrchain = 1'b1;
-				push = 1'b0;
-				pop = 1'b0;
-				p_enable = 1'b0;
-				p_retro = 1'b0;
-				pop_result = 1'b0;
-				transmit = 1'b1;
-				clr = 1'b0;
+				enb = FALSE;
+				clrcnt = FALSE;
+				clrchain = TRUE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = TRUE;
+				clr = FALSE;
 			end
 			
 			
 			default:
 			begin
-				enb = 1'b0;
-				clrcnt = 1'b0;
-				clrchain = 1'b0;
-				push = 1'b0;
-				pop = 1'b0;
-				p_enable = 1'b0;
-				p_retro = 1'b0;
-				pop_result = 1'b0;
-				transmit = 1'b0;
-				clr = 1'b0;
+				enb = FALSE;
+				clrcnt = FALSE;
+				clrchain = FALSE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = FALSE;
 			end
 			
 		endcase
@@ -226,13 +229,13 @@ end
 always_ff@(posedge clk, negedge rst) begin : counterN
 
 	if(~rst)
-		cnt <= '0;
+		cnt <= FALSE;
 		
 	else if(enb)
 		cnt++;
 		
 	else if(clrcnt)
-		cnt <= '0;
+		cnt <= FALSE;
 
 end : counterN
 
@@ -240,9 +243,9 @@ always_comb
 begin
 
 if(cnt==N)
-	ovf = 1'b1;
+	ovf = TRUE;
 else
-	ovf = 1'b0;
+	ovf = FALSE;
 
 	
 end
@@ -251,13 +254,13 @@ end
 always_ff@(posedge clk, negedge rst) begin : chaincounterN
 
 	if(~rst)
-		chain_cnt <= '0;
+		chain_cnt <= FALSE;
 		
 	else if(enb & ovf)
 		chain_cnt++;
 		
 	else if(clrchain)
-		chain_cnt <= '0;
+		chain_cnt <= FALSE;
 	
 
 end : chaincounterN
@@ -266,11 +269,12 @@ always_comb
 begin
 
 if(chain_cnt == N)
-	chain_ovf = 1'b1;
+	chain_ovf = TRUE;
 else
-	chain_ovf = 1'b0;
+	chain_ovf = FALSE;
 	
 end
 
 
 endmodule
+`endif

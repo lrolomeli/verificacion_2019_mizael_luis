@@ -167,50 +167,50 @@ always_comb begin
 	
 	case(status)
 		IDLECMD : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
+		push_A = FALSE;
+		push_B = FALSE;
+		enable_n = FALSE;
+		clear = FALSE;
 		end
 		
 		RCMD1 : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b1;
-		clear = 1'b0;
+		push_A = FALSE;
+		push_B = FALSE;
+		enable_n = TRUE;
+		clear = FALSE;
 
 		end
 		
 		RCMD2 : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
+		push_A = FALSE;
+		push_B = FALSE;
+		enable_n = FALSE;
+		clear = FALSE;
 
 		end
 
 		RCMD4 : begin
 		//habilitar push
-		push_A = 1'b1;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
+		push_A = TRUE;
+		push_B = FALSE;
+		enable_n = FALSE;
+		clear = FALSE;
 
 		end
 		
 		RCMD5 : begin
-		push_A = 1'b0;
-		push_B = 1'b1;
-		enable_n = 1'b0;
-		clear = 1'b0;
+		push_A = FALSE;
+		push_B = TRUE;
+		enable_n = FALSE;
+		clear = FALSE;
 
 		end
 		
 		default: begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
+		push_A = FALSE;
+		push_B = FALSE;
+		enable_n = FALSE;
+		clear = FALSE;
 
 		end
 			

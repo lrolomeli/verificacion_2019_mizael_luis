@@ -1,7 +1,7 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: ram_vector.sv
 
-* Description: FSM to FIFO  
+* Description: memoria ram del vector  
 
 * Inputs: 
 
@@ -21,14 +21,15 @@
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef RAM_VECTOR
+    `define RAM_VECTOR
+	 
 //================================================================================
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
 import global_pkg::*;
-`ifndef RAM_VECTOR
-    `define RAM_VECTOR
+
 
 module ram_vector(
 	/** Input ports **/

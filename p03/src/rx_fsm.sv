@@ -1,11 +1,11 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: rx_fsm.sv
 
-* Description: FSM to description hardwere   
+* Description: fsm de la uart rx   
 
-* Inputs: clk, rst, start, enable,
+* Inputs: 
 
-* Outputs: l_s, done
+* Outputs: 
 
 * Version: 1.0
 
@@ -13,21 +13,23 @@
 
 * Engineers: Luis Roberto Lomeli Plascencia, Jorge Mizael Rodriguez Gutierrez
 
-* Create Date:  09/04/2019
+* Create Date:  15/05/2019
 
-* Project Name: P01
+* Project Name: P03
 
 * Target Devices: FPGA ALTERA DE2-115
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef RX_FSM
+	`define RX_FSM
+	
 //================================================================================
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
-`ifndef RX_FSM
-	`define RX_FSM
+import global_pkg::*;
+
 module rx_fsm
 (
 	/** Input ports **/
@@ -156,119 +158,119 @@ begin
 	case(state)
 		IDLE :
 		begin
-			time_sel = 1'b0;
-			enb_count = 1'b0;
-			enb_sipo = 1'b0;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = FALSE;
+			enb_count = FALSE;
+			enb_sipo = FALSE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		START :
 		begin
-			time_sel = 1'b0;
-			enb_count = 1'b1;
-			enb_sipo = 1'b0;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = FALSE;
+			enb_count = TRUE;
+			enb_sipo = FALSE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT1 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT2 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT3 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT4 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT5 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT6 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT7 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		BIT8 :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b1;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = TRUE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 		
 		PARITY :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b0;
-			enb_parity = 1'b1;
-			rx_interrupt = 1'b0;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = FALSE;
+			enb_parity = TRUE;
+			rx_interrupt = FALSE;
 		end
 		
 		STOP :	
 		begin
-			time_sel = 1'b1;
-			enb_count = 1'b1;
-			enb_sipo = 1'b0;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b1;
+			time_sel = TRUE;
+			enb_count = TRUE;
+			enb_sipo = FALSE;
+			enb_parity = FALSE;
+			rx_interrupt = TRUE;
 		end
 		
 		default: 
 		begin
-			time_sel = 1'b0;
-			enb_count = 1'b0;
-			enb_sipo = 1'b0;
-			enb_parity = 1'b0;
-			rx_interrupt = 1'b0;
+			time_sel = FALSE;
+			enb_count = FALSE;
+			enb_sipo = FALSE;
+			enb_parity = FALSE;
+			rx_interrupt = FALSE;
 		end
 	
 	endcase

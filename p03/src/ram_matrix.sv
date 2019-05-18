@@ -1,7 +1,7 @@
 /*********************************************************************************
-* Module Name: FSM.sv
+* Module Name: ram_matrix.sv
 
-* Description: FSM to FIFO  
+* Description: memoria ram de la matriz  
 
 * Inputs: 
 
@@ -21,14 +21,14 @@
 
 * Tool versions: Quartus Prime
 *********************************************************************************/
-
+`ifndef RAM_MATRIX
+    `define RAM_MATRIX
+	 
 //================================================================================
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
 import global_pkg::*;
-`ifndef RAM_MATRIX
-    `define RAM_MATRIX
 
 module ram_matrix(
 	/** Input ports **/
