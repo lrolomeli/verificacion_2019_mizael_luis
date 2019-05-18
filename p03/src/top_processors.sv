@@ -35,18 +35,22 @@ module top_processors
 	output data_t result_uart_w
 );
 
+data_t A_w;
+data_t B_w;
+data_t out_w;
+
 logic pop_done_w;
 logic pop_w;
 logic uart_push_w;
 logic push_result_w;
 logic pop_result_w;
 
-logic start;
+logic start_w;
 logic matrix_ready;
 logic vector_ready;
 
-
-processors_if proc1_itf();
+logic p_enable_w;
+logic p_retro_w;
 
 
 fifo_matrix matrix(
@@ -59,7 +63,7 @@ fifo_matrix matrix(
 	.data_in(uart),
 	.ready(matrix_ready),
 
-	.data_out(proc1_itf.data.A)
+	.data_out(A_w)
 );
 
 
@@ -71,18 +75,17 @@ fifo_vector vector(
 	.N(N),
 	.ready(vector_ready),
 
-	.data_out(proc1_itf.data.B)
+	.data_out(B_w)
 );
 
-and_start and_start_inst
+logic_and logic_and_inst
 (
 	/** Input ports **/
 	.*,
 	.a(vector_ready),
 	.b(matrix_ready),
-	.clr(clear),
 	
-	.start(start)
+	.out(start_w)
 );
 
 
@@ -91,7 +94,7 @@ fifo_vector fifo_result
 	.*,
 	.pop(pop_result_w),
 	.push(push_result_w),
-	.data_in(proc1_itf.data.out),
+	.data_in(out_w),
 	.N(N),
 	.ready(ready),
 	
@@ -101,18 +104,25 @@ fifo_vector fifo_result
 processor processor1_inst
 (
 	.*,
-	.p(proc1_itf)
+	.A(A_w),
+	.B(B_w),
+	.enable(p_enable_w),
+	.retro(p_retro_w),
+	
+	.out(out_w)
 );
 
 
 fsm_processor fsm_p_inst
 (
 	.*,
-	.start(start),
+	.start(start_w),
 	.N(N),
+	.p_retro(p_retro_w),
+	.p_enable(p_enable_w),
+	
 	.pop(pop_w),
 	.push(push_result_w),
-	.p(proc1_itf),
 	.pop_result(pop_result_w),
 	.transmit(transmit)
 );

@@ -27,7 +27,6 @@
 //================================================================================
 import processor_pkg::*;
 import global_pkg::*;
-
 module fsm_processor
 (
 	/** Input ports **/
@@ -36,22 +35,25 @@ module fsm_processor
 	input start,
 	input nibble_t N,
 	
+	output logic p_retro,
+	output logic p_enable,
 	output logic pop_result,
 	output logic transmit,
 	output logic pop,
-	output logic push,
-	processors_if.ctrl p
+	output logic push
 	
 );
 
 STATE_e state;
 
-Ncounter_t count_N;	//rows
-Ncounter_t count_N_N;	//columns
-Ncounter_t count_res;
+Ncounter_t cnt;	//rows
+Ncounter_t chain_cnt;	//columns
 
-logic add;
-logic add_cnt;
+logic ovf;
+logic chain_ovf;
+logic enb;
+logic clrcnt;
+logic clrchain;
 
 always_ff@(posedge clk, negedge rst)
 begin:statemachine
@@ -80,7 +82,7 @@ begin:statemachine
 			
 			OP :
 			begin 
-				if(count_N == N-1)
+				if(ovf)
 					state <= RESULT;
 				else
 					state <= LOAD;
@@ -89,14 +91,14 @@ begin:statemachine
 			
 			RESULT :
 			begin 
-				if(count_N_N == N-1)
+				if(chain_ovf)
 					state <= TRANSMIT;
 				else
 					state <= LOAD;
 			end
 			TRANSMIT : 
 			begin
-				if(count_N == N)
+				if(ovf)
 					state <= NP;
 				else
 					state <= POP_RES;
@@ -119,132 +121,148 @@ begin
 		case(state)
 			NP :
 			begin
-				add = 1'b0;
-				pop = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
+				enb = 1'b0;
+				clrcnt = 1'b1;
+				clrchain = 1'b1;
 				push = 1'b0;
+				pop = 1'b0;
+				p_enable = 1'b0;
+				p_retro = 1'b0;
 				pop_result = 1'b0;
-				add_cnt = 1'b0;
 				transmit = 1'b0;
 			end
 			
 			LOAD :
 			begin
-				add = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
+				enb = 1'b1;
+				clrcnt = 1'b0;
+				clrchain = 1'b0;
 				push = 1'b0;
 				pop = 1'b1;
+				p_enable = 1'b0;
+				p_retro = 1'b0;
 				pop_result = 1'b0;
-				add_cnt = 1'b0;
 				transmit = 1'b0;
 			end
 		
 			OP :
 			begin 
-				add = 1'b1;
-				pop = 1'b0;
+				enb = 1'b0;
+				clrcnt = 1'b0;
+				clrchain = 1'b0;
 				push = 1'b0;
-				p.enable = 1'b1;
+				pop = 1'b0;
+				p_enable = 1'b1;
+				p_retro = 1'b0;
 				pop_result = 1'b0;
-				add_cnt = 1'b0;
 				transmit = 1'b0;
-				if(count_N)
-				begin
-					p.retro = 1'b1;
-				end
-				else 
-				begin 
-					p.retro = 1'b0;
-				end 
 			end
 			
 			RESULT :
 			begin
-				add = 1'b0;
-				pop = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
-				pop_result = 1'b1;
-				add_cnt = 1'b1;
-				transmit = 1'b0;
+				enb = 1'b0;
+				clrcnt = 1'b1;
+				clrchain = 1'b0;
 				push = 1'b1;
+				pop = 1'b0;
+				p_enable = 1'b0;
+				p_retro = 1'b1;
+				pop_result = 1'b0;
+				transmit = 1'b0;
+				
 			end
 			
 			POP_RES :
 			begin
-				add = 1'b0;
+				enb = 1'b1;
+				clrcnt = 1'b0;
+				clrchain = 1'b1;
+				push = 1'b0;
 				pop = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
+				p_enable = 1'b0;
+				p_retro = 1'b0;
 				pop_result = 1'b1;
-				add_cnt = 1'b1;
 				transmit = 1'b0;
-				push = 1'b1;
 			end
 			
 			TRANSMIT :
 			begin
-				add = 1'b0;
+				enb = 1'b0;
+				clrcnt = 1'b0;
+				clrchain = 1'b1;
+				push = 1'b0;
 				pop = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
-				push = 1'b1;
+				p_enable = 1'b0;
+				p_retro = 1'b0;
 				pop_result = 1'b0;
-				add_cnt = 1'b0;
 				transmit = 1'b1;
 			end
 			
 			
 			default:
 			begin
-				add = 1'b0;
-				pop = 1'b0;
-				p.enable = 1'b0;
-				p.retro = 1'b0;
+				enb = 1'b0;
+				clrcnt = 1'b0;
+				clrchain = 1'b0;
 				push = 1'b0;
+				pop = 1'b0;
+				p_enable = 1'b0;
+				p_retro = 1'b0;
 				pop_result = 1'b0;
-				add_cnt = 1'b0;
 				transmit = 1'b0;
 			end
 			
 		endcase
 end
 
-always_ff@(posedge clk, negedge rst)
-begin:counters
+always_ff@(posedge clk, negedge rst) begin : counterN
+
 	if(~rst)
-	begin
-		count_N<='0;
-		count_N_N<='0;
-		count_res<='0;
-	end
-	
-	else
-	begin
-		if(add)
-			count_N++;
-			
-		if(add_cnt)
-			count_res++;
+		cnt <= '0;
 		
-		if(count_res == N)
-			count_res <= '0;
-
-		if(count_N == N)	begin
-			count_N_N++;
-			count_N <= '0;
-		end
+	else if(enb)
+		cnt++;
 		
-		if(count_N_N == N)
-			count_N_N <= '0;
-			
+	else if(clrcnt)
+		cnt <= '0;
 
-			
-	end
+end : counterN
+
+always_comb
+begin
+
+if(cnt==N)
+	ovf = 1'b1;
+else
+	ovf = 1'b0;
+
 	
-end:counters
+end
+
+
+always_ff@(posedge clk, negedge rst) begin : chaincounterN
+
+	if(~rst)
+		chain_cnt <= '0;
+		
+	else if(enb & ovf)
+		chain_cnt++;
+		
+	else if(clrchain)
+		chain_cnt <= '0;
+	
+
+end : chaincounterN
+
+always_comb
+begin
+
+if(chain_cnt == N)
+	chain_ovf = 1'b1;
+else
+	chain_ovf = 1'b0;
+	
+end
 
 
 endmodule

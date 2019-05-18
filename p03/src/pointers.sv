@@ -26,7 +26,6 @@
 // Import the Packages
 //================================================================================
 import fifo_pkg::*;
-import processor_pkg::*;
 import global_pkg::*;
 `ifndef POINTERS
     `define POINTERS
@@ -62,17 +61,14 @@ begin: counter
 		if(push)
 			count_push <= (count_push==N) ? '0 : count_push + 1'b1;
 
-
 	end
 end:counter
 
-always_comb
-begin
-
-if(count_push==N)
-	ready <= 1'b1;
-else
-	ready <= 1'b0;
+always_comb begin
+	if(count_push==N)
+		ready = 1'b1;
+	else
+		ready = 1'b0;
 
 end
 

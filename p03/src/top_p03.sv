@@ -25,13 +25,13 @@ logic push_A_w;
 logic push_B_w;
 logic transmit_w;
 logic clear_w;
+logic clear_interrupt_w;
 
-top_cmd top_cmd_inst
-(
+top_cmd top_cmd_inst (
 	.*,
 	.transmit(transmit_w),
 	.tx_data(result_w),
-	
+
 	.rcvd_data(data_w),
 	.push_A(push_A_w),
 	.push_B(push_B_w),

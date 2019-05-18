@@ -32,35 +32,39 @@ module processor
 (
 	/** Input ports **/
 	input clk,
-	input rst,	
-	processors_if.proc p
+	input rst,
+	input data_t A,
+	input data_t B,
+	input enable,
+	input retro,
+	
+	output data_t out
 	
 );
 
-data_t result;
 data_t product;
 
-assign product = p.A*p.B;
-assign result = (p.retro) ? (product + p.out) : product;
+assign product = A * B;
 
 always_ff@(posedge clk, negedge rst)
 begin
 
 	if(~rst)
 	begin
-		p.done <= '0;
-		p.out <= '0;
+		out <= '0;
 	end
 	
-	else if(p.enable)
+	else if(enable)
 	begin
-		p.out <= result;
-		p.done <= 1'b1;
+		out <= product + out;
+	end
+	else if(retro)
+	begin
+		out <= '0;
 	end
 	else
 	begin 
-		p.out <= p.out;
-		p.done <= 1'b0;
+		out <= out;
 	end
 
 end

@@ -26,7 +26,6 @@
 // Import the Packages
 //================================================================================
 import uart_pkg::*;
-import processor_pkg::*;
 import global_pkg::*;
 `ifndef CMD_FSM
 	`define CMD_FSM
@@ -46,107 +45,117 @@ module cmd_fsm
 	
 );
 
-CMD_STATE_e state;
 CMD_STATUS_e status;
+
 
 always_ff@(posedge clk, negedge rst)
 begin
 
 	if(~rst) begin
-		state <= WAIT4BYTE;
 		status <= IDLECMD;
 	end
 	
 	else begin
-		case(state)
-			
-			WAIT4BYTE : begin
-				if(rx_interrupt)
-					state <= CHECKSTATUS;
+
+		case(status)
+		
+			IDLECMD : begin
+				if((rx_interrupt) && (uart_data == START_CMD))
+					status <= LENGTH;
 				else
-					state <= WAIT4BYTE;
+					status <= IDLECMD;
 			end
 			
-			CHECKSTATUS : begin : STATE_CHECK_STATUS
-				
-				case(status)
-				
-					IDLECMD : begin
-						if(uart_data == START_CMD)
-							status <= LENGTH;
-						else
-							status <= IDLECMD;
-						state <= WAIT4BYTE;
-					end
-					
-					LENGTH : begin
-						status <= COMMAND;
-						state <= WAIT4BYTE;
-					end
-					
-					COMMAND : begin
-						case(uart_data)
-							CMD1 : status <= RCMD1;
-							CMD2 : status <= RCMD2;
-							CMD3 : status <= RCMD3;
-							CMD4 : status <= RCMD4;
-							CMD5 : status <= RCMD5;
-							default : status <= IDLECMD;
-						endcase
-						state <= WAIT4BYTE;
-					end
-					
-					RCMD1 : begin
-						if(uart_data == END_CMD)
-							status <= IDLECMD;
-						else
-							status <= RCMD1;
-						state <= WAIT4BYTE;
-					end
-					
-					RCMD2 : begin
-						if(uart_data == END_CMD)
-							status <= IDLECMD;
-						else
-							status <= RCMD2;
-						state <= WAIT4BYTE;
-					end
-					
-					RCMD3 : begin
-						if(uart_data == END_CMD)
-							status <= IDLECMD;
-						else
-							status <= RCMD3;
-						state <= WAIT4BYTE;
-					end
-					
-					RCMD4 : begin
-						if(uart_data == END_CMD)
-							status <= IDLECMD;
-						else
-							status <= RCMD4;
-						state <= WAIT4BYTE;
-					end
-					
-					RCMD5 : begin
-						if(uart_data == END_CMD)
-							status <= IDLECMD;
-						else
-							status <= RCMD5;
-						state <= WAIT4BYTE;
-					end
-					
-					default : begin
-						status <= IDLECMD;
-						state <= WAIT4BYTE;
-					end
-				
+			LENGTH : begin
+				if(rx_interrupt)
+				status <= COMMAND;
+				else 
+				status <= LENGTH;
+			end
+			
+			COMMAND : begin
+				if(rx_interrupt)
+				begin
+				case(uart_data)
+					CMD1 : status <= WAITCMD1;
+					CMD2 : status <= WAITCMD2;
+					CMD3 : status <= WAITCMD3;
+					CMD4 : status <= WAITCMD4;
+					CMD5 : status <= WAITCMD5;
+					default : status <= IDLECMD;
 				endcase
-				
-			end : STATE_CHECK_STATUS
-				
-			default : state <= WAIT4BYTE;
-
+				end
+				else
+				status <= COMMAND;
+			end
+			
+			RCMD1 : status <= WAITCMD1;
+			
+			WAITCMD1 : begin
+				if(rx_interrupt)
+				begin
+					if(uart_data == END_CMD)
+						status <= IDLECMD;
+					else
+						status <= RCMD1;
+				end
+			
+			end
+			
+			RCMD2 : status <= WAITCMD2;
+			
+			WAITCMD2 : begin
+				if(rx_interrupt)
+				begin
+					if(uart_data == END_CMD)
+						status <= IDLECMD;
+					else
+						status <= RCMD2;
+				end
+			
+			end
+			
+			RCMD3 : status <= WAITCMD3;
+			
+			WAITCMD3 : begin
+				if(rx_interrupt)
+				begin
+					if(uart_data == END_CMD)
+						status <= IDLECMD;
+					else
+						status <= RCMD3;
+				end
+			
+			end
+			
+			RCMD4 : status <= WAITCMD4;
+			
+			WAITCMD4 : begin
+				if(rx_interrupt)
+				begin
+					if(uart_data == END_CMD)
+						status <= IDLECMD;
+					else
+						status <= RCMD4;
+				end
+			
+			end
+			
+			RCMD5 : status <= WAITCMD5;
+			
+			WAITCMD5 : begin
+				if(rx_interrupt)
+				begin
+					if(uart_data == END_CMD)
+						status <= IDLECMD;
+					else
+						status <= RCMD5;
+				end
+			
+			end
+			
+			default : status <= IDLECMD;
+		
 		endcase
 	
 	end
@@ -155,46 +164,9 @@ end
 
 
 always_comb begin
-
-	case(state)
-		WAIT4BYTE : begin
-			clear_interrupt = 1'b0;
-			push_A = 1'b0;
-			push_B = 1'b0;
-			enable_n = 1'b0;
-			clear = 1'b0;
-		end
-		
-		CHECKSTATUS : begin
-			clear_interrupt = 1'b1;
-		end
-		
-		default : begin
-			clear_interrupt = 1'b0;
-			push_A = 1'b0;
-			push_B = 1'b0;
-			enable_n = 1'b0;
-			clear = 1'b0;
-		end
-		
-	endcase
-
+	
 	case(status)
 		IDLECMD : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
-		end
-		
-		LENGTH : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b0;
-		end
-		
-		COMMAND : begin
 		push_A = 1'b0;
 		push_B = 1'b0;
 		enable_n = 1'b0;
@@ -206,6 +178,7 @@ always_comb begin
 		push_B = 1'b0;
 		enable_n = 1'b1;
 		clear = 1'b0;
+
 		end
 		
 		RCMD2 : begin
@@ -213,21 +186,16 @@ always_comb begin
 		push_B = 1'b0;
 		enable_n = 1'b0;
 		clear = 1'b0;
+
 		end
-		
-		RCMD3 : begin
-		push_A = 1'b0;
-		push_B = 1'b0;
-		enable_n = 1'b0;
-		clear = 1'b1;
-		end
-		
+
 		RCMD4 : begin
 		//habilitar push
 		push_A = 1'b1;
 		push_B = 1'b0;
 		enable_n = 1'b0;
 		clear = 1'b0;
+
 		end
 		
 		RCMD5 : begin
@@ -235,6 +203,7 @@ always_comb begin
 		push_B = 1'b1;
 		enable_n = 1'b0;
 		clear = 1'b0;
+
 		end
 		
 		default: begin
@@ -242,11 +211,12 @@ always_comb begin
 		push_B = 1'b0;
 		enable_n = 1'b0;
 		clear = 1'b0;
-		end
-	
-	endcase
-end
 
+		end
+			
+	endcase
+			
+end
 
 
 endmodule

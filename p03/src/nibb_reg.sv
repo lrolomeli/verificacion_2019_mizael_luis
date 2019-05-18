@@ -27,7 +27,6 @@
 //================================================================================
 import uart_pkg::*;
 import global_pkg::*;
-
 `ifndef NIBB_REG
 	`define NIBB_REG
 module nibb_reg

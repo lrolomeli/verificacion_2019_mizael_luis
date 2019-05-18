@@ -16,19 +16,12 @@ module top_tb_p03;
 	logic ready;
 	logic full_A;
 	logic empty_A;
+	logic clear_interrupt;
 	
 
 top_p03_tb DUV
 (
-	.clk(clk),
-	.rst(rst),
-	.rx_interrupt(rx_interrupt),
-	.data(data),
-	
-	.tx(tx),
-	.ready(ready),
-	.full_A(full_A),
-	.empty_A(empty_A)
+	.*
 	
 );
 
@@ -50,43 +43,384 @@ end
 
 
 initial begin
-	# 0 rx_interrupt = 1'b0;
-	# 4 rx_interrupt = 1'b0;
+	# 0 data = '0;
+	// PROBAR EL COMANDO 1
+	# 40 data = 8'h FE;
 	
-	# 6 rx_interrupt = 1'b1;	
-	# 8 data = 8'h FE;
-	# 10 rx_interrupt = 1'b0;
+	# 40 data = 8'h 03;
 	
-	# 26 rx_interrupt = 1'b1;
-	# 28 data = 8'h 03;
-	# 30 rx_interrupt = 1'b0;
+	# 40 data = 8'h 01;
 	
-	# 46 rx_interrupt = 1'b1;
-	# 48 data = 8'h 01;
-	# 50 rx_interrupt = 1'b0;
-	
-	# 66 rx_interrupt = 1'b1;
-	# 68 data = 8'h 04;
-	# 70 rx_interrupt = 1'b0;
-	
-	# 106 rx_interrupt = 1'b1;	
-	# 108 data = 8'h EF;
-	# 110 rx_interrupt = 1'b0;
-	
-	
-	
-	
-	# 24 data = 8'h 03;
-	# 24 data = 8'h 03;
-	
-	# 6 rx_interrupt = 1'b1;
-	# 7 rx_interrupt = 1'b0;	
+	# 40 data = 8'h 04;
+		
+	# 40 data = 8'h EF;
 
-	# 7 data = 8'h EF;
-	# 9 rx_interrupt = 1'b1;
-	# 10 rx_interrupt = 1'b0;
+	// PROBAR EL COMANDO 2
+	# 40 data = 8'h FE;
+	
+	# 40 data = 8'h 02;
+	
+	# 40 data = 8'h 02;
+		
+	# 40 data = 8'h EF;
+	
+	// PROBAR EL COMANDO 3
+	# 40 data = 8'h FE;
+	
+	# 40 data = 8'h 02;
+	
+	# 40 data = 8'h 03;
+		
+	# 40 data = 8'h EF;
+	
+	// PROBAR EL COMANDO 4
+	# 40 data = 8'h FE;
+	
+	# 40 data = 8'h 03;
+	
+	# 40 data = 8'h 04;
+	
+	# 40 data = 8'h 01;
+	
+	# 40 data = 8'h 02;
+	
+	# 40 data = 8'h 03;
+	
+	# 40 data = 8'h 04;
+	
+	# 40 data = 8'h 05;
+	
+	# 40 data = 8'h 06;
+	
+	# 40 data = 8'h 07;
+	
+	# 40 data = 8'h 08;
+	
+	# 40 data = 8'h 09;
+	
+	# 40 data = 8'h 0A;
+	
+	# 40 data = 8'h 0B;
+	
+	# 40 data = 8'h 0C;
+	
+	# 40 data = 8'h 0D;
+	
+	# 40 data = 8'h 0E;
+	
+	# 40 data = 8'h 0F;
+	
+	# 40 data = 8'h 10;
+		
+	# 40 data = 8'h EF;
+	
+	// PROBAR EL COMANDO 5
+	# 40 data = 8'h FE;
+	
+	# 40 data = 8'h 03;
+	
+	# 40 data = 8'h 05;
+	
+	# 40 data = 8'h 11;
+	
+	# 40 data = 8'h 12;
+	
+	# 40 data = 8'h 13;
+	
+	# 40 data = 8'h 14;
+		
+	# 40 data = 8'h EF;
+		
+	$stop;
 end
 
+
+initial begin
+	# 0 rx_interrupt = 1'b0;
+	//comando 1
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+		# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8
+		# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	#8
+		# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8 
+	# 30 rx_interrupt = 1'b1;
+	# 2 rx_interrupt = 1'b0;
+	# 8	
+	$stop;
+	
+
+end
 
 
 

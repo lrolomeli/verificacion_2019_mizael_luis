@@ -56,8 +56,8 @@ package uart_pkg ;
 	//typedef enum logic [1:0] {WAIT, SYNC, STORE} STATE_RX_e;
 	typedef enum logic [3:0] {IDLE, START, BIT1, BIT2, BIT3, BIT4, BIT5, BIT6, BIT7, BIT8, PARITY, STOP} UART_STATE_e;
 	//typedef enum logic [3:0] {IDLE, LENGTH, RCMD1, RCMD2, RCMD3, RCMD4, RCMD5, PUSH4, PUSH5, EF1, EF2, EF3, EF4, EF5} CMD_STATE_e
-	typedef enum logic [2:0] {IDLECMD, LENGTH, COMMAND, RCMD1, RCMD2, RCMD3, RCMD4, RCMD5} CMD_STATUS_e;
-	typedef enum logic [1:0] {WAIT4BYTE, CHECKSTATUS} CMD_STATE_e;
+	typedef enum logic [3:0] {IDLECMD, LENGTH, COMMAND, RCMD1, WAITCMD1, RCMD2, WAITCMD2, RCMD3, WAITCMD3, RCMD4, WAITCMD4, RCMD5, WAITCMD5} CMD_STATUS_e;
+
 	
 endpackage
 `endif

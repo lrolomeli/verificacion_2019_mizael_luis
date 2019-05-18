@@ -46,6 +46,9 @@ module pointers_M
 	output logic ready
 );
 
+logic [5:0] count_N;
+
+assign count_N = N*N;
 
 always_ff@(posedge clk, negedge rst)
 begin: counter
@@ -76,8 +79,8 @@ begin: FULL_EMPTY
 	else
 		full = FALSE;
 	
-	if(count_push == N*N)
-		ready = 1'b1;
+	if(count_push)
+		ready = (count_push == count_N) ? 1'b1 : 1'b0;
 	else
 		ready = 1'b0;
 
