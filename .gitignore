@@ -1,0 +1,9 @@
+template/tb/transcript
+template/tb/vsim.wlf
+template/tb/work/
+**/tb/work/
+**/tb/vsim.wlf
+**/tb/transcript
+**/db/
+**/incremental_db/
+*.bak
