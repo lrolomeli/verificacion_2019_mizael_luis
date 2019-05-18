@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY top_p03
+set_global_assignment -name TOP_LEVEL_ENTITY top_p03_tb
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:40:53  MAY 13, 2019"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -49,44 +49,41 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name SYSTEMVERILOG_FILE processors_if.sv
-set_global_assignment -name SYSTEMVERILOG_FILE uart_pkg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE uart.sv
-set_global_assignment -name SYSTEMVERILOG_FILE tx_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE tx_mux.sv
-set_global_assignment -name SYSTEMVERILOG_FILE tx_fsm.sv
-set_global_assignment -name SYSTEMVERILOG_FILE top_processors.sv
-set_global_assignment -name SYSTEMVERILOG_FILE top_cmd.sv
-set_global_assignment -name SYSTEMVERILOG_FILE time_mux.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sipo.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rx_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rx_fsm.sv
-set_global_assignment -name SYSTEMVERILOG_FILE register.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ram_vector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ram_matrix.sv
-set_global_assignment -name SYSTEMVERILOG_FILE processor_pkg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE processor.sv
-set_global_assignment -name SYSTEMVERILOG_FILE pointers_M.sv
-set_global_assignment -name SYSTEMVERILOG_FILE pointers.sv
-set_global_assignment -name SYSTEMVERILOG_FILE piso_lsb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE logic_xor.sv
-set_global_assignment -name SYSTEMVERILOG_FILE logic_and.sv
-set_global_assignment -name SYSTEMVERILOG_FILE interrupt_rgstr.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fsm_processor.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fsm_fifo.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fifo_vector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fifo_pkg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fifo_matrix.sv
-set_global_assignment -name SYSTEMVERILOG_FILE counter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE cmd_fsm.sv
-set_global_assignment -name SYSTEMVERILOG_FILE clkdiv.sv
-set_global_assignment -name SYSTEMVERILOG_FILE and_start.sv
-set_global_assignment -name SYSTEMVERILOG_FILE top_p03.sv
-set_global_assignment -name SYSTEMVERILOG_FILE nibb_reg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE global_pkg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE top_p03_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fsm_processor_cambios.sv
-set_global_assignment -name SYSTEMVERILOG_FILE reconf_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/uart_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/uart.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/tx_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/tx_mux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/tx_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_processors.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_p03_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_p03.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_cmd.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/time_mux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/sipo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rx_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rx_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/register.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/ram_vector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/ram_matrix.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/processor_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/processor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/pointers_M.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/pointers.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/piso_lsb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/nibb_reg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/logic_xor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/logic_and.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/interrupt_rgstr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/global_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/fsm_processor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/fsm_fifo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/fifo_vector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/fifo_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/fifo_matrix.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/cmd_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/clkdiv.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/and_start.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
