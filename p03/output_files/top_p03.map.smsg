@@ -1,6 +1,0 @@
-Warning (10268): Verilog HDL information at pointers_M.sv(54): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/pointers_M.sv Line: 54
-Warning (10268): Verilog HDL information at pointers.sv(52): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/pointers.sv Line: 52
-Warning (10268): Verilog HDL information at fsm_processor.sv(254): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/fsm_processor.sv Line: 254
-Warning (10268): Verilog HDL information at fsm_processor.sv(279): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/fsm_processor.sv Line: 279
-Warning (10268): Verilog HDL information at counter.sv(47): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/counter.sv Line: 47
-Warning (10268): Verilog HDL information at clkdiv.sv(46): always construct contains both blocking and non-blocking assignments File: C:/repo_veri/p03/src/clkdiv.sv Line: 46
