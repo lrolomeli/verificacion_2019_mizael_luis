@@ -2,6 +2,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/clk
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/rst
+add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/start
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/N
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/p_retro
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/p_enable
@@ -18,43 +19,43 @@ add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/enb
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/clrcnt
 add wave -noupdate -group fsm_processor /top_tb_p03/DUV/top_processors_inst/fsm_p_inst/clrchain
-add wave -noupdate -expand -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/clk
-add wave -noupdate -expand -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/rst
-add wave -noupdate -expand -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/A
-add wave -noupdate -expand -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/B
-add wave -noupdate -expand -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/enable
-add wave -noupdate -expand -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/retro
-add wave -noupdate -expand -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/out
-add wave -noupdate -expand -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/product
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/clk
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/rst
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/pop
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/push
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/data_in
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/N
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/clr
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/data_out
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/ready
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/count_push_w
-add wave -noupdate -expand -group vector /top_tb_p03/DUV/top_processors_inst/vector/count_pop_w
-add wave -noupdate -expand -group vector -radix unsigned -childformat {{{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[3]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[2]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[1]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[0]} -radix unsigned}} -expand -subitemconfig {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[3]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[2]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[1]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[0]} {-radix unsigned}} /top_tb_p03/DUV/top_processors_inst/vector/ramV/ram
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/clk
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/rst
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/pop
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/push
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/data_in
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/N
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/full
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/empty
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/data_out
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/ready
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/full_w
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/empty_w
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/count_push_w
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/count_pop_w
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/wr_en_w
-add wave -noupdate -expand -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/rd_en_w
-add wave -noupdate -expand -group matrix -childformat {{{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[15]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[14]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[13]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[12]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[11]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[10]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[9]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[8]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[7]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[6]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[5]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[4]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[3]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[2]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[1]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[0]} -radix unsigned}} -subitemconfig {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[15]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[14]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[13]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[12]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[11]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[10]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[9]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[8]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[7]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[6]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[5]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[4]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[3]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[2]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[1]} {-radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[0]} {-radix unsigned}} /top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram
+add wave -noupdate -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/clk
+add wave -noupdate -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/rst
+add wave -noupdate -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/A
+add wave -noupdate -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/B
+add wave -noupdate -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/enable
+add wave -noupdate -group processor /top_tb_p03/DUV/top_processors_inst/processor1_inst/retro
+add wave -noupdate -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/out
+add wave -noupdate -group processor -radix unsigned /top_tb_p03/DUV/top_processors_inst/processor1_inst/product
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/clk
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/rst
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/pop
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/push
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/data_in
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/N
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/clr
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/data_out
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/ready
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/count_push_w
+add wave -noupdate -group vector /top_tb_p03/DUV/top_processors_inst/vector/count_pop_w
+add wave -noupdate -group vector -radix unsigned -childformat {{{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[7]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[6]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[5]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[4]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[3]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[2]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[1]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[0]} -radix unsigned}} -expand -subitemconfig {{/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[7]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[6]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[5]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[4]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[3]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[2]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[1]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/vector/ramV/ram[0]} {-height 15 -radix unsigned}} /top_tb_p03/DUV/top_processors_inst/vector/ramV/ram
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/clk
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/rst
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/pop
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/push
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/data_in
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/N
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/full
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/empty
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/data_out
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/ready
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/full_w
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/empty_w
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/count_push_w
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/count_pop_w
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/wr_en_w
+add wave -noupdate -group matrix /top_tb_p03/DUV/top_processors_inst/matrix/rd_en_w
+add wave -noupdate -group matrix -childformat {{{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[15]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[14]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[13]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[12]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[11]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[10]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[9]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[8]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[7]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[6]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[5]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[4]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[3]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[2]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[1]} -radix unsigned} {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[0]} -radix unsigned}} -subitemconfig {{/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[15]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[14]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[13]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[12]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[11]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[10]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[9]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[8]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[7]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[6]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[5]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[4]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[3]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[2]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[1]} {-height 15 -radix unsigned} {/top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram[0]} {-height 15 -radix unsigned}} /top_tb_p03/DUV/top_processors_inst/matrix/ramM/ram
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/clk
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/rst
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/pop
@@ -66,8 +67,18 @@ add wave -noupdate -group vector_result -radix unsigned -childformat {{{/top_tb_
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/ready
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/count_push_w
 add wave -noupdate -group vector_result /top_tb_p03/DUV/top_processors_inst/fifo_result/count_pop_w
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/clk
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/rst
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/uart_data
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/rx_interrupt
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/clear_interrupt
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/push_A
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/push_B
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/enable_n
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/clear
+add wave -noupdate -group fsm_cmd /top_tb_p03/DUV/cmd_fsm_inst/status
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {986 ps} 0}
+WaveRestoreCursors {{Cursor 1} {1706 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -83,4 +94,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {2037 ps}
+WaveRestoreZoom {1545 ps} {1867 ps}
