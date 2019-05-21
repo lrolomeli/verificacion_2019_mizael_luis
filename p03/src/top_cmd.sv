@@ -45,7 +45,8 @@ module top_cmd
 	output push_A,
 	output push_B,
 	output enable_n,
-	output clear
+	output clear,
+	output working
 );
 
 

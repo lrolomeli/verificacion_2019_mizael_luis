@@ -39,7 +39,8 @@ module tx_top
 	input data_t tx_data,
 	
 	/* output ports */
-	output tx
+	output tx,
+	output working
 	
 );
 
@@ -68,7 +69,8 @@ tx_fsm tx_fsm_inst
 	
 	.sel(sel_w),
 	.load(load_w),
-	.enb(enb_w)
+	.enb(enb_w),
+	.working(working)
 
 );
 

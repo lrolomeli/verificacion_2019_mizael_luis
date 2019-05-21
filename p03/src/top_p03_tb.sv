@@ -36,6 +36,7 @@ module top_p03_tb
 	input rst,
 	input rx_interrupt,
 	input data_t data,
+	input working,
 	
 	output tx,
 	output ready,
@@ -52,7 +53,6 @@ logic push_A_w;
 logic push_B_w;
 logic transmit_w;
 logic clear_w;
-
 
 cmd_fsm cmd_fsm_inst(
 	.*,
@@ -84,6 +84,7 @@ top_processors top_processors_inst
 	.push_B(push_B_w),
 	.clear(clear_w),
 	.N(N_w),
+	.working(working),
 	
 	.transmit(transmit_w),
 	.full_A(full_A),

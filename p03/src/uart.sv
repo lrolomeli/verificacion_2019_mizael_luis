@@ -44,7 +44,8 @@ module uart
 	output rx_interrupt,
 	output parity_err,
 	output data_t rx_data,
-	output tx
+	output tx,
+	output working
 	
 );
 

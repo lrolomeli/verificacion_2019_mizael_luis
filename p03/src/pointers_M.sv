@@ -84,7 +84,7 @@ begin: FULL_EMPTY
 	
 	//comparacion de indices para ver si ya se pueden realizar operaciones
 	if(count_push)
-		ready = (count_push == count_N) ? 1'b1 : 1'b0;
+		ready = (count_push - count_pop == count_N) ? 1'b1 : 1'b0;
 	else
 		ready = 1'b0;
 

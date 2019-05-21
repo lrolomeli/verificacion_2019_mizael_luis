@@ -40,6 +40,7 @@ module top_processors
 	input push_B,
 	input nibble_t N,
 	input clear,
+	input working,
 	
 	output full_A,
 	output empty_A,

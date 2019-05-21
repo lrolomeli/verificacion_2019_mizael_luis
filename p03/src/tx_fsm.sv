@@ -37,6 +37,7 @@ module tx_fsm
 	input rst,
 	input transmit,
 	
+	output logic working,
 	output logic [1:0] sel,
 	output logic load,
 	output logic enb
@@ -86,6 +87,7 @@ begin
 			sel = 2'b00;
 			load = FALSE;
 			enb = FALSE;
+			working = FALSE;
 		end
 		
 		START :
@@ -93,6 +95,7 @@ begin
 			sel = 2'b01;
 			load = TRUE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT1 :	
@@ -100,6 +103,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT2 :	
@@ -107,6 +111,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT3 :	
@@ -114,6 +119,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT4 :	
@@ -121,6 +127,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT5 :	
@@ -128,6 +135,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT6 :	
@@ -135,6 +143,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT7 :	
@@ -142,6 +151,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		BIT8 :	
@@ -149,6 +159,7 @@ begin
 			sel = 2'b10;
 			load = FALSE;
 			enb = TRUE;
+			working = TRUE;
 		end
 		
 		PARITY :	
@@ -156,6 +167,7 @@ begin
 			sel = 2'b11;
 			load = FALSE;
 			enb = FALSE;
+			working = TRUE;
 		end
 		
 		STOP :	
@@ -163,6 +175,7 @@ begin
 			sel = 2'b00;
 			load = FALSE;
 			enb = FALSE;
+			working = FALSE;
 		end
 		
 		default: 
@@ -170,6 +183,7 @@ begin
 			sel = 2'b00;
 			load = FALSE;
 			enb = FALSE;
+			working = FALSE;
 		end
 	
 	endcase

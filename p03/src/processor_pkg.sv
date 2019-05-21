@@ -37,7 +37,7 @@ package processor_pkg ;
 // States Machine
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/** enum used to select type of register **/
-	typedef enum logic [2:0] {NP, LOAD, OP, RESULT, TRANSMIT, POP_RES} STATE_e;
+	typedef enum logic [2:0] {NP, LOAD, OP, RESULT, TRANSMIT, TRANSMITING, POP_RES} STATE_e;
 	 
 endpackage
 `endif

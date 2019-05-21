@@ -56,6 +56,7 @@ logic push_B_w;
 logic transmit_w;
 logic clear_w;
 logic clear_interrupt_w;
+logic working_w;
 
 top_cmd top_cmd_inst (
 	.*,
@@ -66,8 +67,8 @@ top_cmd top_cmd_inst (
 	.push_A(push_A_w),
 	.push_B(push_B_w),
 	.enable_n(enable_n_w),
-	.clear(clear_w)
-	
+	.clear(clear_w),
+	.working(working_w)
 );	
 	
 
@@ -89,6 +90,7 @@ top_processors top_processors_inst
 	.push_B(push_B_w),
 	.clear(clear_w),
 	.N(N_w),
+	.working(working_w),
 	
 	.transmit(transmit_w),
 	.full_A(full_A),

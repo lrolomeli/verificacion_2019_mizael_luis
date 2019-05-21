@@ -36,6 +36,7 @@ module fsm_processor
 	input clk,
 	input rst,
 	input start,
+	input working,
 	input nibble_t N,
 	
 	output logic p_retro,
@@ -96,7 +97,7 @@ begin:statemachine
 			RESULT :
 			begin 
 				if(chain_ovf)
-					state <= TRANSMIT;
+					state <= POP_RES;
 				else
 					state <= LOAD;
 			end
@@ -104,6 +105,14 @@ begin:statemachine
 			begin
 				if(ovf)
 					state <= NP;
+				else
+					state <= TRANSMITING;
+			end
+			
+			TRANSMITING : 
+			begin
+				if(working)
+					state <= TRANSMITING;
 				else
 					state <= POP_RES;
 			end
@@ -180,19 +189,7 @@ begin
 				
 			end
 			
-			POP_RES :
-			begin
-				enb = TRUE;
-				clrcnt = FALSE;
-				clrchain = TRUE;
-				push = FALSE;
-				pop = FALSE;
-				p_enable = FALSE;
-				p_retro = FALSE;
-				pop_result = TRUE;
-				transmit = FALSE;
-				clr = FALSE;
-			end
+
 			
 			TRANSMIT :
 			begin
@@ -205,6 +202,34 @@ begin
 				p_retro = FALSE;
 				pop_result = FALSE;
 				transmit = TRUE;
+				clr = FALSE;
+			end
+			
+			TRANSMITING : 
+			begin
+				enb = FALSE;
+				clrcnt = FALSE;
+				clrchain = TRUE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = FALSE;
+				transmit = FALSE;
+				clr = FALSE;
+			end
+			
+						POP_RES :
+			begin
+				enb = TRUE;
+				clrcnt = FALSE;
+				clrchain = TRUE;
+				push = FALSE;
+				pop = FALSE;
+				p_enable = FALSE;
+				p_retro = FALSE;
+				pop_result = TRUE;
+				transmit = FALSE;
 				clr = FALSE;
 			end
 			
@@ -234,7 +259,7 @@ always_ff@(posedge clk, negedge rst) begin : counterN
 	else if(enb)
 		cnt++;
 		
-	else if(clrcnt)
+	else if(ovf)
 		cnt <= FALSE;
 
 end : counterN
@@ -256,7 +281,7 @@ always_ff@(posedge clk, negedge rst) begin : chaincounterN
 	if(~rst)
 		chain_cnt <= FALSE;
 		
-	else if(enb & ovf)
+	else if(ovf)
 		chain_cnt++;
 		
 	else if(clrchain)

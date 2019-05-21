@@ -10,6 +10,7 @@ module top_tb_p03;
 	logic clk;
 	logic rst;
 	logic rx_interrupt;
+	logic working;
 	data_t data;
 	
 	logic tx;
